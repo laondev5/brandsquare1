@@ -1,10 +1,10 @@
-import LandingPage from "@/components/LandingPage";
+import ContactUs from "@/components/Contact";
 import React from "react";
 
 const page = () => {
   return (
     <div>
-      <LandingPage />
+      <ContactUs />
     </div>
   );
 };

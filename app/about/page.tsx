@@ -1,10 +1,10 @@
-import LandingPage from "@/components/LandingPage";
+import AboutUs from "@/components/About";
 import React from "react";
 
 const page = () => {
   return (
     <div>
-      <LandingPage />
+      <AboutUs />
     </div>
   );
 };
