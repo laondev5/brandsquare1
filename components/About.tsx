@@ -6,14 +6,7 @@ import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import MainNav from "./MainNav";
 import Footer from "./Footer";
-
-type CartItem = {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-};
+import { CartItem } from "@/app/utility/products";
 
 const teamMembers = [
   {
