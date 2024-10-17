@@ -1,7 +1,14 @@
 import ProductDetail from "@/components/ProductDetaile";
 import React from "react";
 
-const page = ({ params }) => {
+interface ParamsProps {
+  id: string | number; // or number, depending on your use case
+}
+
+interface PageProps {
+  params: ParamsProps;
+}
+const page = ({ params }: PageProps) => {
   return (
     <div>
       <ProductDetail id={params.id} />
