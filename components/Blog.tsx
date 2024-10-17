@@ -18,14 +18,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import Footer from "./Footer";
-
-type CartItem = {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-};
+import { CartItem } from "@/app/utility/products";
 
 const blogPosts = [
   {
@@ -152,14 +145,14 @@ export default function Blog() {
       />
 
       <main className="container mx-auto p-4">
-        <motion.h1
+        {/* <motion.h1
           className="text-3xl font-bold mb-6"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
           Zeomart Blog
-        </motion.h1>
+        </motion.h1> */}
 
         <motion.div
           initial={{ opacity: 0 }}
