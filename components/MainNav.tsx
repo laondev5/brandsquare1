@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ShoppingCart, User } from "lucide-react";
+import { Search, ShoppingCart, User, Plus, Minus, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  //NavigationMenuLink,
+  NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { Badge } from "@/components/ui/badge";
@@ -20,20 +20,13 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-
-type CartItem = {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-};
+import { CartItem } from "@/app/utility/products";
 
 type HeaderProps = {
   cart: CartItem[];
   setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
   searchTerm: string;
-  setSearchTerm: (term: string) => void;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const SearchBar = ({
@@ -67,7 +60,9 @@ const Navbar = () => (
             legacyBehavior
             passHref
           >
-            <Button variant="ghost">{item}</Button>
+            <NavigationMenuLink className="text-sm font-semibold hover:underline">
+              {item}
+            </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
       ))}
@@ -93,9 +88,15 @@ export default function MainNav({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const removeFromCart = (id: number) => {
+  const updateQuantity = (id: number, change: number) => {
     setCart((prevCart) => {
-      const newCart = prevCart.filter((item) => item.id !== id);
+      const newCart = prevCart
+        .map((item) =>
+          item.id === id
+            ? { ...item, quantity: Math.max(0, item.quantity + change) }
+            : item
+        )
+        .filter((item) => item.quantity > 0);
       localStorage.setItem("cart", JSON.stringify(newCart));
       return newCart;
     });
@@ -118,7 +119,7 @@ export default function MainNav({
             animate={{ opacity: 1, y: 0 }}
             className="text-2xl font-bold text-black"
           >
-            <Link href="/">BrandSquare</Link>
+            <Link href="/">Zeomart</Link>
           </motion.h1>
           <div className="flex items-center space-x-4">
             <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
@@ -191,23 +192,41 @@ export default function MainNav({
                           />
                           <div>
                             <h3 className="font-semibold">{item.name}</h3>
-                            <p className="text-gray-600">
-                              ${item.price} x {item.quantity}
-                            </p>
+                            <p className="text-gray-600">${item.price}</p>
                           </div>
                         </div>
-                        <Button
-                          variant="destructive"
-                          size="sm"
-                          onClick={() => removeFromCart(item.id)}
-                        >
-                          Remove
-                        </Button>
+                        <div className="flex items-center">
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={() => updateQuantity(item.id, -1)}
+                          >
+                            <Minus className="h-4 w-4" />
+                          </Button>
+                          <span className="mx-2">{item.quantity}</span>
+                          <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={() => updateQuantity(item.id, 1)}
+                          >
+                            <Plus className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() =>
+                              updateQuantity(item.id, -item.quantity)
+                            }
+                            className="ml-2"
+                          >
+                            <X className="h-4 w-4" />
+                          </Button>
+                        </div>
                       </motion.div>
                     ))}
                     <div className="mt-4">
                       <p className="text-xl font-bold">
-                        Total: ${getTotalPrice()}
+                        Total: ${getTotalPrice().toFixed(2)}
                       </p>
                     </div>
                     <div className="mt-6 space-y-2">

@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-
+import Link from "next/link";
+//import Header from "../components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -17,35 +18,23 @@ import {
 import {
   Pagination,
   PaginationContent,
-  //   PaginationEllipsis,
+  //PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import MainNav from "./MainNav";
+//import { products, categories, Product } from "../data/products";
+import {
+  Product,
+  products,
+  categories,
+  CartItem,
+} from "@/app/utility/products";
 import Footer from "./Footer";
+import MainNav from "./MainNav";
 
-// Dummy data (100 items)
-const products = Array.from({ length: 100 }, (_, i) => ({
-  id: i + 1,
-  name: `Product ${i + 1}`,
-  price: Math.floor(Math.random() * 1000) + 1,
-  category: ["Electronics", "Clothing", "Books", "Home & Garden"][
-    Math.floor(Math.random() * 4)
-  ],
-  image: `/placeholder.svg?height=200&width=200&text=Product+${i + 1}`,
-}));
-
-const categories = ["All", "Electronics", "Clothing", "Books", "Home & Garden"];
-
-type CartItem = {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
-};
+//type CartItem = Product & { quantity: number };
 
 export default function Shop() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -74,21 +63,27 @@ export default function Shop() {
     currentPage * itemsPerPage
   );
 
-  const addToCart = (product: (typeof products)[0]) => {
+  const addToCart = (product: Product) => {
     setCart((prevCart) => {
       const existingItem = prevCart.find((item) => item.id === product.id);
-      let newCart;
+
       if (existingItem) {
-        newCart = prevCart.map((item) =>
+        // If the product already exists in the cart, update its quantity
+        return prevCart.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: item.quantity + 1 } // Keep the existing image property
             : item
         );
       } else {
-        newCart = [...prevCart, { ...product, quantity: 1 }];
+        // Create a new CartItem, ensuring to include the image property
+        const newCartItem: CartItem = {
+          ...product,
+          quantity: 1,
+          image: product.images[0], // Assuming product.images is an array and you want to take the first image
+        };
+
+        return [...prevCart, newCartItem]; // Return a new array including the new item
       }
-      localStorage.setItem("cart", JSON.stringify(newCart));
-      return newCart;
     });
   };
 
@@ -102,7 +97,14 @@ export default function Shop() {
       />
 
       <main className="container mx-auto p-4">
-        <h1 className="text-3xl font-bold mb-6">Shop</h1>
+        <motion.h1
+          className="text-3xl font-bold mb-6"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Shop
+        </motion.h1>
 
         <div className="flex flex-col md:flex-row gap-4 mb-6">
           <Input
@@ -141,13 +143,15 @@ export default function Shop() {
             >
               <Card className="bg-white">
                 <CardContent className="p-4">
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    width={200}
-                    height={200}
-                    className="w-full h-48 object-cover mb-4 rounded"
-                  />
+                  <Link href={`/product/${product.id}`}>
+                    <Image
+                      src={product.images[0]}
+                      alt={product.name}
+                      width={200}
+                      height={200}
+                      className="w-full h-48 object-cover mb-4 rounded cursor-pointer"
+                    />
+                  </Link>
                   <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
                   <p className="text-gray-600 mb-2">${product.price}</p>
                   <p className="text-sm text-gray-500 mb-4">
