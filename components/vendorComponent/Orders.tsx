@@ -92,7 +92,15 @@ export default function Orders() {
     return 0;
   });
 
-  const requestSort = (key) => {
+  //   const requestSort = (keykey: string) => {
+  //     let direction = "ascending";
+  //     if (sortConfig.key === key && sortConfig.direction === "ascending") {
+  //       direction = "descending";
+  //     }
+  //     setSortConfig({ key, direction });
+  //   };
+
+  const requestSort = (key: string | any) => {
     let direction = "ascending";
     if (sortConfig.key === key && sortConfig.direction === "ascending") {
       direction = "descending";
@@ -100,7 +108,15 @@ export default function Orders() {
     setSortConfig({ key, direction });
   };
 
-  const updateOrderStatus = (orderId, newStatus) => {
+  //   const updateOrderStatus = (orderId, newStatus) => {
+  //     setOrders(
+  //       orders.map((order) =>
+  //         order.id === orderId ? { ...order, status: newStatus } : order
+  //       )
+  //     );
+  //   };
+
+  const updateOrderStatus = (orderId: number, newStatus: string) => {
     setOrders(
       orders.map((order) =>
         order.id === orderId ? { ...order, status: newStatus } : order
