@@ -76,7 +76,7 @@ const initialPayments = [
 ];
 
 export default function Payments() {
-  const [payments, setPayments] = useState(initialPayments);
+  const [payments] = useState(initialPayments);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
 
