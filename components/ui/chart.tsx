@@ -73,9 +73,15 @@ const ChartContainer = React.forwardRef<
 ChartContainer.displayName = "Chart";
 
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
-  const colorConfig = Object.entries(config).filter(
-    ([_, config]) => config.theme || config.color
-  );
+  // const colorConfig = Object.entries(config).filter(
+  //   ([_, config]) => config.theme || config.color
+  // );
+
+  // @ts-ignore
+  const colorConfig = Object.entries(config).filter(([key, config]) => {
+    console.log(`Processing key: ${key}`); // Example usage
+    return config.theme || config.color;
+  });
 
   if (!colorConfig.length) {
     return null;

@@ -6,7 +6,7 @@
   ],
   "rules": {
     "@typescript-eslint/no-explicit-any": "off",
-    "no-unused-vars": ["error", { "varsIgnorePattern": "^_" }]
+    //"no-unused-vars": ["error", { "varsIgnorePattern": "^_" }]
   }
 }
 
