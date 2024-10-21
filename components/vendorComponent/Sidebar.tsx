@@ -27,7 +27,7 @@ export function Sidebar() {
   ];
 
   return (
-    <div className="flex flex-col w-64 bg-blue-900 text-white">
+    <div className="hidden lg:flex flex-col w-64 bg-blue-900 text-white">
       <div className="flex items-center justify-center h-16 border-b border-blue-800">
         <span className="text-2xl font-semibold">Brandsquare</span>
       </div>
