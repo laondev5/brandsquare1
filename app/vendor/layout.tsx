@@ -9,13 +9,17 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const handleMenuToggle = () => {
+    // Your logic for toggling the menu
+    console.log("Menu toggled");
+  };
   return (
     <html lang="en">
       <body className={`${inter.className} bg-gray-100 text-gray-900`}>
         <div className="flex h-screen overflow-hidden">
           <Sidebar />
           <div className="flex flex-col flex-1 overflow-hidden">
-            <TopBar />
+            <TopBar onMenuToggle={handleMenuToggle} />
             <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
               {children}
             </main>
