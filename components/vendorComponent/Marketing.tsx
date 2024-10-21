@@ -29,7 +29,7 @@ export default function Marketing() {
   const [campaignType, setCampaignType] = useState("");
   const [campaignDescription, setCampaignDescription] = useState("");
 
-  const handleCreateCampaign = (e) => {
+  const handleCreateCampaign = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Here you would typically send this data to your backend
     console.log("Creating campaign:", {
