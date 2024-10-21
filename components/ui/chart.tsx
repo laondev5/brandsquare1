@@ -77,7 +77,7 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   //   ([_, config]) => config.theme || config.color
   // );
 
-  // @ts-ignore
+  // @ts-expect-error
   const colorConfig = Object.entries(config).filter(([key, config]) => {
     console.log(`Processing key: ${key}`); // Example usage
     return config.theme || config.color;
