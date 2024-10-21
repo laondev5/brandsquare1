@@ -77,7 +77,7 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   //   ([_, config]) => config.theme || config.color
   // );
 
-  // @ts-expect-error
+  // @ts-expect-error: This line throws a type error due to missing type definitions in the library.
   const colorConfig = Object.entries(config).filter(([key, config]) => {
     console.log(`Processing key: ${key}`); // Example usage
     return config.theme || config.color;
