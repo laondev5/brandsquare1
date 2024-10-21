@@ -20,7 +20,7 @@ interface TopBarProps {
   onMenuToggle: () => void;
 }
 
-export function TopBar({ onMenuToggle }: TopBarProps) {
+const TopBar: React.FC<TopBarProps> = ({ onMenuToggle }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
@@ -79,4 +79,6 @@ export function TopBar({ onMenuToggle }: TopBarProps) {
       </div>
     </motion.div>
   );
-}
+};
+
+export default TopBar;
