@@ -44,8 +44,8 @@ export function MobileSidebar({ menuOpen, onMenuToggle }: SidebarProps) {
       <div className="flex flex-col ">
         <div className="flex items-center justify-betweens gap-16 h-16 border-b border-blue-800">
           <span className="text-2xl font-semibold">Brandsquare</span>
-          <Button size="icon">
-            <Menu onClick={onMenuToggle} />
+          <Button onClick={onMenuToggle} size="icon">
+            <Menu />
           </Button>
         </div>
         <nav className="flex-1 overflow-y-auto">
