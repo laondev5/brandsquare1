@@ -14,17 +14,17 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/7-nTA2K4zOCiB8ol5bmIAgNXtB5x6mtE.png",
+    url: "/images/bg1.png",
     title: "Brilliant Green",
     subtitle: "Eco-friendly solutions for a better tomorrow",
   },
   {
-    url: "/placeholder.svg?height=1080&width=1920",
+    url: "/images/bg1.png",
     title: "Innovation",
     subtitle: "Pushing boundaries in technology",
   },
   {
-    url: "/placeholder.svg?height=1080&width=1920",
+    url: "/images/bg1.png",
     title: "Sustainability",
     subtitle: "Creating a lasting impact on our planet",
   },

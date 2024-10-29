@@ -17,6 +17,7 @@ import {
 } from "@/app/utility/products";
 import MainNav from "./MainNav";
 import Footer from "./Footer";
+import BackgroundSlider from "./BackgroundSlider";
 
 //type CartItem = Product & { quantity: number };
 
@@ -74,7 +75,7 @@ export default function Zeomart() {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
       />
-
+      <BackgroundSlider />
       <main className="container mx-auto p-4">
         <motion.section
           initial={{ opacity: 0, y: 20 }}
