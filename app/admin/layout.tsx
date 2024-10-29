@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
 import { Inter } from "next/font/google";
-import { Sidebar } from "@/components/vendorComponent/Sidebar";
 import TopBar from "@/components/vendorComponent/Topbar";
-import { MobileSidebar } from "@/components/vendorComponent/MobileSidebar";
+import { AdminSidebar } from "@/components/AdminComponent/AdminSidebar";
+import { AdminMobileSidebar } from "@/components/AdminComponent/MobileSidebar";
 import Providers from "../providers";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,8 +22,8 @@ export default function RootLayout({
       <body className={`${inter.className} bg-gray-100 text-gray-900`}>
         <Providers>
           <div className="flex h-screen overflow-hidden">
-            <Sidebar />
-            <MobileSidebar
+            <AdminSidebar />
+            <AdminMobileSidebar
               menuOpen={menuOpen}
               onMenuToggle={handleMenuToggle}
             />

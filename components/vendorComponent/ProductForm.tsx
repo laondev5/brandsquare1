@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import {
   Plus,
   X,
-  //Upload,
   Bold,
   Italic,
   Underline,
@@ -27,7 +26,7 @@ import { Switch } from "@/components/ui/switch";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface ProductFormProps {
-  onSubmit: (formData: any) => void;
+  onSubmit: (formData: ProductFormData) => void;
   initialData?: Partial<ProductFormData>;
 }
 
@@ -63,19 +62,29 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
     ...initialData,
   });
 
+  const [categories, setCategories] = useState<string[]>([
+    "Electronics",
+    "Clothing",
+    "Home & Garden",
+    "Sports & Outdoors",
+  ]);
+  const [newCategory, setNewCategory] = useState("");
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+
   const editorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (editorRef.current) {
       editorRef.current.innerHTML = formData.fullDescription;
     }
-  }, []);
+  }, [formData.fullDescription]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    console.log(`${name} changed:`, value);
   };
 
   const handleSizeChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -103,6 +112,7 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
           colors: [...prev.colors, newColor],
         }));
         e.currentTarget.value = "";
+        console.log("Color added:", newColor);
       }
     }
   };
@@ -112,6 +122,7 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
       ...prev,
       inventory: { ...prev.inventory, [size]: parseInt(value) || 0 },
     }));
+    console.log("Inventory changed for size", size, ":", value);
   };
 
   const handleImageUpload = (
@@ -122,11 +133,16 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
     if (files) {
       if (type === "display") {
         setFormData((prev) => ({ ...prev, displayImage: files[0] }));
+        console.log("Display image uploaded:", files[0].name);
       } else {
         setFormData((prev) => ({
           ...prev,
           galleryImages: [...prev.galleryImages, ...Array.from(files)],
         }));
+        console.log(
+          "Gallery images uploaded:",
+          Array.from(files).map((f) => f.name)
+        );
       }
     }
   };
@@ -136,6 +152,7 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
       ...prev,
       coupons: [...prev.coupons, { code: "", discount: 0 }],
     }));
+    console.log("New coupon added");
   };
 
   const handleCouponChange = (
@@ -154,6 +171,7 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
           : coupon
       ),
     }));
+    console.log(`Coupon ${field} changed for index ${index}:`, value);
   };
 
   const execCommand = (
@@ -167,12 +185,57 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
         fullDescription: editorRef.current?.innerHTML || "",
       }));
     }
+    console.log("Editor command executed:", command);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Product Data:", formData);
     onSubmit(formData);
+  };
+
+  const handleAddCategory = () => {
+    if (newCategory && !categories.includes(newCategory)) {
+      setCategories([...categories, newCategory]);
+      setFormData((prev) => ({ ...prev, category: newCategory }));
+      setNewCategory("");
+      console.log("New category added:", newCategory);
+    }
+  };
+
+  const ColorAttachment = () => {
+    const colors = [
+      "#FF0000",
+      "#00FF00",
+      "#0000FF",
+      "#FFFF00",
+      "#FF00FF",
+      "#00FFFF",
+      "#FFA500",
+      "#800080",
+      "#008000",
+      "#000080",
+      "#FFC0CB",
+      "#A52A2A",
+    ];
+
+    return (
+      <div className="flex flex-wrap gap-2 mt-2">
+        {colors.map((color) => (
+          <div
+            key={color}
+            className={`w-8 h-8 rounded-full cursor-pointer ${
+              selectedColor === color ? "ring-2 ring-offset-2 ring-black" : ""
+            }`}
+            style={{ backgroundColor: color }}
+            onClick={() => {
+              setSelectedColor(color);
+              console.log("Selected color:", color);
+            }}
+          />
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -229,22 +292,32 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
               <Label htmlFor="category">Category</Label>
               <Select
                 value={formData.category}
-                onValueChange={(value) =>
-                  setFormData((prev) => ({ ...prev, category: value }))
-                }
+                onValueChange={(value) => {
+                  setFormData((prev) => ({ ...prev, category: value }));
+                  console.log("Category changed:", value);
+                }}
               >
                 <SelectTrigger id="category">
                   <SelectValue placeholder="Select a category" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Electronics">Electronics</SelectItem>
-                  <SelectItem value="Clothing">Clothing</SelectItem>
-                  <SelectItem value="Home & Garden">Home & Garden</SelectItem>
-                  <SelectItem value="Sports & Outdoors">
-                    Sports & Outdoors
-                  </SelectItem>
+                  {categories.map((category) => (
+                    <SelectItem key={category} value={category}>
+                      {category}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Input
+                placeholder="New Category"
+                value={newCategory}
+                onChange={(e) => setNewCategory(e.target.value)}
+              />
+              <Button type="button" onClick={handleAddCategory}>
+                Add
+              </Button>
             </div>
             <div>
               <Label htmlFor="shortDescription">Short Description</Label>
@@ -386,6 +459,7 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
                   </span>
                 ))}
               </div>
+              {formData.colors.length > 0 && <ColorAttachment />}
             </div>
             <div>
               <Label>Inventory</Label>
