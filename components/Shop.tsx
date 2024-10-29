@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/pagination";
 //import { products, categories, Product } from "../data/products";
 import {
-  Product,
+  //Product,
   products,
   categories,
   CartItem,
@@ -63,29 +63,29 @@ export default function Shop() {
     currentPage * itemsPerPage
   );
 
-  const addToCart = (product: Product) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.id);
+  // const addToCart = (product: Product) => {
+  //   setCart((prevCart) => {
+  //     const existingItem = prevCart.find((item) => item.id === product.id);
 
-      if (existingItem) {
-        // If the product already exists in the cart, update its quantity
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 } // Keep the existing image property
-            : item
-        );
-      } else {
-        // Create a new CartItem, ensuring to include the image property
-        const newCartItem: CartItem = {
-          ...product,
-          quantity: 1,
-          image: product.images[0], // Assuming product.images is an array and you want to take the first image
-        };
+  //     if (existingItem) {
+  //       // If the product already exists in the cart, update its quantity
+  //       return prevCart.map((item) =>
+  //         item.id === product.id
+  //           ? { ...item, quantity: item.quantity + 1 } // Keep the existing image property
+  //           : item
+  //       );
+  //     } else {
+  //       // Create a new CartItem, ensuring to include the image property
+  //       const newCartItem: CartItem = {
+  //         ...product,
+  //         quantity: 1,
+  //         image: product.images[0], // Assuming product.images is an array and you want to take the first image
+  //       };
 
-        return [...prevCart, newCartItem]; // Return a new array including the new item
-      }
-    });
-  };
+  //       return [...prevCart, newCartItem]; // Return a new array including the new item
+  //     }
+  //   });
+  // };
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -157,12 +157,11 @@ export default function Shop() {
                   <p className="text-sm text-gray-500 mb-4">
                     {product.category}
                   </p>
-                  <Button
-                    onClick={() => addToCart(product)}
-                    className="w-full bg-yellow-400 text-black hover:bg-yellow-500"
-                  >
-                    Add to Cart
-                  </Button>
+                  <Link href={`/product/${product.id}`}>
+                    <Button className="w-full bg-yellow-400 text-black hover:bg-yellow-500">
+                      View Product
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             </motion.div>

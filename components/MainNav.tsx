@@ -130,7 +130,15 @@ export default function MainNav({
             animate={{ opacity: 1, y: 0 }}
             className="text-2xl font-bold text-black"
           >
-            <Link href="/">Zeomart</Link>
+            <Link href="/">
+              <Image
+                src="/images/logo.png"
+                alt="logo"
+                width={100}
+                height={100}
+                className="w-[7rem]"
+              />
+            </Link>
           </motion.h1>
           <div className="flex items-center space-x-4">
             <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />

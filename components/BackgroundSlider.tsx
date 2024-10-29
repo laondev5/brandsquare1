@@ -51,7 +51,7 @@ export default function BackgroundSlider(): JSX.Element {
   }, []);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div className="relative h-[60vh] w-full overflow-hidden">
       <AnimatePresence initial={false}>
         <motion.div
           key={currentIndex}
@@ -68,7 +68,7 @@ export default function BackgroundSlider(): JSX.Element {
             objectFit="cover"
             priority
           />
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
+          <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center   text-white">
             <motion.h1
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -90,7 +90,7 @@ export default function BackgroundSlider(): JSX.Element {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.6 }}
             >
-              <Button variant="default" size="lg">
+              <Button className="bg-yellow-400" size="lg">
                 Learn More
               </Button>
             </motion.div>

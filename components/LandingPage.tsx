@@ -12,12 +12,13 @@ import {
   products,
   categories,
   popularBrands,
-  Product,
+  //Product,
   CartItem,
 } from "@/app/utility/products";
 import MainNav from "./MainNav";
 import Footer from "./Footer";
 import BackgroundSlider from "./BackgroundSlider";
+import ServiceOfferings from "./ServiceOfferings";
 
 //type CartItem = Product & { quantity: number };
 
@@ -43,29 +44,29 @@ export default function Zeomart() {
     setFilteredProducts(filtered);
   }, [searchTerm]);
 
-  const addToCart = (product: Product) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.id);
+  // const addToCart = (product: Product) => {
+  //   setCart((prevCart) => {
+  //     const existingItem = prevCart.find((item) => item.id === product.id);
 
-      if (existingItem) {
-        // If the product already exists in the cart, update its quantity
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 } // Keep the existing image property
-            : item
-        );
-      } else {
-        // Create a new CartItem, ensuring to include the image property
-        const newCartItem: CartItem = {
-          ...product,
-          quantity: 1,
-          image: product.images[0], // Assuming product.images is an array and you want to take the first image
-        };
+  //     if (existingItem) {
+  //       // If the product already exists in the cart, update its quantity
+  //       return prevCart.map((item) =>
+  //         item.id === product.id
+  //           ? { ...item, quantity: item.quantity + 1 } // Keep the existing image property
+  //           : item
+  //       );
+  //     } else {
+  //       // Create a new CartItem, ensuring to include the image property
+  //       const newCartItem: CartItem = {
+  //         ...product,
+  //         quantity: 1,
+  //         image: product.images[0], // Assuming product.images is an array and you want to take the first image
+  //       };
 
-        return [...prevCart, newCartItem]; // Return a new array including the new item
-      }
-    });
-  };
+  //       return [...prevCart, newCartItem]; // Return a new array including the new item
+  //     }
+  //   });
+  // };
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -77,7 +78,7 @@ export default function Zeomart() {
       />
       <BackgroundSlider />
       <main className="container mx-auto p-4">
-        <motion.section
+        {/* <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
@@ -91,8 +92,8 @@ export default function Zeomart() {
               </Button>
             </CardContent>
           </Card>
-        </motion.section>
-
+        </motion.section> */}
+        <ServiceOfferings />
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -206,12 +207,11 @@ export default function Zeomart() {
                         <p className="text-muted-foreground text-sm">
                           ${product.price}
                         </p>
-                        <Button
-                          onClick={() => addToCart(product)}
-                          className="mt-2 w-full bg-yellow-400 text-black hover:bg-yellow-500"
-                        >
-                          Add to Cart
-                        </Button>
+                        <Link href={`/product/${product.id}`} passHref>
+                          <Button className="w-full bg-yellow-400 text-black hover:bg-yellow-500">
+                            View Product
+                          </Button>
+                        </Link>
                       </CardContent>
                     </Card>
                   ))}

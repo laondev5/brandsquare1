@@ -105,6 +105,7 @@ export default function ProductsPage() {
       ).reduce((a, b) => a + b, 0),
     };
     setProducts([...products, newProduct]);
+    console.log("new product", newProduct);
     setIsAddProductOpen(false);
   };
 
