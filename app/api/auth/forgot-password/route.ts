@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+//import { PrismaClient } from "@prisma/client";
 import { randomBytes } from "crypto";
 import nodemailer from "nodemailer";
-
-const prisma = new PrismaClient();
+import { prisma } from '@/lib/prisma'
+//const prisma = new PrismaClient();
 
 export async function POST(request: Request) {
   const { email } = await request.json();

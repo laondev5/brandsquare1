@@ -2,6 +2,8 @@
 
 import { DefaultSession } from "next-auth"
 import { JWT as DefaultJWT } from "next-auth/jwt"
+//import { PrismaClient } from '@prisma/client'
+
 
 export type UserRole = "ADMIN" | "VENDOR" | "CUSTOMER"
 

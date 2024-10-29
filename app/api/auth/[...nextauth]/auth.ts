@@ -1,8 +1,9 @@
+// app/api/auth/[...nextauth]/auth.ts
 import { UserRole } from "@/types/next-auth"
-//import NextAuth from "next-auth/next"
+//import NextAuth from "next-auth"
 import { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { prisma } from "@/lib/prisma"
+import { prisma } from "@/lib/prisma"  // Import the singleton instance
 import { compare } from "bcryptjs"
 
 export const authOptions: NextAuthOptions = {
@@ -58,18 +59,15 @@ export const authOptions: NextAuthOptions = {
       }
     })
   ],
-  
   pages: {
     signIn: "/auth/signin",
-    error: "/auth/error",
+    error: "/error",
     signOut: "/"
   },
-  
   session: {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-  
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
@@ -90,6 +88,5 @@ export const authOptions: NextAuthOptions = {
       return session;
     }
   },
-  
   debug: process.env.NODE_ENV === 'development',
 };

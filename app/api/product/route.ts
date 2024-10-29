@@ -1,10 +1,10 @@
 //import { NextApiRequest, NextApiResponse } from 'next';
-import { PrismaClient } from '@prisma/client';
+//import { PrismaClient } from '@prisma/client';
 import { z } from 'zod';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from '../auth/[...nextauth]/auth';
-
-const prisma = new PrismaClient();
+import { prisma } from '@/lib/prisma'
+//const prisma = new PrismaClient();
 
 const ProductSchema = z.object({
   name: z.string().min(1, "Product name is required"),
