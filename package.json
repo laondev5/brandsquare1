@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "npx prisma generate"
+    "prisma:generate": "prisma generate",
+  "build": "npm run prisma:generate && next build",
+  "vercel-build": "npm run prisma:generate && next build"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
