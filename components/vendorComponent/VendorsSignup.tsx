@@ -18,7 +18,7 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+
 import { Icons } from "../icons";
 import { toast } from "@/hooks/use-toast";
 import { ToastProvider, Toast } from "@/components/ui/toast";
@@ -43,8 +43,8 @@ type SignupFormValues = z.infer<typeof signupSchema>;
 
 export default function VendorSignupForm() {
   const [isLoading, setIsLoading] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+  //   const [submitError, setSubmitError] = useState<string | null>(null);
+  //   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
@@ -60,8 +60,8 @@ export default function VendorSignupForm() {
 
   const onSubmit = async (data: SignupFormValues) => {
     setIsLoading(true);
-    setSubmitError(null);
-    console.log("Form data:", data);
+
+    //console.log("Form data:", data);
     const { name, email, password, role } = data;
     const response = await fetch("/api/auth/register", {
       method: "POST",
@@ -80,7 +80,8 @@ export default function VendorSignupForm() {
           title: "Error",
           description: errorData.message || "Registration failed",
           variant: "destructive",
-        }); // Show error toast
+        });
+        reset(); // Show error toast
       } catch {
         // If parsing fails, show a generic error message
         toast({
@@ -91,25 +92,6 @@ export default function VendorSignupForm() {
       }
     }
     setIsLoading(false);
-
-    try {
-      // Simulated API call
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      // Simulate random success/failure
-      if (Math.random() > 0.5) {
-        throw new Error("Signup failed. Please try again.");
-      }
-
-      setSubmitSuccess(true);
-      reset();
-    } catch (error) {
-      setSubmitError(
-        error instanceof Error ? error.message : "An unexpected error occurred"
-      );
-    } finally {
-      setIsLoading(false);
-    }
   };
 
   return (
@@ -238,20 +220,7 @@ export default function VendorSignupForm() {
             </motion.div>
           </form>
         </CardContent>
-        <CardFooter>
-          {submitError && (
-            <Alert variant="destructive">
-              <AlertDescription>{submitError}</AlertDescription>
-            </Alert>
-          )}
-          {submitSuccess && (
-            <Alert>
-              <AlertDescription>
-                Signup successful! Welcome aboard.
-              </AlertDescription>
-            </Alert>
-          )}
-        </CardFooter>
+        <CardFooter></CardFooter>
       </Card>
     </ToastProvider>
   );
