@@ -16,12 +16,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-} from "@/components/ui/navigation-menu";
+// import {
+//   NavigationMenu,
+//   NavigationMenuItem,
+//   NavigationMenuLink,
+//   NavigationMenuList,
+// } from "@/components/ui/navigation-menu";
 import { Badge } from "@/components/ui/badge";
 import {
   Sheet,
@@ -38,6 +38,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import NavItem from "./NavItem";
 
 type HeaderProps = {
   cart: CartItem[];
@@ -65,27 +66,7 @@ const SearchBar = ({
   </div>
 );
 
-const Navbar = () => (
-  <NavigationMenu>
-    <NavigationMenuList>
-      {["Home", "Shop", "Blog", "About", "Contact"].map((item) => (
-        <NavigationMenuItem key={item}>
-          <Link
-            href={
-              item.toLowerCase() === "home" ? "/" : `/${item.toLowerCase()}`
-            }
-            legacyBehavior
-            passHref
-          >
-            <NavigationMenuLink className="text-sm font-semibold hover:underline">
-              {item}
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-      ))}
-    </NavigationMenuList>
-  </NavigationMenu>
-);
+const Navbar = () => <NavItem />;
 
 export default function MainNav({
   cart,
