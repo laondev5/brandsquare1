@@ -1,9 +1,7 @@
-// app/auth/signin/page.tsx
-
 "use client";
 
 import { useState, FormEvent } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, SignInResponse } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,26 +19,77 @@ import { Icons } from "@/components/icons";
 import Link from "next/link";
 import { Suspense } from "react";
 
-export default function SignIn() {
+interface FormState {
+  email: string;
+  password: string;
+}
+
+interface FormErrors {
+  email?: string;
+  password?: string;
+  general?: string;
+}
+
+type SignInFormProps = {
+  className?: string;
+};
+
+function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [formState, setFormState] = useState<FormState>({
+    email: "",
+    password: "",
+  });
 
-  const callbackUrl = searchParams?.get("callbackUrl") || "/";
+  const callbackUrl: string = searchParams?.get("callbackUrl") ?? "/";
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target;
+    setFormState((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const validateForm = (): FormErrors => {
+    const errors: FormErrors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!formState.email) {
+      errors.email = "Email is required";
+    } else if (!emailRegex.test(formState.email)) {
+      errors.email = "Please enter a valid email address";
+    }
+
+    if (!formState.password) {
+      errors.password = "Password is required";
+    } else if (formState.password.length < 6) {
+      errors.password = "Password must be at least 6 characters";
+    }
+
+    return errors;
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setError(Object.values(errors)[0] ?? "Validation failed");
+      setLoading(false);
+      return;
+    }
+
     try {
-      const result = await signIn("credentials", {
+      const result: SignInResponse | undefined = await signIn("credentials", {
         redirect: false,
-        email: email.toLowerCase().trim(),
-        password,
+        email: formState.email.toLowerCase().trim(),
+        password: formState.password,
         callbackUrl: decodeURIComponent(callbackUrl),
       });
 
@@ -68,66 +117,87 @@ export default function SignIn() {
   };
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div className="flex min-h-screen items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <Card className="w-full max-w-md">
-          <CardHeader className="space-y-1">
-            <CardTitle className="text-2xl font-bold">Sign in</CardTitle>
-            <CardDescription>
-              Enter your email and password to access your account
-            </CardDescription>
-          </CardHeader>
-          <form onSubmit={handleSubmit}>
-            <CardContent className="space-y-4">
-              {error && (
-                <Alert variant="destructive">
-                  <AlertDescription>{error}</AlertDescription>
-                </Alert>
-              )}
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="name@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  disabled={loading}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  disabled={loading}
-                />
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading && (
-                  <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                )}
-                Sign in
-              </Button>
-            </CardFooter>
-            <div className="my-3 flex justify-between items-center px-4">
-              <Link href="/auth/register">
-                <p>
-                  Dont have and account{" "}
-                  <span className="text-blue-600 font-semibold">Sign up</span>
-                </p>
-              </Link>
-              <Link href="/auth/forgot-password">Forgot Password</Link>
-            </div>
-          </form>
-        </Card>
+    <form onSubmit={handleSubmit} className={className}>
+      <CardContent className="space-y-4">
+        {error && (
+          <Alert variant="destructive">
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+        <div className="space-y-2">
+          <Label htmlFor="email">Email</Label>
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="name@example.com"
+            value={formState.email}
+            onChange={handleInputChange}
+            required
+            disabled={loading}
+            aria-describedby={error ? "email-error" : undefined}
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="password">Password</Label>
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            value={formState.password}
+            onChange={handleInputChange}
+            required
+            disabled={loading}
+            aria-describedby={error ? "password-error" : undefined}
+            minLength={6}
+          />
+        </div>
+      </CardContent>
+      <CardFooter>
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={loading}
+          aria-busy={loading}
+        >
+          {loading && (
+            <Icons.spinner
+              className="mr-2 h-4 w-4 animate-spin"
+              aria-hidden="true"
+            />
+          )}
+          Sign in
+        </Button>
+      </CardFooter>
+      <div className="my-3 flex justify-between items-center px-4">
+        <Link href="/auth/register" className="hover:underline">
+          <p>
+            Don&apos;t have an account?{" "}
+            <span className="text-blue-600 font-semibold">Sign up</span>
+          </p>
+        </Link>
+        <Link href="/auth/forgot-password" className="hover:underline">
+          Forgot Password
+        </Link>
       </div>
-    </Suspense>
+    </form>
+  );
+}
+
+export default function SignIn(): JSX.Element {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <Card className="w-full max-w-md">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl font-bold">Sign in</CardTitle>
+          <CardDescription>
+            Enter your email and password to access your account
+          </CardDescription>
+        </CardHeader>
+        <Suspense fallback={<div>Loading...</div>}>
+          <SignInForm />
+        </Suspense>
+      </Card>
+    </div>
   );
 }
