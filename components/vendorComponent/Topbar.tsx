@@ -15,14 +15,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Notifications } from "./Notification";
+import { User } from "@prisma/client";
 
 interface TopBarProps {
   onMenuToggle: () => void;
+  user: User;
 }
 
-const TopBar: React.FC<TopBarProps> = ({ onMenuToggle }) => {
+const TopBar: React.FC<TopBarProps> = ({ onMenuToggle, user }) => {
   const [searchTerm, setSearchTerm] = useState("");
-
+  console.log(user);
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}

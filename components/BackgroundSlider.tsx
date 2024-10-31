@@ -69,33 +69,33 @@ export default function BackgroundSlider(): JSX.Element {
             priority
           />
           <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center   text-white">
-            <div className="w-full pl-[6rem]">
-              <motion.h1
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className="text-4xl md:text-6xl font-bold mb-4"
-              >
-                {slides[currentIndex].title}
-              </motion.h1>
-              <motion.p
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.4 }}
-                className="text-xl md:text-2xl mb-8"
-              >
-                {slides[currentIndex].subtitle}
-              </motion.p>
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.6 }}
-              >
-                <Button className="bg-yellow-400" size="lg">
-                  Learn More
-                </Button>
-              </motion.div>
-            </div>
+            {/* <div className="w-full pl-[6rem]"> */}
+            <motion.h1
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-4xl md:text-6xl font-bold mb-4"
+            >
+              {slides[currentIndex].title}
+            </motion.h1>
+            <motion.p
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="text-xl md:text-2xl mb-8"
+            >
+              {slides[currentIndex].subtitle}
+            </motion.p>
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              <Button className="bg-yellow-400" size="lg">
+                Learn More
+              </Button>
+            </motion.div>
+            {/* </div> */}
           </div>
         </motion.div>
       </AnimatePresence>

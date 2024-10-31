@@ -11,20 +11,57 @@ datasource db {
 }
 
 model User {
-  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  id                String             @id @default(auto()) @map("_id") @db.ObjectId
   name              String?
-  email             String    @unique
+  email             String             @unique
   resetToken        String? // Add this line
   resetTokenExpiry  DateTime?
   password          String
   verificationToken String?
   emailVerified     DateTime?
-  role              Role      @default(CUSTOMER)
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
+  role              Role               @default(CUSTOMER)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
   products          Product[]
-  // orders            Order[]?
-  // reviews          Review[]?
+  onboarding        Boolean            @default(false)
+  // New fields
+  basicInfo         BasicInfo?
+  contactInfo       ContactInfo?
+  socialMedia       SocialMedia?
+  additionalDetails AdditionalDetails?
+  terms             Terms?
+}
+
+type BasicInfo {
+  brandName        String?
+  brandDescription String?
+}
+
+type ContactInfo {
+  address    String?
+  city       String?
+  state      String?
+  postalCode String?
+  phone      String?
+  email      String?
+}
+
+type SocialMedia {
+  instagram String?
+  facebook  String?
+  twitter   String?
+  linkedin  String?
+  website   String?
+}
+
+type AdditionalDetails {
+  operatingHours   String?
+  businessCategory String?
+  taxId            String?
+}
+
+type Terms {
+  agreedToTerms Boolean @default(false)
 }
 
 enum Role {

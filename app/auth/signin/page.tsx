@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import { signIn, SignInResponse } from "next-auth/react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -18,7 +18,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Icons } from "@/components/icons";
 import Link from "next/link";
 import { Suspense } from "react";
-
+import { useSession } from "next-auth/react";
 interface FormState {
   email: string;
   password: string;
@@ -36,6 +36,7 @@ type SignInFormProps = {
 
 function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
   const router = useRouter();
+  const { data: session } = useSession();
   const searchParams = useSearchParams();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -73,6 +74,16 @@ function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
     return errors;
   };
 
+  useEffect(() => {
+    if (session?.user?.role === "VENDOR") {
+      router.push("/vendor");
+    } else if (session?.user?.role === "ADMIN") {
+      router.push("/admin");
+    } else if (session?.user?.role === "CUSTOMER") {
+      router.push("/");
+    }
+  }, [session?.user?.role]);
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     setLoading(true);
@@ -100,11 +111,6 @@ function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
       if (result.error) {
         setError(result.error);
         return;
-      }
-
-      if (result.url) {
-        router.push(result.url);
-        router.refresh();
       }
     } catch (err) {
       console.error("Sign in error:", err);

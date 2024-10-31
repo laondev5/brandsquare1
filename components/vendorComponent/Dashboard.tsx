@@ -3,6 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { motion } from "framer-motion";
+import { User } from "@prisma/client";
 
 const data = [
   { name: "Jan", total: 1200 },
@@ -13,7 +14,15 @@ const data = [
   { name: "Jun", total: 2600 },
 ];
 
-export default function Dashboard() {
+interface DashboardProps {
+  userData: User;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ userData }) => {
+  if (!userData) {
+    return <div>Loading user data...</div>;
+  }
+  //console.log(userData);
   return (
     <div className="p-6 space-y-6">
       <h1 className="text-3xl font-semibold">Dashboard</h1>
@@ -123,4 +132,6 @@ export default function Dashboard() {
       </motion.div>
     </div>
   );
-}
+};
+
+export default Dashboard;
