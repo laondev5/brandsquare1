@@ -18,7 +18,7 @@ const NavItem = () => {
       <div className="block lg:hidden">
         <Sheet>
           <SheetTrigger>
-            <Menu />
+            <Menu className="text-white" />
           </SheetTrigger>
           <SheetContent side="left">
             <SheetHeader>

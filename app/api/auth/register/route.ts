@@ -1,48 +1,87 @@
 import { NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma'; // Adjusted import path
-import { z } from 'zod'; // Optional: for input validation
-import {hash} from 'bcryptjs'; // Import bcrypt for password hashing
+import { prisma } from '@/lib/prisma';
+import { z } from 'zod';
+import { hash } from 'bcryptjs';
 
-// Define a schema for validation using Zod
 const registerSchema = z.object({
     name: z.string().min(1, "Name is required"),
     email: z.string().email("Invalid email address"),
     password: z.string().min(6, "Password must be at least 6 characters"),
-    role: z.enum(["VENDOR", "CUSTOMER"]), // Updated to match the enum values
+    role: z.enum(["VENDOR", "CUSTOMER"]),
 });
 
 export async function POST(request: Request) {
     try {
+        // Log the incoming request body for debugging
         const body = await request.json();
-        const parsedData = registerSchema.parse(body); // Validate input data
+        console.log('Received registration request:', body);
 
-        // Check if the user already exists
+        // Validate input data
+        const parsedData = registerSchema.parse(body);
+
+        // Check if user exists
         const existingUser = await prisma.user.findUnique({
             where: { email: parsedData.email },
         });
 
         if (existingUser) {
-            return NextResponse.json({ message: "User already exists" }, { status: 400 });
+            console.log('User already exists:', parsedData.email);
+            return NextResponse.json(
+                { error: "User already exists" },
+                { status: 400 }
+            );
         }
 
-        // Hash the password before saving
+        // Hash password
         const hashedPassword = await hash(parsedData.password, 10);
 
-        // Create a new user
+        // Create new user
         const newUser = await prisma.user.create({
             data: {
                 name: parsedData.name,
                 email: parsedData.email,
-                password: hashedPassword, // Save the hashed password
-                role: parsedData.role, // This should now match the enum
+                password: hashedPassword,
+                role: parsedData.role,
             },
         });
 
-        return NextResponse.json({ message: "User registered successfully", user: newUser }, { status: 201 });
+        // Remove password from response
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { password: _, ...userWithoutPassword } = newUser;
+
+        console.log('User created successfully:', userWithoutPassword);
+        
+        return NextResponse.json(
+            { 
+                message: "User created successfully", 
+                user: userWithoutPassword 
+            },
+            { status: 201 }
+        );
+
     } catch (error) {
+        console.error('Registration error:', error);
+
+        // Handle Zod validation errors
         if (error instanceof z.ZodError) {
-            return NextResponse.json({ message: error.errors[0].message }, { status: 400 });
+            return NextResponse.json(
+                { error: error.errors },
+                { status: 400 }
+            );
         }
-        return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+
+        // Handle Prisma errors
+        if (error instanceof Error) {
+            return NextResponse.json(
+                { error: error.message },
+                { status: 400 }
+            );
+        }
+
+        // Handle unknown errors
+        return NextResponse.json(
+            { error: "Something went wrong" },
+            { status: 500 }
+        );
     }
 }
