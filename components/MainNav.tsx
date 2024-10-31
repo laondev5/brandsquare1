@@ -120,7 +120,7 @@ export default function MainNav({
   return (
     <header
       className={`sticky top-0 z-50 ${
-        isScrolled ? "bg-yellow-400 shadow-md" : "bg-yellow-400"
+        isScrolled ? "bg-[#000035] shadow-md" : "bg-[#000035]"
       } transition-all duration-300`}
     >
       <div className="container mx-auto p-4">
@@ -128,7 +128,7 @@ export default function MainNav({
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-2xl font-bold text-black"
+            className="text-2xl font-bold text-white"
           >
             <Link href="/">
               <Image
@@ -151,7 +151,7 @@ export default function MainNav({
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsCartOpen(true)}
-                className="relative"
+                className="relative text-white"
               >
                 <ShoppingCart className="h-5 w-5" />
                 {cart && cart.length > 0 && (
@@ -168,8 +168,8 @@ export default function MainNav({
               {session ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon">
-                      <User className="h-4 w-4" />
+                    <Button variant="ghost" size="icon" className="text-white">
+                      <User className="h-4 w-4 " />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
@@ -191,6 +191,7 @@ export default function MainNav({
                 <Button
                   variant="ghost"
                   size="icon"
+                  className="text-white"
                   onClick={() => router.push("/auth/signin")}
                 >
                   <User className="h-4 w-4" />

@@ -45,13 +45,16 @@ const NavItem = () => {
       <div className="hidden lg:flex flex-wrap  justify-center space-x-6">
         {navLinks.map((item, index) => (
           <Link href={item.path} key={index}>
-            <Button variant="ghost"> {item.title}</Button>
+            <Button variant="ghost" className="text-white">
+              {" "}
+              {item.title}
+            </Button>
           </Link>
         ))}
       </div>
 
       <Link href="/vendor-hub">
-        <Button className="bg-blue-950 text-white">Vendors Hub</Button>
+        <Button className="bg-yellow-400 text-black">Vendors Hub</Button>
       </Link>
     </nav>
   );
