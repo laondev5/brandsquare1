@@ -38,7 +38,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="container mx-auto mt-8 pt-8 border-t border-gray-700 text-center">
-        <p>&copy; 2023 Zeomart. All rights reserved.</p>
+        <p>&copy; 2024 Brandsquare. All rights reserved.</p>
       </div>
     </footer>
   );
