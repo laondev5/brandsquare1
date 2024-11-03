@@ -2,7 +2,7 @@
 
 import { useState, FormEvent, useEffect } from "react";
 import { signIn, SignInResponse } from "next-auth/react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -37,7 +37,7 @@ type SignInFormProps = {
 function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
   const router = useRouter();
   const { data: session } = useSession();
-  const searchParams = useSearchParams();
+  //const searchParams = useSearchParams();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [formState, setFormState] = useState<FormState>({
@@ -45,7 +45,7 @@ function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
     password: "",
   });
 
-  const callbackUrl: string = searchParams?.get("callbackUrl") ?? "/";
+  //const callbackUrl: string = searchParams?.get("callbackUrl") ?? "/";
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
@@ -101,7 +101,7 @@ function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
         redirect: false,
         email: formState.email.toLowerCase().trim(),
         password: formState.password,
-        callbackUrl: decodeURIComponent(callbackUrl),
+        // callbackUrl: decodeURIComponent(callbackUrl),
       });
 
       if (!result) {
