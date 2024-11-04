@@ -25,7 +25,7 @@ interface TopBarProps {
 
 const TopBar: React.FC<TopBarProps> = ({ onMenuToggle, user }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  console.log(user);
+  //console.log(user);
 
   const handleLogout = async () => {
     try {

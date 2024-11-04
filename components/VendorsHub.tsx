@@ -26,6 +26,7 @@ import {
 import { CartItem } from "@/app/utility/products";
 import MainNav from "./MainNav";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 type Benefit = {
   icon: React.ReactNode;
@@ -88,6 +89,8 @@ export default function VendorsHub() {
   const [searchTerm, setSearchTerm] = useState("");
   const [cart, setCart] = useState<CartItem[]>([]);
 
+  const { data: session } = useSession();
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* <Header
@@ -117,12 +120,21 @@ export default function VendorsHub() {
           <p className="text-xl text-gray-600 mb-8">
             Join our thriving marketplace and grow your business
           </p>
-          <Link href="/auth/vendor-signup">
-            <Button className="bg-yellow-400 text-black hover:bg-yellow-500 text-lg px-8 py-6">
-              Become a vendor now
-              <ChevronRight className="ml-2 h-5 w-5" />
-            </Button>
-          </Link>
+          {session?.user?.role === "VENDOR" ? (
+            <Link href="/vendor">
+              <Button className="bg-yellow-400 text-black hover:bg-yellow-500 text-lg px-8 py-6">
+                Continue to dashboard
+                <ChevronRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/auth/vendor-signup">
+              <Button className="bg-yellow-400 text-black hover:bg-yellow-500 text-lg px-8 py-6">
+                Become a vendor now
+                <ChevronRight className="ml-2 h-5 w-5" />
+              </Button>
+            </Link>
+          )}
         </motion.section>
 
         <motion.section
