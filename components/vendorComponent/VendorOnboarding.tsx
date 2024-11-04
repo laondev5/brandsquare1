@@ -27,8 +27,8 @@ const basicInfoSchema = z.object({
   brandDescription: z
     .string()
     .min(10, "Please provide a more detailed description"),
-  logo: z.instanceof(File).optional(),
-  banner: z.instanceof(File).optional(),
+  logo: z.any().optional(), // Changed from z.instanceof(File)
+  banner: z.any().optional(), // Changed from z.instanceof(File)
 });
 
 const contactInfoSchema = z.object({
@@ -36,23 +36,21 @@ const contactInfoSchema = z.object({
   city: z.string().min(2, "City name is required"),
   state: z.string().min(2, "State name is required"),
   postalCode: z.string().min(5, "Please enter a valid postal code"),
-  phone: z
-    .string()
-    .regex(/^\+?[1-9]\d{1,14}$/, "Please enter a valid phone number"),
+  phone: z.string().min(5, "Please enter a valid phone number"), // Simplified phone validation
   email: z.string().email("Please enter a valid email address"),
 });
 
 const socialMediaSchema = z.object({
-  instagram: z.string().url().optional(),
-  facebook: z.string().url().optional(),
-  twitter: z.string().url().optional(),
-  linkedin: z.string().url().optional(),
-  website: z.string().url().optional(),
+  instagram: z.string().url().optional().or(z.literal("")),
+  facebook: z.string().url().optional().or(z.literal("")),
+  twitter: z.string().url().optional().or(z.literal("")),
+  linkedin: z.string().url().optional().or(z.literal("")),
+  website: z.string().url().optional().or(z.literal("")),
 });
 
 const additionalDetailsSchema = z.object({
-  operatingHours: z.string(),
-  businessCategory: z.string(),
+  operatingHours: z.string().min(1, "Operating hours are required"),
+  businessCategory: z.string().min(1, "Business category is required"),
   taxId: z.string().optional(),
 });
 
@@ -160,11 +158,13 @@ export default function VendorOnboarding() {
   });
 
   const onSubmit = async (data: VendorData) => {
-    console.log(data);
     try {
+      // Log all the submitted data
+      console.log("Submitted vendor data:", JSON.stringify(data, null, 2));
+
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      console.log("Submitted data:", data);
+
       setIsModalOpen(true);
       toast({
         title: "Onboarding Complete",

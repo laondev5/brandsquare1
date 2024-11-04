@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Notifications } from "./Notification";
 import { User } from "@prisma/client";
+import { signOut } from "next-auth/react";
 
 interface TopBarProps {
   onMenuToggle: () => void;
@@ -25,6 +26,17 @@ interface TopBarProps {
 const TopBar: React.FC<TopBarProps> = ({ onMenuToggle, user }) => {
   const [searchTerm, setSearchTerm] = useState("");
   console.log(user);
+
+  const handleLogout = async () => {
+    try {
+      await signOut({
+        callbackUrl: "/", // Redirect to home page after logout
+        redirect: true,
+      });
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
@@ -66,16 +78,16 @@ const TopBar: React.FC<TopBarProps> = ({ onMenuToggle, user }) => {
           <DropdownMenuContent className="w-56" align="end" forceMount>
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
-                <p className="text-sm font-medium leading-none">username</p>
+                <p className="text-sm font-medium leading-none">{user?.name}</p>
                 <p className="text-xs leading-none text-muted-foreground">
-                  user@example.com
+                  {user?.email}
                 </p>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Profile</DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Log out</DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>Log out</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
