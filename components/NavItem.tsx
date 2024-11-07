@@ -3,7 +3,7 @@ import React from "react";
 import { navLinks } from "@/app/utility/navLink";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { Menu } from "lucide-react";
+import { ChevronRight, Menu } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -12,7 +12,9 @@ import {
   //SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useSession } from "next-auth/react";
 const NavItem = () => {
+  const { data: session } = useSession();
   return (
     <nav className="mt-4 flex justify-between items-center relative">
       <div className="block lg:hidden">
@@ -52,10 +54,18 @@ const NavItem = () => {
           </Link>
         ))}
       </div>
-
-      <Link href="/vendor-hub">
-        <Button className="bg-yellow-400 text-black">Vendors Hub</Button>
-      </Link>
+      {session?.user?.role === "VENDOR" ? (
+        <Link href="/vendor">
+          <Button className="bg-yellow-400 text-black hover:bg-yellow-500 text-lg px-8 py-6">
+            Continue to dashboard
+            <ChevronRight className="ml-2 h-5 w-5" />
+          </Button>
+        </Link>
+      ) : (
+        <Link href="/vendor-hub">
+          <Button className="bg-yellow-400 text-black">Vendors Hub</Button>
+        </Link>
+      )}
     </nav>
   );
 };

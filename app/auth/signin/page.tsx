@@ -19,6 +19,9 @@ import { Icons } from "@/components/icons";
 import Link from "next/link";
 import { Suspense } from "react";
 import { useSession } from "next-auth/react";
+import MainNav from "@/components/MainNav";
+import { CartItem } from "@/app/utility/products";
+import Footer from "@/components/Footer";
 interface FormState {
   email: string;
   password: string;
@@ -191,19 +194,68 @@ function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
 }
 
 export default function SignIn(): JSX.Element {
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <Card className="w-full max-w-md">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Sign in</CardTitle>
-          <CardDescription>
-            Enter your email and password to access your account
-          </CardDescription>
-        </CardHeader>
-        <Suspense fallback={<div>Loading...</div>}>
-          <SignInForm />
-        </Suspense>
-      </Card>
-    </div>
+    <>
+      <MainNav
+        cart={cart}
+        setCart={setCart}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
+      <div className="relative flex items-center justify-center w-full min-h-screen overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500 via-purple-400 to-pink-300">
+          <div className="absolute inset-0">
+            <svg
+              className="absolute w-full h-full"
+              viewBox="0 0 1000 1000"
+              preserveAspectRatio="none"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0,1000 C300,800 400,600 1000,800 L1000,0 L0,0 Z"
+                fill="rgba(255,255,255,0.1)"
+              />
+              <path
+                d="M0,1000 C300,900 500,600 1000,900 L1000,0 L0,0 Z"
+                fill="rgba(255,255,255,0.05)"
+              />
+            </svg>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="relative w-full max-w-md px-4">
+          <div className="text-center mb-8">
+            <h1 className="text-4xl font-bold text-white mb-2">
+              Welcome Back!
+            </h1>
+            <p className="text-white/80">Sign in and get started</p>
+          </div>
+          <Card className="w-full max-w-md">
+            <CardHeader className="space-y-1">
+              <CardTitle className="text-2xl font-bold">Sign in</CardTitle>
+              <CardDescription>
+                Enter your email and password to access your account
+              </CardDescription>
+            </CardHeader>
+            <Suspense fallback={<div>Loading...</div>}>
+              <SignInForm />
+            </Suspense>
+          </Card>
+        </div>
+      </div>
+      <Footer />
+    </>
   );
 }

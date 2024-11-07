@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-//import { useRouter } from "next/router";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -18,13 +17,13 @@ interface ProductDetailProps {
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
-  //const router = useRouter();
   const [product, setProduct] = useState<Product | null>(null);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
+  const [isInCart, setIsInCart] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -39,34 +38,39 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
-      setCart(JSON.parse(storedCart));
+      const parsedCart = JSON.parse(storedCart);
+      setCart(parsedCart);
+      setIsInCart(parsedCart.some((item: CartItem) => item.id === Number(id)));
     }
-  }, []);
+  }, [id]);
 
   const addToCart = () => {
     if (product) {
       const newItem: CartItem = {
         ...product,
         quantity: quantity,
-        image: product.images[0], // Add this line to include the image
+        image: product.images[0],
       };
       setCart((prevCart) => {
-        const existingItemIndex = prevCart.findIndex(
-          (item) => item.id === newItem.id
-        );
-        if (existingItemIndex > -1) {
-          const updatedCart = [...prevCart];
-          updatedCart[existingItemIndex].quantity += quantity;
-          localStorage.setItem("cart", JSON.stringify(updatedCart));
-          return updatedCart;
-        } else {
-          const updatedCart = [...prevCart, newItem];
-          localStorage.setItem("cart", JSON.stringify(updatedCart));
-          return updatedCart;
-        }
+        const updatedCart = [...prevCart, newItem];
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        return updatedCart;
       });
+      setIsInCart(true);
     }
   };
+
+  const updateCartQuantity = (newQuantity: number) => {
+    setCart((prevCart) => {
+      const updatedCart = prevCart.map((item) =>
+        item.id === Number(id) ? { ...item, quantity: newQuantity } : item
+      );
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      return updatedCart;
+    });
+    setQuantity(newQuantity);
+  };
+
   if (!product) {
     return <div>Loading...</div>;
   }
@@ -92,7 +96,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
             transition={{ duration: 0.5 }}
           >
             <Image
-              src={product.images[0]}
+              src={product.images[selectedImage]}
               alt={product.name}
               width={400}
               height={400}
@@ -175,7 +179,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
               <Button
                 variant="outline"
                 size="icon"
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                onClick={() =>
+                  isInCart
+                    ? updateCartQuantity(Math.max(1, quantity - 1))
+                    : setQuantity(Math.max(1, quantity - 1))
+                }
               >
                 <Minus className="h-4 w-4" />
               </Button>
@@ -183,7 +191,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
               <Button
                 variant="outline"
                 size="icon"
-                onClick={() => setQuantity(quantity + 1)}
+                onClick={() =>
+                  isInCart
+                    ? updateCartQuantity(quantity + 1)
+                    : setQuantity(quantity + 1)
+                }
               >
                 <Plus className="h-4 w-4" />
               </Button>
@@ -192,8 +204,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
             <Button
               className="w-full bg-yellow-400 text-black hover:bg-yellow-500"
               onClick={addToCart}
+              disabled={isInCart}
             >
-              Add to Cart
+              {isInCart ? "Added to Cart" : "Add to Cart"}
             </Button>
             <Button className="w-full bg-blue-950 text-white hover:bg-blue-500 mt-2">
               Checkout

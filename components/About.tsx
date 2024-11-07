@@ -1,37 +1,22 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 import MainNav from "./MainNav";
 import Footer from "./Footer";
 import { CartItem } from "@/app/utility/products";
+import { ChevronRight } from "lucide-react";
 
-const teamMembers = [
-  {
-    name: "John Doe",
-    role: "CEO",
-    image: "/placeholder.svg?height=200&width=200&text=John+Doe",
-  },
-  {
-    name: "Jane Smith",
-    role: "CTO",
-    image: "/placeholder.svg?height=200&width=200&text=Jane+Smith",
-  },
-  {
-    name: "Mike Johnson",
-    role: "COO",
-    image: "/placeholder.svg?height=200&width=200&text=Mike+Johnson",
-  },
-  {
-    name: "Sarah Brown",
-    role: "CMO",
-    image: "/placeholder.svg?height=200&width=200&text=Sarah+Brown",
-  },
-];
-
-export default function About() {
+export default function AboutUs() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -42,8 +27,10 @@ export default function About() {
     }
   }, []);
 
+  const { data: session } = useSession();
+
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen flex flex-col">
       <MainNav
         cart={cart}
         setCart={setCart}
@@ -51,100 +38,140 @@ export default function About() {
         setSearchTerm={setSearchTerm}
       />
 
-      <main className="container mx-auto p-4">
-        {/* <motion.h1
-          className="text-3xl font-bold mb-6"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          About Zeomart
-        </motion.h1> */}
+      <motion.div
+        className="relative overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-br from-yellow-200 via-pink-200 to-blue-200"
+          animate={{
+            background: [
+              "linear-gradient(to bottom right, #fef08a, #fecaca, #bfdbfe)",
+              "linear-gradient(to bottom right, #bfdbfe, #fef08a, #fecaca)",
+              "linear-gradient(to bottom right, #fecaca, #bfdbfe, #fef08a)",
+            ],
+          }}
+          transition={{ duration: 10, repeat: Infinity, repeatType: "reverse" }}
+        />
+        <div className="relative z-10 container mx-auto px-4 py-24 text-center">
+          <motion.h1
+            className="text-5xl font-bold mb-6"
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            About Brandsquare Vendor Hub
+          </motion.h1>
+          <motion.p
+            className="text-xl mb-8"
+            initial={{ y: -30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            Empowering small businesses and startups to thrive in e-commerce
+          </motion.p>
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            {session?.user?.role === "VENDOR" ? (
+              <Link href="/vendor">
+                <Button className="bg-yellow-400 text-black hover:bg-yellow-500 text-lg px-8 py-6">
+                  Continue to dashboard
+                  <ChevronRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            ) : (
+              <Link href="/auth/vendor-signup">
+                <Button
+                  size="lg"
+                  className="bg-yellow-400 text-black hover:bg-yellow-500"
+                >
+                  Join Brandsquare Today
+                </Button>
+              </Link>
+            )}
+          </motion.div>
+        </div>
+      </motion.div>
 
-        <motion.section
-          className="mb-8"
+      <div className="container mx-auto px-4 py-16">
+        <motion.div
+          className="grid gap-8 md:grid-cols-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ delay: 0.8 }}
         >
-          <h2 className="text-2xl font-semibold mb-4">Our Story</h2>
           <Card>
-            <CardContent className="p-6">
-              <p className="text-gray-700 mb-4">
-                Zeomart was founded in 2020 with a vision to revolutionize the
-                e-commerce industry. Our mission is to provide a seamless
-                shopping experience for our customers while offering a wide
-                range of high-quality products at competitive prices.
-              </p>
-              <p className="text-gray-700">
-                Since our inception, weve grown from a small startup to a
-                leading online marketplace, serving thousands of customers
-                worldwide. Our success is built on our commitment to customer
-                satisfaction, innovation, and sustainable business practices.
+            <CardHeader>
+              <CardTitle>Our Mission</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>
+                The Vendor Hub is an innovative platform designed to empower
+                small business owners and startups to grow their e-commerce
+                businesses with ease. We provide solutions for seamless payments
+                in Naira, trusted partnerships with verified vendors, and
+                flexible capital options to help you start selling with as
+                little as 50% upfront.
               </p>
             </CardContent>
           </Card>
-        </motion.section>
-
-        <motion.section
-          className="mb-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
           <Card>
-            <CardContent className="p-6">
-              <p className="text-gray-700">
-                At Zeomart, our mission is to empower both buyers and sellers by
-                creating a trusted and efficient online marketplace. We strive
-                to:
-              </p>
-              <ul className="list-disc list-inside text-gray-700 mt-2">
-                <li>Offer a diverse range of products to meet every need</li>
-                <li>
-                  Ensure the highest standards of quality and customer service
-                </li>
-                <li>Foster innovation in e-commerce technology</li>
-                <li>Promote sustainable and ethical business practices</li>
-                <li>Support small businesses and independent sellers</li>
+            <CardHeader>
+              <CardTitle>What We Offer</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ul className="list-disc pl-5 space-y-2">
+                <li>Seamless payments in Naira</li>
+                <li>Trusted partnerships with verified Chinese vendors</li>
+                <li>Flexible capital options (start with 50% upfront)</li>
+                <li>Shipping and warehousing solutions</li>
+                <li>Instant web store setup</li>
               </ul>
             </CardContent>
           </Card>
-        </motion.section>
+        </motion.div>
 
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
+        <motion.div
+          className="mt-16"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 1 }}
         >
-          <h2 className="text-2xl font-semibold mb-4">Our Team</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {teamMembers.map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.1 * index }}
-              >
-                <Card>
-                  <CardContent className="p-4 text-center">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      width={150}
-                      height={150}
-                      className="rounded-full mx-auto mb-4"
-                    />
-                    <h3 className="font-semibold text-lg">{member.name}</h3>
-                    <p className="text-gray-600">{member.role}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
+          <h2 className="text-3xl font-semibold mb-6">
+            Frequently Asked Questions
+          </h2>
+          <Accordion type="single" collapsible className="w-full">
+            {[
+              {
+                question: "What is the Brandsquare Vendor Hub?",
+                answer:
+                  "The Brandsquare Vendor Hub is a platform designed to help small business owners and startups sell their products through trusted partnerships with Chinese vendors. We provide solutions for seamless payments, capital assistance, shipping, and warehousing, making it easier for you to grow your business with less hassle.",
+              },
+              {
+                question: "How do I start selling on Brandsquare?",
+                answer:
+                  "To start selling on Brandsquare, you'll need to sign up as a vendor on our platform. Once registered, we'll guide you through the process of setting up your online store, choosing products from trusted Chinese vendors, and getting access to our flexible payment and warehousing options.",
+              },
+              {
+                question: "How does the 50% capital option work?",
+                answer:
+                  "When you choose the 50% capital option, you make a partial payment for your goods. Brandsquare handles the shipping and warehousing. Once your goods arrive, you can either pay the remaining amount to collect them or start selling directly from our warehouse, allowing you to generate revenue before completing the full payment.",
+              },
+            ].map((item, index) => (
+              <AccordionItem key={index} value={`item-${index + 1}`}>
+                <AccordionTrigger>{item.question}</AccordionTrigger>
+                <AccordionContent>{item.answer}</AccordionContent>
+              </AccordionItem>
             ))}
-          </div>
-        </motion.section>
-      </main>
+          </Accordion>
+        </motion.div>
+      </div>
+
       <Footer />
     </div>
   );
