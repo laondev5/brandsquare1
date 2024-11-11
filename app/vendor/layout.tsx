@@ -104,8 +104,10 @@ export default function RootLayout({
             <div className="flex flex-col flex-1 overflow-hidden">
               <TopBar user={userData.user} onMenuToggle={handleMenuToggle} />
               <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
-                {!userData.user.onboarding && (
-                  <Alert className="bg-white m-3 p-4">
+                {userData.user.onboarding ? (
+                  <div className="hidden"></div>
+                ) : (
+                  <Alert className="bg-red-100 m-3 p-4">
                     <X className="h-4 w-4" />
                     <AlertTitle>Complete Your Sign up</AlertTitle>
                     <AlertDescription>

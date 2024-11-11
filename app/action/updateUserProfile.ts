@@ -6,49 +6,48 @@ import { revalidatePath } from 'next/cache'
 const prisma = new PrismaClient()
 
 interface UpdateUserProfileData {
-  userId: string;
-  basicInfo?: {
+    userId: string;
     brandName?: string;
     brandDescription?: string;
-  };
-  contactInfo?: {
     address?: string;
     city?: string;
     state?: string;
     postalCode?: string;
     phone?: string;
-    email?: string;
-  };
-  socialMedia?: {
     instagram?: string;
     facebook?: string;
     twitter?: string;
     linkedin?: string;
     website?: string;
-  };
-  additionalDetails?: {
     operatingHours?: string;
     businessCategory?: string;
     taxId?: string;
-  };
-  terms?: {
-    agreedToTerms: boolean;
-  };
+
 }
 
-export async function updateUserProfile(data: UpdateUserProfileData) {
+export async function updateUserProfile(unboardingData: UpdateUserProfileData) {
   try {
     const updatedUser = await prisma.user.update({
       where: {
-        id: data.userId,
+        id: unboardingData.userId,
       },
       data: {
         onboarding: true,
-        basicInfo: data.basicInfo || undefined,
-        contactInfo: data.contactInfo || undefined,
-        socialMedia: data.socialMedia || undefined,
-        additionalDetails: data.additionalDetails || undefined,
-        terms: data.terms || undefined,
+        brandName: unboardingData.brandName,
+        brandDescription: unboardingData.brandDescription,
+        address: unboardingData.address,
+        city: unboardingData.city,
+        state: unboardingData.state,
+        postalCode: unboardingData.postalCode,
+        phone: unboardingData.phone,
+        instagram: unboardingData.instagram,
+        facebook: unboardingData.facebook,
+        twitter: unboardingData.twitter,
+        linkedin: unboardingData.linkedin,
+        website: unboardingData.website,
+        operatingHours: unboardingData.operatingHours,
+        businessCategory: unboardingData.businessCategory,
+        taxId: unboardingData.taxId
       },
     })
 

@@ -178,6 +178,10 @@ export default function PreOrdersPage() {
         transition={{ duration: 0.5 }}
       >
         <h1 className="text-3xl font-semibold">Pre-Orders</h1>
+        <p>
+          Get ahead by managing upcoming orders before they even arrive. Prepare
+          for what’s next.
+        </p>
       </motion.div>
 
       <motion.div

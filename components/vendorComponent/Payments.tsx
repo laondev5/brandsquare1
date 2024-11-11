@@ -110,6 +110,10 @@ export default function Payments() {
         transition={{ duration: 0.5 }}
       >
         <h1 className="text-3xl font-semibold">Payment Management</h1>
+        <p>
+          Keep track of your payments here. See what’s been paid and manage any
+          pending transactions with ease.
+        </p>
       </motion.div>
 
       <motion.div

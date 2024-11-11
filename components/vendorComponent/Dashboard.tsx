@@ -26,6 +26,11 @@ const Dashboard: React.FC<DashboardProps> = ({ userData }) => {
   return (
     <div className="p-6 space-y-6">
       <h1 className="text-3xl font-semibold">Dashboard</h1>
+      <p>
+        This is your business control center. Keep an eye on everything
+        happening with your store - sales, orders, and performance all in one
+        spot.
+      </p>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

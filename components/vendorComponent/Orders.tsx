@@ -132,6 +132,10 @@ export default function Orders() {
         transition={{ duration: 0.5 }}
       >
         <h1 className="text-3xl font-semibold">Order Management</h1>
+        <p>
+          Stay on top of all your customer orders. From new orders to fulfilled
+          ones, this is where you track it all.
+        </p>
       </motion.div>
       <motion.div
         initial={{ opacity: 0 }}

@@ -9,11 +9,11 @@ export const UploadToCloudinary = async (
 ): Promise<CloudinaryResponse | undefined> => {
   const formData = new FormData();
   formData.append("file", rawImage);
-  formData.append("upload_preset", "skilldesk");
+  formData.append("upload_preset", "brandsquare");
 
   try {
     const response = await fetch(
-      "https://api.cloudinary.com/v1_1/laon/image/upload",
+      "https://api.cloudinary.com/v1_1/dlrusyqli/image/upload",
       {
         method: "POST",
         body: formData,

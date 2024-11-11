@@ -18,8 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ToastProvider, Toast } from "@/components/ui/toast"; // Import ToastProvider
-import { toast } from "@/hooks/use-toast";
+import { Toaster, toast } from "sonner";
 import { Icons } from "@/components/icons";
 import { CartItem } from "@/app/utility/products";
 import MainNav from "@/components/MainNav";
@@ -60,31 +59,24 @@ export default function Register() {
     });
 
     if (response.ok) {
+      toast.success("Registration successful! Please login."); // Show success toast
       router.push("/auth/signin");
     } else {
       const errorText = await response.text(); // Get the raw response text
       console.error("Registration failed:", errorText); // Log the raw error text
       try {
         const errorData = JSON.parse(errorText); // Attempt to parse as JSON
-        toast({
-          title: "Error",
-          description: errorData.message || "Registration failed",
-          variant: "destructive",
-        }); // Show error toast
+        toast.error(errorData.message || "Registration failed"); // Show error toast
       } catch {
         // If parsing fails, show a generic error message
-        toast({
-          title: "Error",
-          description: "Registration failed. Please try again.",
-          variant: "destructive",
-        });
+        toast.error("Registration failed. Please try again.");
       }
     }
     setLoading(false);
   };
 
   return (
-    <ToastProvider>
+    <>
       <MainNav
         cart={cart}
         setCart={setCart}
@@ -93,7 +85,7 @@ export default function Register() {
       />
       {/* Wrap with ToastProvider */}
       <div className="relative flex items-center justify-center w-full min-h-screen overflow-hidden">
-        <Toast />
+        <Toaster position="bottom-right" expand={false} richColors />
         <div className="absolute inset-0 bg-gradient-to-br from-purple-500 via-purple-400 to-pink-300">
           <div className="absolute inset-0">
             <svg
@@ -194,6 +186,6 @@ export default function Register() {
         </div>
       </div>
       <Footer />
-    </ToastProvider>
+    </>
   );
 }

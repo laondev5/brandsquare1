@@ -20,8 +20,7 @@ import {
 } from "@/components/ui/card";
 
 import { Icons } from "../icons";
-import { toast } from "@/hooks/use-toast";
-import { ToastProvider, Toast } from "@/components/ui/toast";
+import { Toaster, toast } from "sonner";
 import Link from "next/link";
 import { CartItem } from "@/app/utility/products";
 import MainNav from "../MainNav";
@@ -90,26 +89,18 @@ export default function VendorSignupForm() {
       console.error("Registration failed:", errorText); // Log the raw error text
       try {
         const errorData = JSON.parse(errorText); // Attempt to parse as JSON
-        toast({
-          title: "Error",
-          description: errorData.message || "Registration failed",
-          variant: "destructive",
-        });
+        toast.error(errorData.message || "Registration failed");
         reset(); // Show error toast
       } catch {
         // If parsing fails, show a generic error message
-        toast({
-          title: "Error",
-          description: "Registration failed. Please try again.",
-          variant: "destructive",
-        });
+        toast.error("Registration failed. Please try again.");
       }
     }
     setIsLoading(false);
   };
 
   return (
-    <ToastProvider>
+    <>
       <MainNav
         cart={cart}
         setCart={setCart}
@@ -117,7 +108,7 @@ export default function VendorSignupForm() {
         setSearchTerm={setSearchTerm}
       />
       <div className="relative flex items-center justify-center w-full min-h-screen overflow-hidden">
-        <Toast />
+        <Toaster position="bottom-right" expand={false} richColors />
         <div className="absolute inset-0 bg-gradient-to-br from-purple-500 via-purple-400 to-pink-300">
           <div className="absolute inset-0">
             <svg
@@ -286,6 +277,6 @@ export default function VendorSignupForm() {
       </div>
 
       <Footer />
-    </ToastProvider>
+    </>
   );
 }

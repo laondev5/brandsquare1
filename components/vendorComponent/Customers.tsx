@@ -77,6 +77,10 @@ export default function Customers() {
         transition={{ duration: 0.5 }}
       >
         <h1 className="text-3xl font-semibold">Customer Management</h1>
+        <p>
+          Here’s where you can see who your customers are. Get to know them
+          better and build stronger relationships.
+        </p>
       </motion.div>
       <motion.div
         initial={{ opacity: 0 }}

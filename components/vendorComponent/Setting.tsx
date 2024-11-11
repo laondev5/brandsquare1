@@ -57,6 +57,8 @@ export default function Settings() {
         transition={{ duration: 0.5 }}
       >
         <h1 className="text-3xl font-semibold">Settings</h1>
+        Customize how your store runs. Adjust your preferences, manage users,
+        and make your shop exactly how you want it.
       </motion.div>
 
       <motion.div

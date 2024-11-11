@@ -22,6 +22,7 @@ import { useSession } from "next-auth/react";
 import MainNav from "@/components/MainNav";
 import { CartItem } from "@/app/utility/products";
 import Footer from "@/components/Footer";
+import { Toaster, toast } from "sonner";
 interface FormState {
   email: string;
   password: string;
@@ -108,14 +109,18 @@ function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
       });
 
       if (!result) {
+        toast.error("Authentication failed. Please try again.");
         throw new Error("Authentication failed");
       }
 
       if (result.error) {
+        toast.error("Authentication failed. Please try again.");
         setError(result.error);
         return;
       }
+      toast.success("Logged in successfully!");
     } catch (err) {
+      toast.error("An unexpected error occurred. Please try again.");
       console.error("Sign in error:", err);
       setError(
         err instanceof Error ? err.message : "An unexpected error occurred"
@@ -206,6 +211,7 @@ export default function SignIn(): JSX.Element {
 
   return (
     <>
+      <Toaster position="bottom-right" expand={false} richColors />
       <MainNav
         cart={cart}
         setCart={setCart}

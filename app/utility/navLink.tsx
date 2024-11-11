@@ -5,6 +5,6 @@ export const navLinks = [
   { title: "Pages", path: "/pages" },
   { title: "Contact", path: "/contact" },
   { title: "About us", path: "/about" },
-  //{ title: "Contact", path: "/contact" },
+  { title: "Store", path: "/store" },
 ];
 //"Home", "Shop", "Blog", "Pages", "Contact"

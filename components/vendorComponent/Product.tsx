@@ -121,6 +121,10 @@ export default function ProductsPage() {
         transition={{ duration: 0.5 }}
       >
         <h1 className="text-3xl font-semibold">Products</h1>
+        <p>
+          Easily manage your products here. Add new items, update listings, and
+          keep your customers excited about what’s on offer.
+        </p>
       </motion.div>
 
       <motion.div

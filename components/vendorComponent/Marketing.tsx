@@ -51,6 +51,10 @@ export default function Marketing() {
         transition={{ duration: 0.5 }}
       >
         <h1 className="text-3xl font-semibold">Marketing Tools</h1>
+        <p>
+          Looking to grow your business? Create campaigns and promotions that
+          help you reach more customers.
+        </p>
       </motion.div>
 
       <motion.div
