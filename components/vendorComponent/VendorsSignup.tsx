@@ -100,7 +100,7 @@ export default function VendorSignupForm() {
   };
 
   return (
-    <>
+    <div className="w-full h-screen flex flex-col">
       <MainNav
         cart={cart}
         setCart={setCart}
@@ -277,6 +277,6 @@ export default function VendorSignupForm() {
       </div>
 
       <Footer />
-    </>
+    </div>
   );
 }

@@ -54,11 +54,11 @@ const SearchBar = ({
   searchTerm: string;
   setSearchTerm: (term: string) => void;
 }) => (
-  <div className="relative flex-grow md:flex-grow-0">
+  <div className="relative flex-grow md:flex-grow-0  ">
     <Input
       type="text"
       placeholder="Search products..."
-      className="w-full md:w-64"
+      className="w-full md:w-64 text-gray-200"
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
     />
@@ -119,12 +119,12 @@ export default function MainNav({
 
   return (
     <header
-      className={`sticky top-0 z-50 ${
+      className={`sticky top-0 z-50    ${
         isScrolled ? "bg-[#000035] shadow-md" : "bg-[#000035]"
       } transition-all duration-300`}
     >
       <div className="container mx-auto p-4">
-        <div className="flex flex-wrap justify-between items-center">
+        <div className="flex flex-wrap justify-between items-start">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -140,12 +140,17 @@ export default function MainNav({
               />
             </Link>
           </motion.h1>
-          <div className="flex items-center space-x-4">
+           <div className="">
+          <Navbar />
+        </div>
+        </div>
+         
+        <div className="flex items-center      float-right py-3">
             <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="flex space-x-2"
+              className="flex  sm:space-x-2"
             >
               <Button
                 variant="ghost"
@@ -199,10 +204,6 @@ export default function MainNav({
               )}
             </motion.div>
           </div>
-        </div>
-        <div className="mt-4">
-          <Navbar />
-        </div>
       </div>
 
       <AnimatePresence>

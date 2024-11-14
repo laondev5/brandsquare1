@@ -210,7 +210,7 @@ export default function SignIn(): JSX.Element {
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Toaster position="bottom-right" expand={false} richColors />
       <MainNav
         cart={cart}
@@ -262,6 +262,6 @@ export default function SignIn(): JSX.Element {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -16,7 +16,7 @@ import { useSession } from "next-auth/react";
 const NavItem = () => {
   const { data: session } = useSession();
   return (
-    <nav className="mt-4 flex justify-between items-center relative">
+    <nav className="mt-4 flex  sm:flex-row flex-row-reverse justify-between items-center relative">
       <div className="block lg:hidden">
         <Sheet>
           <SheetTrigger>
@@ -56,14 +56,14 @@ const NavItem = () => {
       </div>
       {session?.user?.role === "VENDOR" ? (
         <Link href="/vendor">
-          <Button className="bg-yellow-400 text-black hover:bg-yellow-500 text-lg px-8 py-6">
-            Continue to dashboard
-            <ChevronRight className="ml-2 h-5 w-5" />
+          <Button className="bg-yellow-400 text-black hover:bg-yellow-500 text-lg px-8 py-6 sm:mr-0 mr-3 text-[12px] p-1 sm:text-[14px] sm:p-2">
+         dashboard
+            <ChevronRight className="ml-1 h-5 w-5" />
           </Button>
         </Link>
       ) : (
         <Link href="/vendor-hub">
-          <Button className="bg-yellow-400 text-black">Vendors Hub</Button>
+          <Button className="bg-yellow-400  sm:mr-0 mr-3 text-[12px] p-1 sm:text-[14px] sm:p-2 text-black">Vendors Hub</Button>
         </Link>
       )}
     </nav>

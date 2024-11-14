@@ -69,8 +69,8 @@ export default function Zeomart() {
   // };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <MainNav
+    <div className="min-h-screen flex flex-col bg-gray-100">
+      <MainNav 
         cart={cart}
         setCart={setCart}
         searchTerm={searchTerm}
