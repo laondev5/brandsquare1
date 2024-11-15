@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import MainNav from "./MainNav";
 import { motion } from "framer-motion";
 import Footer from "./Footer";
-
+import ChatButton from "./chatButton";
 
 
 
@@ -27,6 +27,7 @@ const categoryItems: React.FC<categoryProps> = ({  category }) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
+      <ChatButton />
     <MainNav
       cart={cart}
       setCart={setCart}

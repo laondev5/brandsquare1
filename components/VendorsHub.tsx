@@ -10,6 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import ChatButton from "./chatButton";
+
 import { CheckCircle, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { CartItem } from "@/app/utility/products";
@@ -90,6 +92,7 @@ export default function VendorHub() {
   const { data: session } = useSession();
   return (
     <div className="min-h-screen flex flex-col">
+      <ChatButton />
       <MainNav
         cart={cart}
         setCart={setCart}

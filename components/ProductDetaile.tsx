@@ -11,6 +11,7 @@ import { Star, Plus, Minus } from "lucide-react";
 import { products, Product, CartItem } from "@/app/utility/products";
 import Footer from "./Footer";
 import MainNav from "./MainNav";
+import ChatButton from "./chatButton";
 
 interface ProductDetailProps {
   id: string | number;
@@ -81,6 +82,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
+      <ChatButton />
       <MainNav
         cart={cart}
         setCart={setCart}
