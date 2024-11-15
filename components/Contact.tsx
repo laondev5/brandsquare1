@@ -28,7 +28,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen flex flex-col bg-gray-100">
       <MainNav
         cart={cart}
         setCart={setCart}
@@ -36,7 +36,7 @@ export default function Contact() {
         setSearchTerm={setSearchTerm}
       />
 
-      <main className="container mx-auto p-4">
+      <main className="container mx-auto my-12  sm:my-20 p-4">
         <motion.h1
           className="text-3xl font-bold mb-6"
           initial={{ opacity: 0, y: -20 }}
