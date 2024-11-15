@@ -17,7 +17,7 @@ const SearchBar = ({
     <input
       type="text"
       placeholder="Search products..."
-      className="p-2 rounded-full w-full md:w-64"
+      className="p-2 rounded-full   w-full md:w-64"
       value={searchTerm}
       onChange={handleSearch}
     />

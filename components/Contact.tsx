@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Mail } from "lucide-react";
 import Footer from "./Footer";
 import { CartItem } from "@/app/utility/products";
+import ChatButton from "./chatButton";
+
 export default function Contact() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -29,6 +31,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
+      <ChatButton />
       <MainNav
         cart={cart}
         setCart={setCart}

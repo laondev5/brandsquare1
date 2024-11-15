@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import ChatButton from "./chatButton";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -94,6 +95,7 @@ export default function Zeomart() {
           </Card>
         </motion.section> */}
         <ServiceOfferings />
+        <ChatButton />
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -188,7 +190,7 @@ export default function Zeomart() {
               <h2 className="text-2xl font-bold mb-4">{category}</h2>
 
               <Link href={`/category/${category}`} passHref>
-                    <Button className="w-full bg-[#000035] text-white hover:bg-[#000035cc]">
+                    <Button className="w-full bg-[#000035] hover:bg-[#000035cc] text-white  ">
                       View All
                     </Button>
                   </Link>

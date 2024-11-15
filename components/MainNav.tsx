@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Search,
-  ShoppingCart,
+   ShoppingCart,
   User,
   Plus,
   Minus,
@@ -12,6 +11,7 @@ import {
   LogOut,
   Settings,
 } from "lucide-react";
+import { IoMdSearch } from "react-icons/io";
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
@@ -54,15 +54,15 @@ const SearchBar = ({
   searchTerm: string;
   setSearchTerm: (term: string) => void;
 }) => (
-  <div className="relative flex-grow md:flex-grow-0  ">
+  <div className="relative  flex-grow mr-1  max-w-[500px]    ">
     <Input
       type="text"
       placeholder="Search products..."
-      className="w-full md:w-64 text-gray-200"
+      className=" md:py-4 py-1  text-gray-200"
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
     />
-    <Search className="absolute right-3 top-2.5 text-muted-foreground" />
+    <IoMdSearch  className=" sm:block hidden absolute right-3 top-2.5 text-muted-foreground font-bold" />
   </div>
 );
 
@@ -124,7 +124,8 @@ export default function MainNav({
       } transition-all duration-300`}
     >
       <div className="container mx-auto p-4">
-        <div className="flex flex-wrap justify-between items-start">
+     
+        <div className=" flex justify-between items-center w-full">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -136,17 +137,13 @@ export default function MainNav({
                 alt="logo"
                 width={100}
                 height={100}
-                className="w-[7rem]"
+                className="max-w-[7rem]"
               />
             </Link>
           </motion.h1>
-           <div className="">
-          <Navbar />
-        </div>
-        </div>
-         
-        <div className="flex items-center      float-right py-3">
-            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+           
+          <div className="flex items-center  w-[70%]    ">
+            <SearchBar  searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -173,7 +170,7 @@ export default function MainNav({
               {session ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="text-white">
+                    <Button variant="ghost" size="icon" className="text-white ">
                       <User className="h-4 w-4 " />
                     </Button>
                   </DropdownMenuTrigger>
@@ -203,7 +200,15 @@ export default function MainNav({
                 </Button>
               )}
             </motion.div>
+            <div className="">
+          <Navbar />
+           
+        </div>
           </div>
+            
+        </div>
+         
+        
       </div>
 
       <AnimatePresence>
