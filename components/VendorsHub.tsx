@@ -86,7 +86,7 @@ const features: Feature[] = [
 export default function VendorHub() {
   const [searchTerm, setSearchTerm] = useState("");
   const [cart, setCart] = useState<CartItem[]>([]);
-
+ 
   const { data: session } = useSession();
   return (
     <div className="min-h-screen flex flex-col">
@@ -171,24 +171,24 @@ export default function VendorHub() {
             {
               title: "Seamless Payments",
               content:
-                "With the Vendor Hub, you can forget the hassle of finding trusted suppliers or worrying about complicated international payment processes. We partner with reliable Chinese vendors and simplify payments by allowing you to pay in Naira, eliminating the need for currency conversion or payment gateway challenges. This makes the process smoother and more secure for Nigerian businesses.",
-                icon: <GrTransaction className="   text-yellow-400" />,
+                "The Vendor Hub connects Nigerian businesses with trusted Chinese suppliers, enabling secure Naira payments, eliminating currency conversion and gateway issues for a smooth, efficient sourcing process.",
+                 icon: <GrTransaction className="   text-yellow-400" />,
             },
             {
               title: "Flexible Financing",
 content:
-  "we offer flexible financing options. You don’t need 100% capital upfront to get started. With as little as 50% down, you can secure your goods, and you can either complete the payment when your goods arrive at our warehouse or start selling directly from our warehouse while you gather the remaining funds. ",
+  "We offer flexible financing options, requiring only 50% down to secure your goods. You can either complete payment upon arrival at our warehouse or start selling directly while gathering the remaining funds.",
   icon: <FaMoneyBillWave  className="   text-yellow-400" />,
             },
             {
               title: "Effortless Shipping",
 content:
-  " The Vendor Hub also supports your business by managing the shipping process, ensuring your goods are handled professionally from China to Nigeria. Whether you choose to collect your products once they arrive or sell directly from our warehouse, we made it easy for you to focus on what matters most: growing your business.",
+  " The Vendor Hub manages shipping from China to Nigeria, ensuring professional handling. Collect your products upon arrival or sell directly from our warehouse, focusing on growing your business.",
   icon: <FaShippingFast className="   text-yellow-400" />,
             },
             {
               title: "Instant Storefront",
-              content: "Through our platform, you'll also have access to an instant web store, providing a quick and professional online presence without any additional setup costs. As a vendor, you’ll benefit from our extensive network, business tools, and a streamlined path to success in e-commerce.Start small, scale smart, and experience a simplified way of doing business with the Brandsquare Vendor Hub.",
+              content: "Our platform offers an instant web store, providing a professional online presence with no setup costs. Benefit from our network, tools, and streamlined e-commerce success path.",
               icon: <FaStoreAlt className="   text-yellow-400" />,
             },
           ].map((feature, index) => (
@@ -198,12 +198,13 @@ content:
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.8 + index * 0.2 }}
             >
-              <Card className=" md:max-h-[360px]  md:min-h-[360px]  xl:max-h-[410px]  xl:min-h-[410px]  transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  md:text-left">
+              <Card className=" md:max-h-[250px]  md:min-h-[250px]  xl:max-h-[330px]  xl:min-h-[330px]  transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  md:text-left">
                 <CardHeader>
                   <CardTitle className="flex  items-center  justify-center custom-md:justify-normal gap-2 text-[20px]">{feature.title} {feature.icon}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-[15px] text-gray-700  leading-7">{feature.content}</p>
+                  <p className="text-[15px] text-gray-700  leading-7 md:leading-8">{feature.content}</p>
+            
                 </CardContent>
               </Card>
             </motion.div>

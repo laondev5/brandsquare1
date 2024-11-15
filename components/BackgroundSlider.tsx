@@ -51,7 +51,7 @@ export default function BackgroundSlider(): JSX.Element {
   }, []);
 
   return (
-    <div className="relative h-[60vh] w-full overflow-hidden">
+    <div className="relative h-[30vh]  sm:h-[60vh] w-full overflow-hidden">
       <AnimatePresence initial={false}>
         <motion.div
           key={currentIndex}
@@ -59,14 +59,13 @@ export default function BackgroundSlider(): JSX.Element {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="absolute inset-0"
+          className="absolute inset-0   w-full h-64 sm:h-96 md:h-full"
         >
-          <Image
+          <Image className=" object-cover "
             src={slides[currentIndex].url}
             alt={slides[currentIndex].title}
             layout="fill"
-            objectFit="cover"
-            priority
+             priority
           />
           {/* <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center   text-white">
            

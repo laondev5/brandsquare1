@@ -184,7 +184,15 @@ export default function Zeomart() {
               animate={{ opacity: 1, y: 0 }}
               className="mb-8"
             >
+              <div className="flex justify-between items-center"> 
               <h2 className="text-2xl font-bold mb-4">{category}</h2>
+
+              <Link href={`/category/${category}`} passHref>
+                    <Button className="w-full bg-[#000035] text-white hover:bg-[#000035cc]">
+                      View All
+                    </Button>
+                  </Link>
+              </div>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 {filteredProducts
                   .filter((product) => product.category === category)

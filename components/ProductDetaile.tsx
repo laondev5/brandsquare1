@@ -80,7 +80,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
     .slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen flex flex-col bg-gray-100">
       <MainNav
         cart={cart}
         setCart={setCart}
@@ -208,7 +208,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
             >
               {isInCart ? "Added to Cart" : "Add to Cart"}
             </Button>
-            <Button className="w-full bg-blue-950 text-white hover:bg-blue-500 mt-2">
+            <Button className="w-full bg-blue-950 text-white  hover:bg-[#000035cc] mt-2">
               Checkout
             </Button>
           </motion.div>
