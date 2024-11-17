@@ -18,8 +18,9 @@ import { CartItem } from "@/app/utility/products";
 import MainNav from "./MainNav";
 import { useSession } from "next-auth/react";
 import Footer from "./Footer";
-import { GrTransaction } from "react-icons/gr";
-import { FaMoneyBillWave, FaShippingFast, FaStoreAlt } from "react-icons/fa";
+import { FcInTransit, FcShop, FcViewDetails } from "react-icons/fc";
+ import { FcMoneyTransfer } from "react-icons/fc";
+
 import {
   Accordion,
   AccordionContent,
@@ -165,12 +166,12 @@ export default function VendorHub() {
           <span className="text-3xl    font-bold text-center">About Vendor Hub  </span>
         </motion.h1>
         <motion.div
-          className="grid gap-4  md:grid-cols-2  xl:grid-cols-4"
+          className="  flex flex-col gap-4 md:gap-7 md:flex-row justify-center items-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
         >
-          {[
+          {/* {[
             {
               title: "Seamless Payments",
               content:
@@ -194,24 +195,82 @@ content:
               content: "Our platform offers an instant web store, providing a professional online presence with no setup costs. Benefit from our network, tools, and streamlined e-commerce success path.",
               icon: <FaStoreAlt className="   text-yellow-400" />,
             },
-          ].map((feature, index) => (
-            <motion.div  
-              key={index}
+          ]  */}
+           <motion.div  
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.8 + index * 0.2 }}
+              transition={{ delay: 0.8 + 0 * 0.2 }}
             >
-              <Card className=" md:max-h-[250px]  md:min-h-[250px]  xl:max-h-[330px]  xl:min-h-[330px]  transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  md:text-left">
-                <CardHeader>
-                  <CardTitle className="flex  items-center  justify-center custom-md:justify-normal gap-2 text-[20px]">{feature.title} {feature.icon}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-[15px] text-gray-700  leading-7 md:leading-8">{feature.content}</p>
-            
-                </CardContent>
-              </Card>
+              <div className="  border-t-4  min-h-[160px] md:min-h-[180px]  border-blue-200 rounded-lg shadow-lg  transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
+                
+                  <div className=" text-[20px] font-thin "><span>Seamless Payments</span></div>
+                
+                <div>
+                  <p className="text-[15px]  py-3 text-gray-700  leading-7 md:leading-8">The Vendor Hub connects Nigerian businesses with trusted Chinese suppliers</p>   
+                </div>
+                <div className=" text-[29px] float-right">
+                <FcViewDetails /> 
+                </div>
+              </div>
             </motion.div>
-          ))}
+
+            <div className=" flex  flex-col-reverse md:flex-col gap-4">
+            <motion.div  
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.8 + 0 * 0.2 }}
+            >
+              <div className="  min-h-[160px] md:min-h-[180px]  border-t-4  border-gray-300  rounded-lg shadow-lg   transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
+                
+                  <div className=" text-[20px] font-thin "><span>Flexible Financing</span></div>
+                
+                <div>
+                  <p className="text-[15px]  py-3 text-gray-700  leading-7 md:leading-8">The Vendor Hub connects We offer flexible financing options, requiring only 50% down to secure your goods.</p>   
+                </div>
+                <div className=" text-[29px] float-right">
+                <FcMoneyTransfer /> 
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div  
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.8 + 0 * 0.2 }}
+            >
+              <div className="  border-t-4  min-h-[160px] md:min-h-[180px] border-purple-200  rounded-lg shadow-lg  transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
+                
+                  <div className=" text-[20px] font-thin "><span>Effortless Shipping</span></div>
+                
+                <div>
+                  <p className="text-[15px]  py-3 text-gray-700  leading-7 md:leading-8">The Vendor Hub manages shipping from China to Nigeria, ensuring professional handling.</p>   
+                </div>
+                <div className=" text-[29px] float-right">
+                <FcInTransit /> 
+                </div>
+              </div>
+            </motion.div>
+            </div>
+            <motion.div  
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.8 + 0 * 0.2 }}
+            >
+              <div className="  border-t-4  min-h-[160px] md:min-h-[180px]  border-yellow-400 rounded-lg shadow-lg  transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
+                
+                  <div className=" text-[20px] font-thin "><span>Instant Storefront</span></div>
+                
+                <div>
+                  <p className="text-[15px]  py-3 text-gray-700  leading-7 md:leading-8">We offer an instant web store, providing a professional online presence with no setup costs.</p>   
+                </div>
+                <div className=" text-[29px] float-right">
+                <FcShop /> 
+                </div>
+              </div>
+            </motion.div>
+            
+            
+  
         </motion.div></div>
 <div className=" bg-slate-100  my-9 mb-32 pb-7 px-7">
 <motion.div
