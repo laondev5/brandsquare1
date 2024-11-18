@@ -27,6 +27,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Image from "next/image";
 
 // type Benefit = {
 //   icon: React.ReactNode;
@@ -201,7 +202,7 @@ content:
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.8 + 0 * 0.2 }}
             >
-              <div className="  border-t-4  min-h-[160px] md:min-h-[180px]  border-blue-200 rounded-lg shadow-lg  transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
+              <div className="  border-t-4  min-h-[190px] md:min-h-[180px]  border-blue-200 rounded-lg shadow-lg  transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
                 
                   <div className=" text-[20px] font-thin "><span>Seamless Payments</span></div>
                 
@@ -220,7 +221,7 @@ content:
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.8 + 0 * 0.2 }}
             >
-              <div className="  min-h-[160px] md:min-h-[180px]  border-t-4  border-gray-300  rounded-lg shadow-lg   transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
+              <div className="  min-h-[190px] md:min-h-[180px]  border-t-4  border-gray-300  rounded-lg shadow-lg   transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
                 
                   <div className=" text-[20px] font-thin "><span>Flexible Financing</span></div>
                 
@@ -238,7 +239,7 @@ content:
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.8 + 0 * 0.2 }}
             >
-              <div className="  border-t-4  min-h-[160px] md:min-h-[180px] border-purple-200  rounded-lg shadow-lg  transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
+              <div className="  border-t-4  min-h-[190px] md:min-h-[180px] border-purple-200  rounded-lg shadow-lg  transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
                 
                   <div className=" text-[20px] font-thin "><span>Effortless Shipping</span></div>
                 
@@ -256,7 +257,7 @@ content:
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.8 + 0 * 0.2 }}
             >
-              <div className="  border-t-4  min-h-[160px] md:min-h-[180px]  border-yellow-400 rounded-lg shadow-lg  transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
+              <div className="  border-t-4  min-h-[190px] md:min-h-[180px]  border-yellow-400 rounded-lg shadow-lg  transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
                 
                   <div className=" text-[20px] font-thin "><span>Instant Storefront</span></div>
                 
@@ -274,7 +275,7 @@ content:
         </motion.div></div>
 <div className=" bg-slate-100  my-9 mb-32 pb-7 px-7">
 <motion.div
-          className="  my-20 mt-32"
+          className=" container  my-20 mt-32"
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1.4 }}
@@ -282,29 +283,89 @@ content:
           <h2 className="text-3xl font-semibold pt-9 mb-6 text-center">
             Why Choose Brandsquare?
           </h2>
-          <div className="grid max-w-[900px] mx-auto gap-4 md:grid-cols-2     place-content-center">
-            {[
-              "Simplified international transactions",
-              "Warehousing and shipping support",
-              "Instant web store setup",
-              "Access to a large customer base",
-              "Ongoing vendor education and support",
-              "Flexible growth options for your business",
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                className="flex items-center space-x-2"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.6 + index * 0.1 }}
-              >
-                <CheckCircle className="text-green-500" />
-                <span>{feature}</span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+          <div>
+ <div className="flex  xl:flex-row flex-col-reverse  items-center justify-between my-7">
+          <div className="relative   w-full md:w-[300px] h-[300px]">
+  {/* The image */}
+  <Image
+    className="rounded-3xl object-cover lg:mt-0 mt-7"
+    src="/images/happy-young-african.jpg"
+    layout="fill" // Ensures the image fills the container
+    alt=""
+  />
 
+  {/* Feature texts */}
+  {[
+    "Simplified international transactions",
+    "Warehousing and shipping support",
+    "Instant web store setup",
+  ].map((feature, index) => {
+    // Define specific positions for each text
+    const positions = ["top-4 right-5", "top-[30%] right-3 -translate-y-1/2", "top-[50%] right-4"];
+    return (
+      <motion.div
+        key={index}
+        className={`absolute ${positions[index]} md:right-[-200px] flex items-center space-x-2 bg-white shadow-lg rounded-full px-4 py-2`}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1.6 + index * 0.1 }}
+      >
+        <CheckCircle className="text-green-500" />
+        <span className=" md:text-[15px] text-[12px]">{feature}</span>
+      </motion.div>
+    );
+  })}
+</div>
+ <div className=" text-center my-4 md:my-0 lg:max-w-[700px]">
+  <h2 className=" font-bold text-[21px]">Empowering Vendors, Simplifying Growth
+
+</h2>
+  <p> your gateway to seamless collaboration and success. Manage your products, track sales, and connect with customers effortlessly on one unified platform.</p>
+ </div>
+</div>
+
+<div className="flex  xl:flex-row-reverse  flex-col-reverse   items-center justify-between  my-14 lg:my-7">
+          <div className="relative    w-full lg:w-[300px] h-[300px]">
+  {/* The image */}
+  <Image
+    className="rounded-3xl object-cover lg:mt-0 mt-7"
+    src="/images/beautiful-african-american-woman.jpg"
+    layout="fill" // Ensures the image fills the container
+    alt=""
+  />
+
+  {/* Feature texts */}
+  {[
+    "Access to a large customer base",
+              "Ongoing vendor education ",
+              "Flexible growth options ",
+  ].map((feature, index) => {
+    // Define specific positions for each text
+    const positions = ["top-4 right-2", "top-[30%] right-3 -translate-y-1/2", "top-[50%] right-4"];
+    return (
+      <motion.div
+        key={index}
+        className={`absolute ${positions[index]} md:right-[-100px] flex items-center space-x-2 bg-white shadow-lg text-right rounded-full px-4 py-2`}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1.6 + index * 0.1 }}
+      >
+        <CheckCircle className="text-green-500" />
+        <span className=" md:text-[15px] text-[12px]">{feature}</span>
+      </motion.div>
+    );
+  })}
+</div>
+ <div className=" text-center my-4 md:my-0  lg:max-w-[700px]">
+  <h2 className=" font-bold text-[21px]">Your Partner for Smarter Selling.</h2>
+  <p className=" leading-7">From listing your products to tracking performance, we provide the tools you need to streamline operations and maximize your reach.</p>
+ </div>
+</div>
+</div>
+        </motion.div>
+        {/* "Access to a large customer base",
+              "Ongoing vendor education and support",
+              "Flexible growth options for your business", */}
         <motion.div
           className="mt-16 text-center"
           initial={{ y: 50, opacity: 0 }}
@@ -334,6 +395,8 @@ content:
         </motion.div>
 </div>
        
+
+
 <div className="container mx-auto px-4 "> 
         <motion.section
           initial={{ opacity: 0, y: 20 }}
