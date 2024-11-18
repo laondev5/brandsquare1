@@ -67,7 +67,7 @@ export default function BackgroundSlider(): JSX.Element {
             layout="fill"
              priority
           />
-          <div className={`absolute     ${currentIndex === 0 ? 'text-right pr-5 ml-auto text-gray-800 w-[850px]': 'text-left pl-5 w-[700px] mr-auto text-white'}  inset-0 flex flex-col   justify-center    text-center `}>
+          <div className={`absolute     ${currentIndex === 0 ? 'md:text-right md:pr-5 ml-auto text-gray-800 md:w-[850px]': 'md:text-left md:pl-5 md:w-[700px] mr-auto text-white'}  inset-0 flex flex-col   justify-center    text-center `}>
            
             <motion.h1
               initial={{ y: -20, opacity: 0 }}
