@@ -14,20 +14,20 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    url: "/images/bg1.png",
-    title: "Brilliant Green",
-    subtitle: "Eco-friendly solutions for a better tomorrow",
+    url: "/images/BQheader1.gif",
+    title: "One Stop Shop for Everyone",
+    subtitle: "From businesses to consumers, Brandsquare is your one-stop shop for all your needs",
   },
   {
-    url: "/images/bg1.png",
-    title: "Innovation",
-    subtitle: "Pushing boundaries in technology",
+    url: "/images/BQheader2.gif",
+    title: "Shop with Ease",
+    subtitle: "Experience seamless shopping at your fingertips with Brandsquare.",
   },
-  {
-    url: "/images/bg1.png",
-    title: "Sustainability",
-    subtitle: "Creating a lasting impact on our planet",
-  },
+  // {
+  //   url: "/images/bg1.png",
+  //   title: "Sustainability",
+  //   subtitle: "Creating a lasting impact on our planet",
+  // },
 ];
 
 export default function BackgroundSlider(): JSX.Element {
@@ -61,19 +61,19 @@ export default function BackgroundSlider(): JSX.Element {
           transition={{ duration: 0.5 }}
           className="absolute inset-0   w-full h-64 sm:h-96 md:h-full"
         >
-          <Image className=" object-cover "
+          <Image className="  object-cover "
             src={slides[currentIndex].url}
             alt={slides[currentIndex].title}
             layout="fill"
              priority
           />
-          {/* <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col justify-center items-center   text-white">
+          <div className="absolute inset-0 bg-black bg-opacity-20 flex flex-col justify-center items-center   text-white">
            
             <motion.h1
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-4xl md:text-6xl font-bold mb-4"
+              className="text-2xl md:text-6xl font-bold mb-4"
             >
               {slides[currentIndex].title}
             </motion.h1>
@@ -81,11 +81,11 @@ export default function BackgroundSlider(): JSX.Element {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="text-xl md:text-2xl mb-8"
+              className="text-md  text-center md:text-2xl mb-8"
             >
               {slides[currentIndex].subtitle}
             </motion.p>
-            <motion.div
+            {/* <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.6 }}
@@ -93,9 +93,9 @@ export default function BackgroundSlider(): JSX.Element {
               <Button className="bg-yellow-400" size="lg">
                 Learn More
               </Button>
-            </motion.div>
+            </motion.div> */}
             
-          </div> */}
+          </div>
         </motion.div>
       </AnimatePresence>
       <Button
