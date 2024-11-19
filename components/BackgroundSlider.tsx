@@ -20,7 +20,7 @@ const slides: Slide[] = [
     subtitle: "Your one-stop shop for all your needs",
   },
   {
-    url: "/images/BQheader2.gif",
+    url: "/images/BQheader1.gif",
     title: "Shop with Ease",
     subtitle: "Experience seamless shopping at your fingertips.",
   },
@@ -73,7 +73,7 @@ export default function BackgroundSlider(): JSX.Element {
           //  layout="fill"
              priority
           />
-          <div className={`absolute  md:block hidden   ${currentIndex === 3 ? 'md:text-right md:pr-5 ml-auto text-gray-800 md:w-[850px]': 'md:text-left md:pl-5 w-[100px] md:w-[400px] mr-auto ml-24 text-black'}  inset-0 flex flex-col   justify-center  mb-10 my-5   text-center `}>
+          <div className={`absolute  md:block hidden   ${currentIndex === 1 ? 'md:text-right md:pr-5 ml-auto text-gray-800 md:w-[450px] mr-24': 'md:text-left md:pl-5 w-[100px] md:w-[400px] mr-auto ml-24 text-black'}  inset-0 flex flex-col   justify-center  mb-10 my-5   text-center `}>
            
             <motion.h1
               initial={{ y: -20, opacity: 0 }}
