@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Rocket, RotateCcw, ShieldCheck, HeadphonesIcon } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+
 
 const services = [
   {
@@ -44,16 +44,16 @@ export default function ServiceOfferings() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card className="h-full">
-                <CardContent className="flex flex-col items-center text-center p-6">
+                 <div className={`flex flex-row gap-3 items-center bg-none  text-center   ${index != 3 && '  md:border-r-[2px]'} `}>
+                  <div></div>
                   <div className="mb-4">{service.icon}</div>
+                  <div className=" flex flex-col items-start"> 
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
                     {service.title}
                   </h3>
-                  <p className="text-sm text-gray-600">{service.description}</p>
-                </CardContent>
-              </Card>
-            </motion.div>
+                  <p className="text-sm text-gray-600">{service.description}</p></div>
+                </div>
+             </motion.div>
           ))}
         </motion.div>
       </div>

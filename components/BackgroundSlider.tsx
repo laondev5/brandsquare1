@@ -20,7 +20,7 @@ const slides: Slide[] = [
     subtitle: "Your one-stop shop for all your needs",
   },
   {
-    url: "/images/BQheader2.gif",
+    url: "/images/BQheader1.gif",
     title: "Shop with Ease",
     subtitle: "Experience seamless shopping at your fingertips.",
   },
@@ -54,8 +54,8 @@ export default function BackgroundSlider(): JSX.Element {
   // absolute   bg-[url('/images/header1BG.png')] inset-0  flex items-center justify-center  w-full h-64 sm:h-96 md:h-full
 
   return (
-  <div > 
-    <div className="relative h-full  sm:h-[30vh] max-w-[900px] mx-auto mt-9 w-full overflow-hidden">
+ 
+    <div className="relative h-full  sm:h-full max-w-[900px] mx-auto mt-9 w-full overflow-hidden">
          <motion.div
           key={currentIndex}
           initial={{ opacity: 0 }}
@@ -73,7 +73,7 @@ export default function BackgroundSlider(): JSX.Element {
           //  layout="fill"
              priority
           />
-          <div className={`absolute  md:block hidden   ${currentIndex === 3 ? 'md:text-right md:pr-5 ml-auto text-gray-800 md:w-[850px]': 'md:text-left md:pl-5 w-[100px] md:w-[400px] mr-auto ml-24 text-black'}  inset-0 flex flex-col   justify-center  mb-10 my-5   text-center `}>
+          <div className={`absolute      ${currentIndex === 1 ? 'text-right md:pr-5 ml-auto text-gray-800 md:w-[450px] w-[300px] mr-10 md:mr-24': 'text-left md:pl-5 w-[300px] md:w-[400px] mr-auto ml-10 md:ml-24 text-black'}  inset-0 flex flex-col   justify-center  mb-10 my-5     `}>
            
             <motion.h1
               initial={{ y: -20, opacity: 0 }}
@@ -125,6 +125,6 @@ export default function BackgroundSlider(): JSX.Element {
         <ChevronRight className="h-4 w-4" />
       </Button>
     </div>
-    </div>
+     
   );
 }
