@@ -126,7 +126,7 @@ export default function VendorHub() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            Welcome to the Brandsquare Vendor Hub
+            Welcome to the Brandsquare Vendors Hub
           </motion.h1>
           <motion.p
             className="text-md mb-8 max-w-[900px] mx-auto bg-white/30 backdrop-blur-lg rounded-lg p-8 shadow-xl"
@@ -134,7 +134,7 @@ export default function VendorHub() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            The Vendor Hub is an innovative platform designed to empower small business owners and startups to grow their e-commerce businesses with ease. We provide solutions for seamless payments in Naira, trusted partnerships with verified vendors, and flexible capital options to help you start selling with as little as 50% upfront. From shipping and warehousing to hassle-free payments and reliable vendor connections, the Vendor Hub is your one-stop solution for building a successful business without the stress. 
+            The Vendors Hub is an innovative platform designed to empower small business owners and startups to grow their e-commerce businesses with ease. We provide solutions for seamless payments in Naira, trusted partnerships with verified vendors, and flexible capital options to help you start selling with as little as 50% upfront. From shipping and warehousing to hassle-free payments and reliable vendor connections, the Vendors Hub is your one-stop solution for building a successful business without the stress. 
 
           </motion.p>
           <motion.div
@@ -144,14 +144,14 @@ export default function VendorHub() {
           >
             {session?.user?.role === "VENDOR" ? (
               <Link href="/vendor">
-                <Button className="bg-yellow-400 text-black hover:bg-yellow-500 text-lg px-8 py-6">
+                <Button className="bg-yellow-400 font-semibold text-black hover:bg-yellow-500 text-lg px-8 py-6">
                   Continue to dashboard
                   <ChevronRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
             ) : (
               <Link href="/auth/vendor-signup">
-                <Button className="bg-yellow-400 text-black hover:bg-yellow-500 text-lg px-8 py-6">
+                <Button className="bg-yellow-400 font-semibold text-black hover:bg-yellow-500 text-lg px-8 py-6">
                   Become a vendor now
                   <ChevronRight className="ml-2 h-5 w-5" />
                 </Button>
@@ -164,7 +164,7 @@ export default function VendorHub() {
       <div className="    md:mt-20   py-16">
         <div className="container mx-auto px-4 "> 
         <motion.h1 className="text-center  py-5  pb-8 md:pb-14">
-          <span className="text-3xl    font-bold text-center">About Vendor Hub  </span>
+          <span className="text-3xl    font-bold text-center">About Vendors Hub  </span>
         </motion.h1>
         <motion.div
           className="  flex flex-col gap-4 md:gap-7 md:flex-row justify-center items-center"
@@ -207,7 +207,7 @@ content:
                   <div className=" text-[20px] font-thin "><span>Seamless Payments</span></div>
                 
                 <div>
-                  <p className="text-[15px]  py-3 text-gray-700  leading-7 md:leading-8">The Vendor Hub connects Nigerian businesses with trusted Chinese suppliers</p>   
+                  <p className="text-[15px]  py-3 text-gray-700  leading-7 md:leading-8">The Vendors Hub connects Nigerian businesses with trusted Chinese suppliers</p>   
                 </div>
                 <div className=" text-[29px] float-right">
                 <FcViewDetails /> 
@@ -226,7 +226,7 @@ content:
                   <div className=" text-[20px] font-thin "><span>Flexible Financing</span></div>
                 
                 <div>
-                  <p className="text-[15px]  py-3 text-gray-700  leading-7 md:leading-8">The Vendor Hub connects We offer flexible financing options, requiring only 50% down to secure your goods.</p>   
+                  <p className="text-[15px]  py-3 text-gray-700  leading-7 md:leading-8">The Vendors Hub connects We offer flexible financing options, requiring only 50% down to secure your goods.</p>   
                 </div>
                 <div className=" text-[29px] float-right">
                 <FcMoneyTransfer /> 
@@ -244,7 +244,7 @@ content:
                   <div className=" text-[20px] font-thin "><span>Effortless Shipping</span></div>
                 
                 <div>
-                  <p className="text-[15px]  py-3 text-gray-700  leading-7 md:leading-8">The Vendor Hub manages shipping from China to Nigeria, ensuring professional handling.</p>   
+                  <p className="text-[15px]  py-3 text-gray-700  leading-7 md:leading-8">The Vendors Hub manages shipping from China to Nigeria, ensuring professional handling.</p>   
                 </div>
                 <div className=" text-[29px] float-right">
                 <FcInTransit /> 
@@ -257,7 +257,7 @@ content:
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.8 + 0 * 0.2 }}
             >
-              <div className="  border-t-4  min-h-[190px] md:min-h-[180px]  border-yellow-400 rounded-lg shadow-lg  transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
+              <div className="  border-t-4  min-h-[190px] md:min-h-[180px]  border-yellow-400 rounded-lg shadow-lg  transition-transform transform  font-semibold  md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
                 
                   <div className=" text-[20px] font-thin "><span>Instant Storefront</span></div>
                 
@@ -273,127 +273,139 @@ content:
             
   
         </motion.div></div>
-<div className=" bg-slate-100  my-9 mb-32 pb-7 px-7">
-<motion.div
-          className=" container  my-20 mt-32"
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1.4 }}
-        >
-          <h2 className="text-3xl font-semibold pt-9 mb-6 text-center">
-            Why Choose Brandsquare?
-          </h2>
-          <div>
- <div className="flex  xl:flex-row flex-col-reverse  items-center justify-between my-7">
-          <div className="relative   w-full md:w-[300px] h-[300px]">
-  {/* The image */}
-  <Image
-    className="rounded-3xl object-cover lg:mt-0 mt-7"
-    src="/images/happy-young-african.jpg"
-    layout="fill" // Ensures the image fills the container
-    alt=""
-  />
+        <div className="bg-slate-100 my-9 mb-32 pb-7 px-7">
+  <motion.div
+    className="container mx-auto my-20 mt-32"
+    initial={{ y: 50, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ delay: 1.4 }}
+  >
+    <h2 className="text-3xl font-semibold pt-9 mb-6 text-center">
+      Why Choose Brandsquare?
+    </h2>
+    <div>
+      {/* First Section */}
+      <div className="grid lg:grid-cols-2 grid-cols-1 items-center my-7 gap-6">
+        {/* Image with Text */}
+        <div className="relative w-full md:max-w-[700px] h-[300px] mx-auto">
+          <Image
+            className="rounded-3xl object-cover"
+            src="/images/happy-young-african.jpg"
+            layout="fill"
+            alt=""
+          />
+          {[
+            "Simplified international transactions",
+            "Warehousing and shipping support",
+            "Instant web store setup",
+          ].map((feature, index) => {
+            const positions = [
+              "top-[45%] right-5",
+              "top-[65%] right-5 -translate-y-1/2",
+              "top-[85%] right-5",
+            ];
+            return (
+              <motion.div
+                key={index}
+                className={`absolute ${positions[index]} flex items-center space-x-2 bg-white shadow-lg rounded-full px-4 py-2`}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.6 + index * 0.1 }}
+              >
+                <CheckCircle className="text-green-500" />
+                <span className="text-sm">{feature}</span>
+              </motion.div>
+            );
+          })}
+        </div>
 
-  {/* Feature texts */}
-  {[
-    "Simplified international transactions",
-    "Warehousing and shipping support",
-    "Instant web store setup",
-  ].map((feature, index) => {
-    // Define specific positions for each text
-    const positions = ["top-4 right-5", "top-[30%] right-3 -translate-y-1/2", "top-[50%] right-4"];
-    return (
-      <motion.div
-        key={index}
-        className={`absolute ${positions[index]} md:right-[-200px] flex items-center space-x-2 bg-white shadow-lg rounded-full px-4 py-2`}
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.6 + index * 0.1 }}
-      >
-        <CheckCircle className="text-green-500" />
-        <span className=" md:text-[15px] text-[12px]">{feature}</span>
-      </motion.div>
-    );
-  })}
-</div>
- <div className=" text-center my-4 md:my-0 lg:max-w-[700px]">
-  <h2 className=" font-bold text-[21px]">Empowering Vendors, Simplifying Growth
-
-</h2>
-  <p> your gateway to seamless collaboration and success. Manage your products, track sales, and connect with customers effortlessly on one unified platform.</p>
- </div>
-</div>
-
-<div className="flex  xl:flex-row-reverse  flex-col-reverse   items-center justify-between  my-14 lg:my-7">
-          <div className="relative    w-full lg:w-[300px] h-[300px]">
-  {/* The image */}
-  <Image
-    className="rounded-3xl object-cover lg:mt-0 mt-7"
-    src="/images/beautiful-african-american-woman.jpg"
-    layout="fill" // Ensures the image fills the container
-    alt=""
-  />
-
-  {/* Feature texts */}
-  {[
-    "Access to a large customer base",
-              "Ongoing vendor education ",
-              "Flexible growth options ",
-  ].map((feature, index) => {
-    // Define specific positions for each text
-    const positions = ["top-4 right-2", "top-[30%] right-3 -translate-y-1/2", "top-[50%] right-4"];
-    return (
-      <motion.div
-        key={index}
-        className={`absolute ${positions[index]} md:right-[-100px] flex items-center space-x-2 bg-white shadow-lg text-right rounded-full px-4 py-2`}
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 1.6 + index * 0.1 }}
-      >
-        <CheckCircle className="text-green-500" />
-        <span className=" md:text-[15px] text-[12px]">{feature}</span>
-      </motion.div>
-    );
-  })}
-</div>
- <div className=" text-center my-4 md:my-0  lg:max-w-[700px]">
-  <h2 className=" font-bold text-[21px]">Your Partner for Smarter Selling.</h2>
-  <p className=" leading-7">From listing your products to tracking performance, we provide the tools you need to streamline operations and maximize your reach.</p>
- </div>
-</div>
-</div>
-        </motion.div>
-        {/* "Access to a large customer base",
-              "Ongoing vendor education and support",
-              "Flexible growth options for your business", */}
-        <motion.div
-          className="mt-16 text-center"
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 2.2 }}
-        >
-          <h2 className="text-3xl font-semibold mb-4">Ready to Get Started?</h2>
-          <p className="text-xl mb-6">
-            Join Brandsquare today and take your e-commerce business to the next
-            level.
+        {/* Text Section */}
+        <div className="text-center md:my-0 lg:max-w-[500px] mx-auto">
+          <h2 className="font-bold text-xl">Empowering Vendors, Simplifying Growth</h2>
+          <p>
+            Your gateway to seamless collaboration and success. Manage your
+            products, track sales, and connect with customers effortlessly on one
+            unified platform.
           </p>
-          {session?.user?.role === "VENDOR" ? (
-            <Link href="/vendor">
-              <Button className="bg-yellow-400 text-black hover:bg-yellow-500 text-lg px-8 py-6">
-                Continue to dashboard
-                <ChevronRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-          ) : (
-            <Link href="/auth/vendor-signup">
-              <Button className="bg-yellow-400 text-black hover:bg-yellow-500 text-lg px-8 py-6">
-                Become a vendor now
-                <ChevronRight className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
-          )}
-        </motion.div>
+        </div>
+      </div>
+
+      {/* Second Section */}
+      <div className="grid lg:grid-cols-2 grid-cols-1 lg:flex-row-reverse items-center my-16 mt-20 gap-6">
+        {/* Image with Text */}
+        <div className="relative w-full md:max-w-[700px] h-[300px] mx-auto">
+          <Image
+            className="rounded-3xl object-cover"
+            src="/images/beautiful-african-american-woman.jpg"
+            layout="fill"
+            alt=""
+          />
+          {[
+            "Access to a large customer base",
+            "Ongoing vendor education",
+            "Flexible growth options",
+          ].map((feature, index) => {
+            const positions = [
+             "top-[45%] right-5",
+              "top-[65%] right-5 -translate-y-1/2",
+              "top-[85%] right-5",
+            ];
+            return (
+              <motion.div
+                key={index}
+                className={`absolute ${positions[index]} flex items-center space-x-2 bg-white shadow-lg rounded-full px-4 py-2`}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.6 + index * 0.1 }}
+              >
+                <CheckCircle className="text-green-500" />
+                <span className="text-sm">{feature}</span>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Text Section */}
+        <div className="text-center md:my-0 lg:max-w-[500px] mx-auto">
+          <h2 className="font-bold text-xl">Your Partner for Smarter Selling</h2>
+          <p>
+            From listing your products to tracking performance, we provide the
+            tools you need to streamline operations and maximize your reach.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Call to Action */}
+    <motion.div
+      className="mt-16 text-center"
+      initial={{ y: 50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ delay: 2.2 }}
+    >
+      {/* <h2 className="  text-[21px] md:text-3xl font-semibold mb-4">Ready to Get Started?</h2>
+      <p className=" text-[16#px] md:text-xl mb-6">
+        Join Brandsquare today and take your e-commerce business to the next level.
+      </p> */}
+      {session?.user?.role === "VENDOR" ? (
+        <Link href="/vendor">
+          <Button className="bg-yellow-400 font-semibold text-black hover:bg-yellow-500 text-lg px-8 py-6">
+            Continue to dashboard
+            <ChevronRight className="ml-2 h-5 w-5" />
+          </Button>
+        </Link>
+      ) : (
+        <Link href="/auth/vendor-signup">
+          <Button className="bg-yellow-400 font-semibold text-black hover:bg-yellow-500 text-lg px-8 py-6">
+            Become a vendor now
+            <ChevronRight className="ml-2 h-5 w-5" />
+          </Button>
+        </Link>
+      )}
+    </motion.div>
+  </motion.div>
 </div>
+
        
 
 
@@ -440,9 +452,9 @@ content:
           <Accordion type="single" collapsible className="w-full">
             {[
               {
-                question: "What is the Brandsquare Vendor Hub?",
+                question: "What is the Brandsquare Vendors Hub?",
                 answer:
-                  "The Brandsquare Vendor Hub is a platform designed to help small business owners and startups sell their products through trusted partnerships with Chinese vendors. We provide solutions for seamless payments, capital assistance, shipping, and warehousing, making it easier for you to grow your business with less hassle.",
+                  "The Brandsquare Vendors Hub is a platform designed to help small business owners and startups sell their products through trusted partnerships with Chinese vendors. We provide solutions for seamless payments, capital assistance, shipping, and warehousing, making it easier for you to grow your business with less hassle.",
               },
               {
                 question: "How do I start selling on Brandsquare?",
@@ -458,77 +470,7 @@ content:
                 question: " How does the 50% capital option work?",
                 answer:
                   "When you choose the 50% capital option, you make a partial payment for your goods. Brandsquare handles the shipping and warehousing. Once your goods arrive, you can either pay the remaining amount to collect them or start selling directly from our warehouse, allowing you to generate revenue before completing the full payment.",
-              },
-              {
-                question: "What if I don’t have enough capital to start my business?",
-                answer:
-                  "We understand that raising capital can be a challenge, so with Brandsquare, you can start with as low as 50% of the total cost of your goods. You can either complete the payment when the goods arrive at our warehouse or sell directly from our warehouse until you have the remaining balance to pick up your goods.",
-              },
-              {
-                question: " Can I sell directly from the Brandsquare warehouse?",
-                answer:
-                  "Yes! If you don’t have the full capital to pick up your goods, you can sell them directly from our warehouse. Once you’ve generated enough sales, you can complete the payment and retrieve your goods.",
-              },
-              {
-                question: "How do I know which Chinese vendors I can trust?",
-                answer:
-                  "We have a verified list of trusted Chinese vendors that we partner with. These vendors are carefully selected to ensure quality and reliability, giving you peace of mind when sourcing products for your business.",
-              },
-              {
-                question: "What shipping options are available?",
-                answer:
-                  "Brandsquare offers flexible shipping options based on your needs. We handle the entire shipping process from China to Nigeria, ensuring your goods are safely transported. You can choose to store your goods in our warehouse until you’re ready to collect them or sell them directly from our warehouse.",
-              },
-              {
-                question: "Do I need to pay for warehousing?",
-                answer:
-                  "Brandsquare provides affordable warehousing solutions for all vendors. If you choose to store your goods in our warehouse, we offer flexible terms that allow you to keep your products with us until you have the capital to pick them up or until you’re ready to sell them.",
-              },
-              {
-                question: "How do I register as a vendor?",
-                answer:
-                  "Registering as a vendor is simple. Just visit our Vendor Hub page, click on 'Register Now,' and fill in the necessary details. Once you’re registered, you can start sourcing products, setting up your online store, and taking advantage of Brandsquare’s unique solutions for vendors.",
-              },
-              {
-                question: " Can I attend the Brandsquare Vendor Seminar?",
-                answer:
-                  "Yes! We host regular seminars to help businesses and vendors understand how to grow their e-commerce business with Brandsquare. These seminars cover topics like payment solutions, sourcing reliable products, and using our platform to its fullest potential. Keep an eye on our website and social media for announcements.",
-              },
-              {
-                question: "How does Brandsquare ensure product quality?",
-                answer:
-                  "We partner with trusted and verified Chinese vendors who are committed to delivering quality products. In addition, you have the option to inspect your goods when they arrive at our warehouse before completing the rest of your payment.",
-              },
-              {
-                question: "Can I sell products from other countries besides China?",
-                answer:
-                  "Currently, Brandsquare focuses on partnerships with Chinese vendors to provide the best products at competitive prices. However, we are always looking to expand and will inform our vendors if other countries become available.",
-              },
-              {
-                question: "How do I handle returns or faulty goods?",
-                answer:
-                  "If you receive faulty goods, Brandsquare will work with the vendor to resolve the issue. We have a streamlined returns process to ensure that any defective products are handled efficiently. Just contact our support team for assistance.",
-              },
-              {
-                question: "What are the benefits of becoming a Brandsquare vendor?",
-                answer:
-                  `<div><h3 class=' font-semibold'>As a Brandsquare vendor, you benefit from:</h3>
-                   <ul class='list-disc pl-5'>
-                   <li class=' py-1'>Payment in Naira for Chinese products.</li>
-                   <li class=' py-1'>Trusted and verified Chinese vendors.</li>
-                   <li class=' py-1'>50% capital start-up option.</li>
-                   <li class=' py-1'>Warehousing and shipping support.</li>
-                   <li class=' py-1'>Access to a large customer base through our e-commerce platform</li>
-                   <li class=' py-1'>Ongoing support and vendor education through our seminars and resources.</li>
-                   </ul>
-                  
-                  </div>`,
-              },
-              {
-                question: "Can I upgrade my vendor plan as my business grows?",
-                answer:
-                  "Absolutely! As your business grows, you can take advantage of more advanced vendor options and services from Brandsquare. Whether you need more storage, faster shipping, or enhanced product sourcing, we’re here to support your business at every stage.",
-              },
+              }
                
             ].map((item, index) => (
               <AccordionItem key={index} value={`item-${index + 1}`}>
@@ -538,7 +480,18 @@ content:
             ))}
           </Accordion>
         </motion.div>
-      </div></div>
+
+        <motion.div
+          className="mt-5"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 1.2 }}>
+            <Link href='/help'><Button className="bg-yellow-400 text-black font-semibold text-sm hover:bg-yellow-500   px-4 py-3">
+View more faqs            <ChevronRight className="ml-2 h-5 w-5" />
+          </Button> </Link>
+          </motion.div>
+      </div>
+      </div>
 
  
       <Footer />

@@ -126,23 +126,23 @@ export default function VendorOnboarding() {
       <h1 className="text-3xl font-bold text-center mb-8">Vendor Onboarding</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         <div className="space-y-4">
-          <h2 className="text-2xl font-semibold">Basic Brand Information</h2>
+          <h2 className="text-2xl font-semibold">Basic Business Information</h2>
           <div>
-            <Label htmlFor="brandName">Brand Name</Label>
+            <Label htmlFor="brandName">Business Name</Label>
             <Input
               id="brandName"
-              {...register("brandName", { required: "Brand name is required" })}
+              {...register("brandName", { required: "Business name is required" })}
             />
             {errors.brandName && (
               <p className="text-red-500">{errors.brandName.message}</p>
             )}
           </div>
           <div>
-            <Label htmlFor="brandDescription">Brand Description</Label>
+            <Label htmlFor="brandDescription">Business Description</Label>
             <Textarea
               id="brandDescription"
               {...register("brandDescription", {
-                required: "Brand description is required",
+                required: "Business description is required",
               })}
             />
             {errors.brandDescription && (
@@ -150,7 +150,7 @@ export default function VendorOnboarding() {
             )}
           </div>
           <div>
-            <Label htmlFor="logo">Brand Logo</Label>
+            <Label htmlFor="logo">Business Logo</Label>
             <Input
               id="logo"
               type="file"
@@ -159,7 +159,7 @@ export default function VendorOnboarding() {
             />
           </div>
           <div>
-            <Label htmlFor="banner">Brand Banner</Label>
+            <Label htmlFor="banner">Business Banner</Label>
             <Input
               id="banner"
               type="file"

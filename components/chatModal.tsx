@@ -67,7 +67,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement >) => {
 }
   return (
     <div>
-      <div className="fixed top-28  left-1/2   transform -translate-x-1/2 md:-translate-x-0 md:left-[60%]  min-h-[80vh] md:h-[80vh]  md:w-[40vw] w-[70vw] lg:w-[30vw]  rounded-2xl   bg-white shadow-lg">
+      <div className="fixed top-28  left-1/2   transform -translate-x-1/2 md:-translate-x-0 md:left-[60%]  min-h-[80vh] md:max-h-[20vh]  md:w-[40vw] w-[90vw] lg:w-[30vw]  rounded-2xl   bg-white shadow-lg">
       {!chatUiModal ? <><div className="bg-[#000035] max-w-[800px] w-full p-6 rounded-lg">
           <div className="header flex justify-between items-center">
             <Image src="/images/logo.png" alt="logo" width={100} height={100} />
@@ -90,11 +90,12 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement >) => {
             <div className="grid place-items-center  pt-4" > 
             <Image src="/images/chat.png"  alt="chat" width={100} height={100} /></div>
            </div>
+           <div className="fixed bottom-0 left-0 w-full bg-white p-4 flex items-center"> 
            <Button onClick={() => setChatUiModal(true)}
           type="submit"
           className="w-full bg-yellow-400 font-bold   hover:bg-yellow-500 text-black"
         >
-Start a conversation        </Button>
+Start a conversation        </Button></div>
            </div>
         </div>
         </div></> : <><div className="bg-[#000035] px-4 py-6">

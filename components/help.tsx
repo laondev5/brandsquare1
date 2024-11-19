@@ -104,9 +104,9 @@ import { MdMailOutline, MdOutlineAddIcCall } from "react-icons/md";
           <Accordion type="single" collapsible className="w-full">
             {[
               {
-                question: "What is the Brandsquare Vendor Hub?",
+                question: "What is the Brandsquare Vendors Hub?",
                 answer:
-                  "The Brandsquare Vendor Hub is a platform designed to help small business owners and startups sell their products through trusted partnerships with Chinese vendors. We provide solutions for seamless payments, capital assistance, shipping, and warehousing, making it easier for you to grow your business with less hassle.",
+                  "The Brandsquare Vendors Hub is a platform designed to help small business owners and startups sell their products through trusted partnerships with Chinese vendors. We provide solutions for seamless payments, capital assistance, shipping, and warehousing, making it easier for you to grow your business with less hassle.",
               },
               {
                 question: "How do I start selling on Brandsquare?",
@@ -151,10 +151,10 @@ import { MdMailOutline, MdOutlineAddIcCall } from "react-icons/md";
               {
                 question: "How do I register as a vendor?",
                 answer:
-                  "Registering as a vendor is simple. Just visit our Vendor Hub page, click on 'Register Now,' and fill in the necessary details. Once you’re registered, you can start sourcing products, setting up your online store, and taking advantage of Brandsquare’s unique solutions for vendors.",
+                  "Registering as a vendor is simple. Just visit our Vendors Hub page, click on 'Register Now,' and fill in the necessary details. Once you’re registered, you can start sourcing products, setting up your online store, and taking advantage of Brandsquare’s unique solutions for vendors.",
               },
               {
-                question: " Can I attend the Brandsquare Vendor Seminar?",
+                question: " Can I attend the Brandsquare Vendors Seminar?",
                 answer:
                   "Yes! We host regular seminars to help businesses and vendors understand how to grow their e-commerce business with Brandsquare. These seminars cover topics like payment solutions, sourcing reliable products, and using our platform to its fullest potential. Keep an eye on our website and social media for announcements.",
               },
@@ -183,7 +183,7 @@ import { MdMailOutline, MdOutlineAddIcCall } from "react-icons/md";
                    <li class=' py-1'>50% capital start-up option.</li>
                    <li class=' py-1'>Warehousing and shipping support.</li>
                    <li class=' py-1'>Access to a large customer base through our e-commerce platform</li>
-                   <li class=' py-1'>Ongoing support and vendor education through our seminars and resources.</li>
+                   <li class=' py-1'>Ongoing support and vendor seducation through our seminars and resources.</li>
                    </ul>
                   
                   </div>`,
