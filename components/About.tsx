@@ -65,7 +65,7 @@ export default function AboutUs() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            About Brandsquare Vendor Hub
+            About Brandsquare Vendors Hub
           </motion.h1>
           <motion.p
             className="text-xl mb-8"
@@ -114,7 +114,7 @@ export default function AboutUs() {
             </CardHeader>
             <CardContent>
               <p>
-                The Vendor Hub is an innovative platform designed to empower
+                The Vendors Hub is an innovative platform designed to empower
                 small business owners and startups to grow their e-commerce
                 businesses with ease. We provide solutions for seamless payments
                 in Naira, trusted partnerships with verified vendors, and
@@ -151,9 +151,9 @@ export default function AboutUs() {
           <Accordion type="single" collapsible className="w-full">
             {[
               {
-                question: "What is the Brandsquare Vendor Hub?",
+                question: "What is the Brandsquare Vendors Hub?",
                 answer:
-                  "The Brandsquare Vendor Hub is a platform designed to help small business owners and startups sell their products through trusted partnerships with Chinese vendors. We provide solutions for seamless payments, capital assistance, shipping, and warehousing, making it easier for you to grow your business with less hassle.",
+                  "The Brandsquare Vendors Hub is a platform designed to help small business owners and startups sell their products through trusted partnerships with Chinese vendors. We provide solutions for seamless payments, capital assistance, shipping, and warehousing, making it easier for you to grow your business with less hassle.",
               },
               {
                 question: "How do I start selling on Brandsquare?",
@@ -173,6 +173,15 @@ export default function AboutUs() {
             ))}
           </Accordion>
         </motion.div>
+        <motion.div
+          className="mt-5"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 1.2 }}>
+            <Link href='/help'><Button className="bg-yellow-400 text-black font-semibold text-sm hover:bg-yellow-500   px-4 py-3">
+View more faqs            <ChevronRight className="ml-2 h-5 w-5" />
+          </Button> </Link>
+          </motion.div>
       </div>
 
       <Footer />
