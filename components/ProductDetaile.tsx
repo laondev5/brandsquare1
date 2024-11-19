@@ -127,7 +127,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
             transition={{ duration: 0.5 }}
           >
             <h1 className="text-3xl font-bold mb-4">{product.name}</h1>
-            <p className="text-2xl font-semibold mb-4">${product.price}</p>
+            <p className="text-2xl font-semibold mb-4">₦{product.price}</p>
             <div className="flex items-center mb-4">
               {[...Array(5)].map((_, i) => (
                 <Star
@@ -235,7 +235,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
                     className="w-full h-48 object-cover mb-4 rounded"
                   />
                   <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
-                  <p className="text-gray-600 mb-4">${product.price}</p>
+                  <p className="text-gray-600 mb-4">₦{product.price}</p>
                   <Button className="w-full bg-yellow-400 text-black hover:bg-yellow-500">
                     View Product
                   </Button>

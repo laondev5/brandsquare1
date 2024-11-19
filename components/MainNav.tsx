@@ -246,7 +246,7 @@ export default function MainNav({
                           />
                           <div>
                             <h3 className="font-semibold">{item.name}</h3>
-                            <p className="text-gray-600">${item.price}</p>
+                            <p className="text-gray-600">₦{item.price}</p>
                           </div>
                         </div>
                         <div className="flex items-center">
@@ -280,7 +280,7 @@ export default function MainNav({
                     ))}
                     <div className="mt-4">
                       <p className="text-xl font-bold">
-                        Total: ${getTotalPrice().toFixed(2)}
+                        Total: ₦{getTotalPrice().toFixed(2)}
                       </p>
                     </div>
                     <div className="mt-6 space-y-2">
