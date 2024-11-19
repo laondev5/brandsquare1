@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 import ChatButton from "./chatButton";
 
-import { CheckCircle, ChevronRight } from "lucide-react";
+import {  ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { CartItem } from "@/app/utility/products";
 import MainNav from "./MainNav";
@@ -275,52 +275,30 @@ content:
         </motion.div></div>
         <div className="bg-slate-100 my-9 mb-32 pb-7 px-7">
   <motion.div
-    className="container mx-auto my-20 mt-32"
+    className="container mx-auto  md:my-20 mt-32"
     initial={{ y: 50, opacity: 0 }}
     animate={{ y: 0, opacity: 1 }}
     transition={{ delay: 1.4 }}
   >
-    <h2 className="text-3xl font-semibold pt-9 mb-6 text-center">
+    <h2 className=" text-[23px] md:text-3xl font-semibold pt-9 mb-6 text-center">
       Why Choose Brandsquare?
     </h2>
     <div>
       {/* First Section */}
-      <div className="grid lg:grid-cols-2 grid-cols-1 items-center my-7 gap-6">
+      <div className="grid lg:grid-cols-2 grid-cols-1 items-center md:my-7  md:gap-6">
         {/* Image with Text */}
-        <div className="relative w-full md:max-w-[700px] h-[300px] mx-auto">
+        <div className="relative w-full md:max-w-[700px]  h-[200px] md:h-[300px] mx-auto">
           <Image
-            className="rounded-3xl object-cover"
-            src="/images/happy-young-african.jpg"
+            className=" object-contain"
+            src="/images/happyman1.png"
             layout="fill"
             alt=""
           />
-          {[
-            "Simplified international transactions",
-            "Warehousing and shipping support",
-            "Instant web store setup",
-          ].map((feature, index) => {
-            const positions = [
-              "top-[45%] right-5",
-              "top-[65%] right-5 -translate-y-1/2",
-              "top-[85%] right-5",
-            ];
-            return (
-              <motion.div
-                key={index}
-                className={`absolute ${positions[index]} flex items-center space-x-2 bg-white shadow-lg rounded-full px-4 py-2`}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.6 + index * 0.1 }}
-              >
-                <CheckCircle className="text-green-500" />
-                <span className="text-sm">{feature}</span>
-              </motion.div>
-            );
-          })}
+          
         </div>
 
         {/* Text Section */}
-        <div className="text-center md:my-0 lg:max-w-[500px] mx-auto">
+        <div className="text-center md:text-left my-4 md:my-0 lg:max-w-[500px] mx-auto leading-7">
           <h2 className="font-bold text-xl">Empowering Vendors, Simplifying Growth</h2>
           <p>
             Your gateway to seamless collaboration and success. Manage your
@@ -331,42 +309,20 @@ content:
       </div>
 
       {/* Second Section */}
-      <div className="grid lg:grid-cols-2 grid-cols-1 lg:flex-row-reverse items-center my-16 mt-20 gap-6">
+      <div className="  flex flex-col  lg:flex-row-reverse items-center  md:my-16  md:mt-20 gap-6">
         {/* Image with Text */}
-        <div className="relative w-full md:max-w-[700px] h-[300px] mx-auto">
+        <div className="relative w-full md:max-w-[700px] h-[200px] md:h-[300px] mx-auto">
           <Image
-            className="rounded-3xl object-cover"
-            src="/images/beautiful-african-american-woman.jpg"
+            className=" object-contain"
+            src="/images/woman_bg.png"
             layout="fill"
             alt=""
           />
-          {[
-            "Access to a large customer base",
-            "Ongoing vendor education",
-            "Flexible growth options",
-          ].map((feature, index) => {
-            const positions = [
-             "top-[45%] right-5",
-              "top-[65%] right-5 -translate-y-1/2",
-              "top-[85%] right-5",
-            ];
-            return (
-              <motion.div
-                key={index}
-                className={`absolute ${positions[index]} flex items-center space-x-2 bg-white shadow-lg rounded-full px-4 py-2`}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.6 + index * 0.1 }}
-              >
-                <CheckCircle className="text-green-500" />
-                <span className="text-sm">{feature}</span>
-              </motion.div>
-            );
-          })}
+        
         </div>
 
         {/* Text Section */}
-        <div className="text-center md:my-0 lg:max-w-[500px] mx-auto">
+        <div className=" text-center md:text-left my-2 md:my-0 lg:max-w-[500px] mx-auto leading-7">
           <h2 className="font-bold text-xl">Your Partner for Smarter Selling</h2>
           <p>
             From listing your products to tracking performance, we provide the
@@ -407,7 +363,7 @@ content:
 </div>
 
        
-
+ 
 
 <div className="container mx-auto px-4 "> 
         <motion.section
@@ -493,7 +449,7 @@ View more faqs            <ChevronRight className="ml-2 h-5 w-5" />
       </div>
       </div>
 
- 
+      
       <Footer />
     </div>
   );

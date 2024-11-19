@@ -71,7 +71,7 @@ export default function Zeomart() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
-      <MainNav 
+      <MainNav
         cart={cart}
         setCart={setCart}
         searchTerm={searchTerm}
@@ -153,7 +153,7 @@ export default function Zeomart() {
             {filteredProducts.slice(0, 5).map((product) => (
               <Card className="bg-white" key={product.id}>
                 <CardContent className="p-4">
-                  <Link href={`/product/${product.id}`}>
+                  <Link href={`/product/{product.id}`}>
                     <Image
                       src={product.images[0]}
                       alt={product.name}
@@ -163,10 +163,10 @@ export default function Zeomart() {
                     />
                   </Link>
                   <h3 className="font-semibold text-sm">{product.name}</h3>
-                  <p className="text-muted-foreground text-sm">
-                    ${product.price}
+                  <p className="text-muted-foreground text-sm">₦
+                    {product.price}
                   </p>
-                  <Link href={`/product/${product.id}`} passHref>
+                  <Link href={`/product/{product.id}`} passHref>
                     <Button className="w-full bg-yellow-400 text-black hover:bg-yellow-500">
                       View Product
                     </Button>
@@ -186,14 +186,14 @@ export default function Zeomart() {
               animate={{ opacity: 1, y: 0 }}
               className="mb-8"
             >
-              <div className="flex justify-between items-center"> 
-              <h2 className="text-2xl font-bold mb-4">{category}</h2>
+              <div className="flex justify-between items-center">
+                <h2 className="text-2xl font-bold mb-4">{category}</h2>
 
-              <Link href={`/category/${category}`} passHref>
-                    <Button className="w-full bg-[#000035] hover:bg-[#000035cc] text-white  ">
-                      View All
-                    </Button>
-                  </Link>
+                <Link href={`/category/{category}`} passHref>
+                  <Button className="w-full bg-[#000035] hover:bg-[#000035cc] text-white  ">
+                    View All
+                  </Button>
+                </Link>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                 {filteredProducts
@@ -202,7 +202,7 @@ export default function Zeomart() {
                   .map((product) => (
                     <Card className="bg-white" key={product.id}>
                       <CardContent className="p-4">
-                        <Link href={`/product/${product.id}`}>
+                        <Link href={`/product/{product.id}`}>
                           <Image
                             src={product.images[0]}
                             alt={product.name}
@@ -215,9 +215,9 @@ export default function Zeomart() {
                           {product.name}
                         </h3>
                         <p className="text-muted-foreground text-sm">
-                          ${product.price}
+                        ₦{product.price}
                         </p>
-                        <Link href={`/product/${product.id}`} passHref>
+                        <Link href={`/product/{product.id}`} passHref>
                           <Button className="w-full bg-yellow-400 text-black hover:bg-yellow-500">
                             View Product
                           </Button>

@@ -24,6 +24,17 @@ const slides: Slide[] = [
     title: "Shop with Ease",
     subtitle: "Experience seamless shopping at your fingertips.",
   },
+  {
+    url: "/images/BQheader3.gif",
+    title: "Begin Your Journey",
+    subtitle: "Start and grow your Business with marketing tools and resources",
+  },
+  {
+    url: "/images/BQheader4.gif",
+    title: "Ready to start a business?",
+    subtitle: "We help source, ship, and sell the best products",
+  },
+   
   // {
   //   url: "/images/bg1.png",
   //   title: "Sustainability",
@@ -71,15 +82,15 @@ export default function BackgroundSlider(): JSX.Element {
 
           height={700}
           //  layout="fill"
-             priority
+             priority 
           />
-          <div className={`absolute      ${currentIndex === 1 ? 'text-right md:pr-5 ml-auto text-gray-800 md:w-[450px] w-[300px] mr-16 md:mr-24': 'text-left md:pl-5 w-[300px] md:w-[400px] mr-auto ml-16 md:ml-24 text-black'}  inset-0 flex flex-col   justify-center  mb-10 my-5     `}>
+          <div className={`absolute       ${currentIndex === 1 || currentIndex === 3  ? 'text-right md:pr-5 ml-auto text-gray-800 md:w-[450px] w-[300px] mr-16 md:mr-24': 'text-left md:pl-5 w-[300px] md:w-[400px] mr-auto ml-16 md:ml-24 text-black'}      inset-0 flex flex-col   justify-center  mb-10 my-5 ${ currentIndex === 2 && '    left-[20%]  my-2 mb-4 text-left '}       `}>
            
             <motion.h1
               initial={{ y: -20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-xl md:text-[32px] font-bold mb-2"
+              className={`text-xl md:text-[32px] font-bold mb-2 ${currentIndex === 2 && ' text-[15px] ' }`}
             >
               {slides[currentIndex].title}
             </motion.h1>
@@ -92,7 +103,7 @@ export default function BackgroundSlider(): JSX.Element {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="text-md    font-semibold    md:text-[17px] my-2"
+              className={`text-md font-semibold md:text-[17px] my-2 `}
             >
               {slides[currentIndex].subtitle}
             </motion.p>
