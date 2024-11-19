@@ -73,7 +73,7 @@ export default function BackgroundSlider(): JSX.Element {
           //  layout="fill"
              priority
           />
-          <div className={`absolute md:block hidden    ${currentIndex === 3 ? 'md:text-right md:pr-5 ml-auto text-gray-800 md:w-[850px]': 'md:text-leftn pl-1 md:pl-5 w-[200px] md:w-[400px] mr-auto ml-14 text-black'}  inset-0 flex flex-col   justify-center  mb-14   text-center `}>
+          <div className={`absolute  md:block hidden   ${currentIndex === 3 ? 'md:text-right md:pr-5 ml-auto text-gray-800 md:w-[850px]': 'md:text-left md:pl-5 w-[100px] md:w-[400px] mr-auto ml-14 text-black'}  inset-0 flex flex-col   justify-center  mb-10 mt-4   text-center `}>
            
             <motion.h1
               initial={{ y: -20, opacity: 0 }}
