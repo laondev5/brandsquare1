@@ -54,8 +54,8 @@ export default function BackgroundSlider(): JSX.Element {
   // absolute   bg-[url('/images/header1BG.png')] inset-0  flex items-center justify-center  w-full h-64 sm:h-96 md:h-full
 
   return (
-  <div className="bg-[url('/images/header1BG.png')]"> 
-    <div className="relative h-[10vh]  sm:h-[30vh] max-w-[900px] mx-auto mt-9 w-full overflow-hidden">
+  <div > 
+    <div className="relative h-full  sm:h-[30vh] max-w-[900px] mx-auto mt-9 w-full overflow-hidden">
          <motion.div
           key={currentIndex}
           initial={{ opacity: 0 }}
@@ -64,7 +64,7 @@ export default function BackgroundSlider(): JSX.Element {
           transition={{ duration: 0.5 }}
           className=" flex items-center justify-center "
         >
-          <Image className="  object-contain  rounded-lg"
+          <Image className=" h-[200px] object-cover  md:h-full md:object-contain  rounded-lg"
             src={slides[currentIndex].url}
             alt={slides[currentIndex].title}
           width={1000}
@@ -73,7 +73,7 @@ export default function BackgroundSlider(): JSX.Element {
           //  layout="fill"
              priority
           />
-          <div className={`absolute  md:block hidden   ${currentIndex === 3 ? 'md:text-right md:pr-5 ml-auto text-gray-800 md:w-[850px]': 'md:text-left md:pl-5 w-[100px] md:w-[400px] mr-auto ml-14 text-black'}  inset-0 flex flex-col   justify-center  mb-10 mt-4   text-center `}>
+          <div className={`absolute  md:block hidden   ${currentIndex === 3 ? 'md:text-right md:pr-5 ml-auto text-gray-800 md:w-[850px]': 'md:text-left md:pl-5 w-[100px] md:w-[400px] mr-auto ml-24 text-black'}  inset-0 flex flex-col   justify-center  mb-10 my-5   text-center `}>
            
             <motion.h1
               initial={{ y: -20, opacity: 0 }}
@@ -92,7 +92,7 @@ export default function BackgroundSlider(): JSX.Element {
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4 }}
-              className="text-md    font-semibold    md:text-[17px] mb-4"
+              className="text-md    font-semibold    md:text-[17px] my-2"
             >
               {slides[currentIndex].subtitle}
             </motion.p>
