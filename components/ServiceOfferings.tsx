@@ -30,7 +30,7 @@ const services = [
 export default function ServiceOfferings() {
   return (
     <section className="bg-gray-100 py-12">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto  text-center  md:pl-20 ">
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           initial={{ opacity: 0, y: 20 }}

@@ -78,7 +78,7 @@ export default function Zeomart() {
         setSearchTerm={setSearchTerm}
       />
       <BackgroundSlider />
-      <main className="container mx-auto p-4">
+      <main className="container mx-auto p-4  ">
         {/* <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
