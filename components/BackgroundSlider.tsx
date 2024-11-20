@@ -6,7 +6,7 @@ import { motion,  } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BsCart4 } from "react-icons/bs";
-
+import { IoStorefrontOutline } from "react-icons/io5";
 interface Slide {
   url: string;
   title: string;
@@ -113,7 +113,7 @@ export default function BackgroundSlider(): JSX.Element {
               transition={{ delay: 0.6 }}
             >
               <Button className="bg-[#000035]" size="lg">
-                shop now <BsCart4 className="" />
+                 { currentIndex === 2 || currentIndex === 3  ? <>Vendors Hub  <IoStorefrontOutline className="" /></> :<>shop now <BsCart4 className="" /></>}
               </Button>
             </motion.div>
             
