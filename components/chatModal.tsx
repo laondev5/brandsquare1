@@ -67,7 +67,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement >) => {
 }
   return (
     <div>
-      <div className="fixed top-28  left-1/2   transform -translate-x-1/2 md:-translate-x-0 md:left-[60%]  min-h-[80vh] md:max-h-[20vh]  md:w-[40vw] w-[90vw] lg:w-[30vw]  rounded-2xl   bg-white shadow-lg">
+      <div className="fixed top-28 z-50  left-1/2   transform -translate-x-1/2 md:-translate-x-0 md:left-[60%]  min-h-[80vh] md:max-h-[20vh]  md:w-[40vw] w-[90vw] lg:w-[30vw]  rounded-2xl   bg-white shadow-lg">
       {!chatUiModal ? <><div className="bg-[#000035] max-w-[800px] w-full p-6 rounded-lg">
           <div className="header flex justify-between items-center">
             <Image src="/images/logo.png" alt="logo" width={100} height={100} />

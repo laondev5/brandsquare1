@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import Cards from "./cards";
 import {
   Card,
   CardContent,
@@ -134,7 +135,7 @@ export default function VendorHub() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            The Vendors Hub is an innovative platform designed to empower small business owners and startups to grow their e-commerce businesses with ease. We provide solutions for seamless payments in Naira, trusted partnerships with verified vendors, and flexible capital options to help you start selling with as little as 50% upfront. From shipping and warehousing to hassle-free payments and reliable vendor connections, the Vendors Hub is your one-stop solution for building a successful business without the stress. 
+            The Vendors Hub is an all-in-one platform specifically crafted to empower small business owners and aspiring entrepreneurs like you to effortlessly grow your business. We help you source the product, advertise, and handle local deliveries to your customers, with as little as 50% capital. The Vendors Hub is your go-to destination for building a thriving business without any stress.
 
           </motion.p>
           <motion.div
@@ -167,108 +168,24 @@ export default function VendorHub() {
           <span className="text-3xl    font-bold text-center">About Vendors Hub  </span>
         </motion.h1>
         <motion.div
-          className="  flex flex-col gap-4 md:gap-7 md:flex-row justify-center items-center"
+          className="  flex flex-col gap-4 md:gap-7 md:flex-row justify-center items-center grid  lg:grid-cols-3"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
         >
-          {/* {[
-            {
-              title: "Seamless Payments",
-              content:
-                "The Vendor Hub connects Nigerian businesses with trusted Chinese suppliers, enabling secure Naira payments, eliminating currency conversion and gateway issues for a smooth, efficient sourcing process.",
-                 icon: <GrTransaction className="   text-yellow-400" />,
-            },
-            {
-              title: "Flexible Financing",
-content:
-  "We offer flexible financing options, requiring only 50% down to secure your goods. You can either complete payment upon arrival at our warehouse or start selling directly while gathering the remaining funds.",
-  icon: <FaMoneyBillWave  className="   text-yellow-400" />,
-            },
-            {
-              title: "Effortless Shipping",
-content:
-  " The Vendor Hub manages shipping from China to Nigeria, ensuring professional handling. Collect your products upon arrival or sell directly from our warehouse, focusing on growing your business.",
-  icon: <FaShippingFast className="   text-yellow-400" />,
-            },
-            {
-              title: "Instant Storefront",
-              content: "Our platform offers an instant web store, providing a professional online presence with no setup costs. Benefit from our network, tools, and streamlined e-commerce success path.",
-              icon: <FaStoreAlt className="   text-yellow-400" />,
-            },
-          ]  */}
-           <motion.div  
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.8 + 0 * 0.2 }}
-            >
-              <div className="  border-t-4  min-h-[190px] md:min-h-[180px]  border-blue-200 rounded-lg shadow-lg  transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
-                
-                  <div className=" text-[20px] font-thin "><span>Seamless Payments</span></div>
-                
-                <div>
-                  <p className="text-[15px]  py-3 text-gray-700  leading-7 md:leading-8">The Vendors Hub connects Nigerian businesses with trusted Chinese suppliers</p>   
-                </div>
-                <div className=" text-[29px] float-right">
-                <FcViewDetails /> 
-                </div>
-              </div>
-            </motion.div>
+          
+           
+<Cards style="border-blue-200" text='we help you source the product
+                  Whether you’re looking for innovative products, competitive pricing, or reliable suppliers, we’ve got you covered.' title="Seamless Payments" icon={ <FcViewDetails />} />
 
             <div className=" flex  flex-col-reverse md:flex-col gap-4">
-            <motion.div  
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.8 + 0 * 0.2 }}
-            >
-              <div className="  min-h-[190px] md:min-h-[180px]  border-t-4  border-gray-300  rounded-lg shadow-lg   transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
-                
-                  <div className=" text-[20px] font-thin "><span>Flexible Financing</span></div>
-                
-                <div>
-                  <p className="text-[15px]  py-3 text-gray-700  leading-7 md:leading-8">The Vendors Hub connects We offer flexible financing options, requiring only 50% down to secure your goods.</p>   
-                </div>
-                <div className=" text-[29px] float-right">
-                <FcMoneyTransfer /> 
-                </div>
-              </div>
-            </motion.div>
+            <Cards style="border-gray-300" text=' You can kickstart your business with only 50% of the required capital. Imagine launching your dream business, tapping into your passion, and making a meaningful impact—all while managing your finances wisely.' title="Start With Just 50% Capital" icon={ <FcMoneyTransfer /> } />
+                  <Cards style="border-purple-200" text='With our expertise in both local and international shipping, we ensure that your goods are handled with care and delivered to your customers.' title="Effortless Shipping" icon={ <FcInTransit /> } />
+          
 
-            <motion.div  
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.8 + 0 * 0.2 }}
-            >
-              <div className="  border-t-4  min-h-[190px] md:min-h-[180px] border-purple-200  rounded-lg shadow-lg  transition-transform transform   md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
-                
-                  <div className=" text-[20px] font-thin "><span>Effortless Shipping</span></div>
-                
-                <div>
-                  <p className="text-[15px]  py-3 text-gray-700  leading-7 md:leading-8">The Vendors Hub manages shipping from China to Nigeria, ensuring professional handling.</p>   
-                </div>
-                <div className=" text-[29px] float-right">
-                <FcInTransit /> 
-                </div>
-              </div>
-            </motion.div>
+           
             </div>
-            <motion.div  
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.8 + 0 * 0.2 }}
-            >
-              <div className="  border-t-4  min-h-[190px] md:min-h-[180px]  border-yellow-400 rounded-lg shadow-lg  transition-transform transform  font-semibold  md:hover:scale-105 hover:scale-[1.03]  hover:shadow-lg  text-center  p-4 md:text-left">
-                
-                  <div className=" text-[20px] font-thin "><span>Instant Storefront</span></div>
-                
-                <div>
-                  <p className="text-[15px]  py-3 text-gray-700  leading-7 md:leading-8">We offer an instant web store, providing a professional online presence with no setup costs.</p>   
-                </div>
-                <div className=" text-[29px] float-right">
-                <FcShop /> 
-                </div>
-              </div>
-            </motion.div>
+            <Cards style="border-yellow-400" text="Our innovative platform empowers you to create a stunning online store that captures your brand's essence and attracts customers from all over the globe." title="Instant Storefront" icon={ <FcShop /> } />
             
             
   
@@ -281,7 +198,7 @@ content:
     transition={{ delay: 1.4 }}
   >
     <h2 className=" text-[23px] md:text-3xl font-semibold pt-9 mb-6 text-center">
-      Why Choose Brandsquare?
+    Why we are Different?
     </h2>
     <div>
       {/* First Section */}
@@ -299,7 +216,7 @@ content:
 
         {/* Text Section */}
         <div className="text-center md:text-left my-4 md:my-0 lg:max-w-[500px] mx-auto leading-7">
-          <h2 className="font-bold text-xl">Empowering Vendors, Simplifying Growth</h2>
+          <h2 className="font-bold text-xl">Empowering entrepreneurs</h2>
           <p>
             Your gateway to seamless collaboration and success. Manage your
             products, track sales, and connect with customers effortlessly on one

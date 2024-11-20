@@ -6,7 +6,8 @@ import { motion,  } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BsCart4 } from "react-icons/bs";
-
+import { IoStorefrontOutline } from "react-icons/io5";
+import Link from "next/link";
 interface Slide {
   url: string;
   title: string;
@@ -112,9 +113,10 @@ export default function BackgroundSlider(): JSX.Element {
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.6 }}
             >
+              <Link href={currentIndex === 2 || currentIndex === 3 ? '/vendor-signup': '/'}> 
               <Button className="bg-[#000035]" size="lg">
-                shop now <BsCart4 className="" />
-              </Button>
+                 { currentIndex === 2 || currentIndex === 3  ? <>Vendors Hub  <IoStorefrontOutline className="" /></> :<>shop now <BsCart4 className="" /></>}
+              </Button></Link>
             </motion.div>
             
           </div>
