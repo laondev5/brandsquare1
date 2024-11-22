@@ -5,17 +5,21 @@ import { JWT as DefaultJWT } from "next-auth/jwt"
 //import { PrismaClient } from '@prisma/client'
 
 
-export type UserRole = "ADMIN" | "VENDOR" | "CUSTOMER"
+export type UserRole = "admin" | "vendor" | "customer"
+
+
 
 declare module "next-auth" {
-  interface User {
+ export interface User {
     id: string
     role: UserRole
     name?: string | null
     email?: string | null
+    phoneNumber?: string | null
   }
 
   interface Session extends DefaultSession {
+    accessToken: string,
     user: {
       id: string
       role: UserRole
@@ -37,4 +41,12 @@ declare module "next-auth/jwt" {
 export interface AuthCredentials {
   email: string
   password: string
+}
+export interface User {
+  id?: string
+  role: UserRole
+  name?: string | null
+  email?: string | null
+  phoneNumber?: string | null
+  password?: string | null
 }

@@ -4,21 +4,22 @@ import { Inter } from "next/font/google";
 //import { Sidebar } from "@/components/vendorComponent/Sidebar";
 import TopBar from "@/components/vendorComponent/Topbar";
 //import { MobileSidebar } from "@/components/vendorComponent/MobileSidebar";
-import Providers from "../providers";
+// import Providers from "../providers";
 import { useSession } from "next-auth/react";
-import { getUserData } from "../action/getUserData";
-import { User } from "@prisma/client";
+// import { getUserData } from "../action/getUserData";
+// import { User } from "@prisma/client";
 
 import { useRouter } from "next/navigation";
 import { AdminSidebar } from "@/components/AdminComponent/AdminSidebar";
 import { AdminMobileSidebar } from "@/components/AdminComponent/MobileSidebar";
+import AuthProvider from "@/providers/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
-interface GetUserDataResponse {
-  user: User | null;
-  error?: string;
-}
+// interface GetUserDataResponse {
+//   user: User | null;
+//   error?: string;
+// }
 
 export default function RootLayout({
   children,
@@ -26,42 +27,42 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
-  const [userData, setUserData] = useState<GetUserDataResponse | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const { data: session, status } = useSession();
+  // const [userData, setUserData] = useState<GetUserDataResponse | null>(null);
+  // const [isLoading, setIsLoading] = useState(true);
+  const  session  = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (status === "unauthenticated") {
+    if (session.status === "unauthenticated") {
       router.push("/login");
       return;
     }
 
-    const fetchUserData = async () => {
-      if (session?.user?.id) {
-        try {
-          setIsLoading(true);
-          const response = await getUserData(session.user.id);
-          if (response) {
-            setUserData(response);
-          } else {
-            console.log("Error fetching user data", response);
-          }
-        } catch (error) {
-          console.error("Error fetching user data:", error);
-        } finally {
-          setIsLoading(false);
-        }
-      }
-    };
+  //   const fetchUserData = async () => {
+  //     if (session?.user?.id) {
+  //       try {
+  //         setIsLoading(true);
+  //         const response = await getUserData(session.user.id);
+  //         if (response) {
+  //           setUserData(response);
+  //         } else {
+  //           console.log("Error fetching user data", response);
+  //         }
+  //       } catch (error) {
+  //         console.error("Error fetching user data:", error);
+  //       } finally {
+  //         setIsLoading(false);
+  //       }
+  //     }
+  //   };
 
-    if (session?.user?.id) {
-      fetchUserData();
-    }
-  }, [session, status, router]);
+  //   if (session?.user?.id) {
+  //     fetchUserData();
+  //   }
+  }, [session]);
 
   // Show loading state
-  if (isLoading || status === "loading") {
+  if (session.status === "loading") {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900"></div>
@@ -70,12 +71,12 @@ export default function RootLayout({
   }
 
   // Handle unauthenticated state
-  if (status === "unauthenticated") {
-    return null; // Router will handle redirect
-  }
+  // if (status === "unauthenticated") {
+  //   return null; // Router will handle redirect
+  // }
 
   // Handle case where user data is not available
-  if (!userData?.user) {
+  if (!session.data?.user) {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
@@ -91,17 +92,17 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-gray-100 text-gray-900`}>
-        <Providers>
-          <div className="flex h-screen overflow-hidden">
+    <AuthProvider>
+
+      <div className={`${inter.className} bg-gray-100 text-gray-900`}>
+           <div className="flex h-screen overflow-hidden">
             <AdminSidebar />
             <AdminMobileSidebar
               menuOpen={menuOpen}
               onMenuToggle={handleMenuToggle}
             />
             <div className="flex flex-col flex-1 overflow-hidden">
-              <TopBar user={userData.user} onMenuToggle={handleMenuToggle} />
+              <TopBar   onMenuToggle={handleMenuToggle} />
               <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
                 {/* {!userData.user.onboarding && (
                   <Alert className="bg-white m-3 p-4">
@@ -129,8 +130,7 @@ export default function RootLayout({
               </main>
             </div>
           </div>
-        </Providers>
-      </body>
-    </html>
-  );
+       </div>
+       </AuthProvider>
+  )
 }

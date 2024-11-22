@@ -7,8 +7,8 @@ const prisma = new PrismaClient()
 
 interface UpdateUserProfileData {
     userId: string;
-    brandName?: string;
-    brandDescription?: string;
+    businessName?: string;
+    businessDescription?: string;
     address?: string;
     city?: string;
     state?: string;
@@ -33,8 +33,8 @@ export async function updateUserProfile(unboardingData: UpdateUserProfileData) {
       },
       data: {
         onboarding: true,
-        brandName: unboardingData.brandName,
-        brandDescription: unboardingData.brandDescription,
+        businessName: unboardingData.businessName,
+        businessDescription: unboardingData.businessDescription,
         address: unboardingData.address,
         city: unboardingData.city,
         state: unboardingData.state,

@@ -35,6 +35,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ProductForm } from "./ProductForm";
+ import useAxiosAuth from "@/hooks/useAxiosAuth";
+import { useSession } from "next-auth/react";
 
 interface Product {
   id: number;
@@ -87,14 +89,36 @@ export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [searchTerm, setSearchTerm] = useState("");
   const [isAddProductOpen, setIsAddProductOpen] = useState(false);
-
+   const axiosAuth = useAxiosAuth();
   const filteredProducts = products.filter(
     (product) =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.category.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const handleAddProduct = (formData: any) => {
+  const session = useSession();
+//   console.log({"coupons": ["SUMMER20", "WELCOME10"],
+//   "galleryImages": [
+//     "https://example.com/image1.jpg",
+//     "https://example.com/image2.jpg", 
+//     "https://example.com/image3.jpg"
+//   ],
+//   "displayImage": "https://example.com/display-image.jpg",
+//   "colors": ["Red", "Blue", "Green"],
+//   "sizes": ["S", "M", "L", "XL"],
+//   "category": "Clothing",
+//   "fullDescription": "This is a comprehensive and detailed description of the product, highlighting all its key features, materials, and benefits. It provides in-depth information for potential buyers.",
+//   "shortDescription": "A stylish and comfortable product perfect for everyday wear.",
+//   "isFree": false,
+//   "price": 49.99,
+//   "description": "Versatile and high-quality product suitable for multiple occasions.",
+//   "name": "Premium Comfort Shirt",
+//   "inventory": {
+//     "S":10,
+//     "M":15,
+//     "L":15,
+//   "XL":10}
+// });
+  const handleAddProduct = async (formData: any) => {
     const newProduct = {
       id: products.length + 1,
       name: formData.name,
@@ -106,9 +130,29 @@ export default function ProductsPage() {
     };
     setProducts([...products, newProduct]);
     console.log("new product", newProduct);
-    setIsAddProductOpen(false);
-  };
+    //  try {
+    //   const response = await axiosAuth.post("/products", {
+    //     id: products.length + 1,
+    //     name: formData.name, 
+    //     price: parseFloat(formData.price),
+    //     category: formData.category,
+    //     inventory: Object.values(
+    //       formData.inventory as Record<string, number>
+    //     ).reduce((a, b) => a + b, 0),
+    //     userId: session.data?.accessToken
+        
+    //   });
+    //   console.log(response);
+    //   if (response.status === 201) {
+    //     console.log("Registration successful! Please login."); // Show success toast
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    //  }  
+     setIsAddProductOpen(false);
 
+  };
+ 
   const handleDeleteProduct = (id: number) => {
     setProducts(products.filter((product) => product.id !== id));
   };

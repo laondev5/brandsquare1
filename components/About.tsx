@@ -153,12 +153,12 @@ export default function AboutUs() {
               {
                 question: "What is the Brandsquare Vendors Hub?",
                 answer:
-                  "The Brandsquare Vendors Hub is a platform designed to help small business owners and startups sell their products through trusted partnerships with Chinese vendors. We provide solutions for seamless payments, capital assistance, shipping, and warehousing, making it easier for you to grow your business with less hassle.",
+                  "The Vendors Hub is an all-in-one platform specifically crafted to empower small business owners and aspiring entrepreneurs like you to effortlessly grow your business. We help you source the product, advertise, and handle local deliveries to your customers, with as little as 50% capital. The Vendors Hub is your go-to destination for building a thriving business without any stress.",
               },
               {
                 question: "How do I start selling on Brandsquare?",
                 answer:
-                  "To start selling on Brandsquare, you'll need to sign up as a vendor on our platform. Once registered, we'll guide you through the process of setting up your online store, choosing products from trusted Chinese vendors, and getting access to our flexible payment and warehousing options.",
+                  "To start selling on Brandsquare, you need to sign up as a vendor through the vendors hub. Once registered, we'll guide you through the process of setting up your online store, choosing products from trusted local or international suppliers, and getting access to our flexible payment and warehousing options.",
               },
               {
                 question: "How does the 50% capital option work?",
@@ -179,7 +179,7 @@ export default function AboutUs() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1.2 }}>
             <Link href='/help'><Button className="bg-yellow-400 text-black font-semibold text-sm hover:bg-yellow-500   px-4 py-3">
-View more faqs            <ChevronRight className="ml-2 h-5 w-5" />
+View more FAQS            <ChevronRight className="ml-2 h-5 w-5" />
           </Button> </Link>
           </motion.div>
       </div>

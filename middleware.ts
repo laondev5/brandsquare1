@@ -26,9 +26,9 @@ export default withAuth(
 
     // Role-based routing configuration
     const roleRoutes: Record<UserRole, string> = {
-      ADMIN: '/admin',
-      VENDOR: '/vendor',
-      CUSTOMER: '/'
+      admin: '/admin',
+      vendor: '/vendor',
+      customer: '/'
     }
 
     // Verify role-based access for protected paths

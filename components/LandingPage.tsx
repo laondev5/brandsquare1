@@ -36,6 +36,13 @@ export default function Zeomart() {
     }
   }, []);
 
+  fetch('/api/v1/products')
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data); // List of all products
+   })
+  .catch((error) => console.error('Error:', error));
+
   useEffect(() => {
     const filtered = products.filter(
       (product) =>
@@ -153,7 +160,7 @@ export default function Zeomart() {
             {filteredProducts.slice(0, 5).map((product) => (
               <Card className="bg-white" key={product.id}>
                 <CardContent className="p-4">
-                  <Link href={`/product/{product.id}`}>
+                  <Link href={`/product/${product.id}`}>
                     <Image
                       src={product.images[0]}
                       alt={product.name}
@@ -166,7 +173,7 @@ export default function Zeomart() {
                   <p className="text-muted-foreground text-sm">₦
                     {product.price}
                   </p>
-                  <Link href={`/product/{product.id}`} passHref>
+                  <Link href={`/product/${product.id}`} passHref>
                     <Button className="w-full bg-yellow-400 text-black hover:bg-yellow-500">
                       View Product
                     </Button>
@@ -189,7 +196,7 @@ export default function Zeomart() {
               <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-bold mb-4">{category}</h2>
 
-                <Link href={`/category/{category}`} passHref>
+                <Link href={`/category/${category}`} passHref>
                   <Button className="w-full bg-[#000035] hover:bg-[#000035cc] text-white  ">
                     View All
                   </Button>
@@ -202,7 +209,7 @@ export default function Zeomart() {
                   .map((product) => (
                     <Card className="bg-white" key={product.id}>
                       <CardContent className="p-4">
-                        <Link href={`/product/{product.id}`}>
+                        <Link href={`/product/${product.id}`}>
                           <Image
                             src={product.images[0]}
                             alt={product.name}
@@ -217,7 +224,7 @@ export default function Zeomart() {
                         <p className="text-muted-foreground text-sm">
                         ₦{product.price}
                         </p>
-                        <Link href={`/product/{product.id}`} passHref>
+                        <Link href={`/product/${product.id}`} passHref>
                           <Button className="w-full bg-yellow-400 text-black hover:bg-yellow-500">
                             View Product
                           </Button>

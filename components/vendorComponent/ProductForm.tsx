@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import { UploadToCloudinary } from "@/app/action/UploadImage";
+
 import {
   Plus,
   X,
@@ -24,6 +26,7 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Card, CardContent } from "@/components/ui/card";
+import { useProductStore } from "@/store/productStore";
 
 interface ProductFormProps {
   onSubmit: (formData: ProductFormData) => void;
@@ -40,8 +43,9 @@ interface ProductFormData {
   sizes: string[];
   colors: string[];
   inventory: { [key: string]: number };
-  displayImage: File | null;
-  galleryImages: File[];
+  // displayImage: File | null;
+  displayImage:  string;
+  galleryImages: string[];
   coupons: { code: string; discount: number }[];
 }
 
@@ -56,7 +60,7 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
     sizes: [],
     colors: [],
     inventory: {},
-    displayImage: null,
+    displayImage: '',
     galleryImages: [],
     coupons: [],
     ...initialData,
@@ -124,26 +128,58 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
     }));
     console.log("Inventory changed for size", size, ":", value);
   };
+  // const bannerUrl =
+  //       data.banner && data.banner[0]
+  //         ? await UploadToCloudinary(data.banner[0])
+  //         : undefined;
 
-  const handleImageUpload = (
+  const handleImageUpload = async (
     e: React.ChangeEvent<HTMLInputElement>,
     type: "display" | "gallery"
   ) => {
     const files = e.target.files;
     if (files) {
       if (type === "display") {
-        setFormData((prev) => ({ ...prev, displayImage: files[0] }));
-        console.log("Display image uploaded:", files[0].name);
+        try {
+          // Upload the display image to Cloudinary
+          const displayUrl = await UploadToCloudinary(files[0]);
+          const displayUrl1 = displayUrl?.secure_url;
+      
+          // Update the form data with the Cloudinary URL
+          setFormData((prev) => ({ ...prev, displayImage: displayUrl1 || "" }));
+      
+          console.log("Display image uploaded:", files[0].name);
+        } catch (error) {
+          console.error("Error uploading display image:", error);
+        }
       } else {
-        setFormData((prev) => ({
-          ...prev,
-          galleryImages: [...prev.galleryImages, ...Array.from(files)],
-        }));
-        console.log(
-          "Gallery images uploaded:",
-          Array.from(files).map((f) => f.name)
-        );
+        try {
+          // Upload gallery images to Cloudinary
+          const uploadedGalleryImages = await Promise.all(
+            Array.from(files).map(async (file) => {
+              const result = await UploadToCloudinary(file);
+              return result?.secure_url;
+            })
+          );
+      
+          // Update the form data with the Cloudinary URLs
+          setFormData((prev) => ({
+            ...prev,
+            galleryImages: [
+              ...prev.galleryImages,
+              ...uploadedGalleryImages.filter((url): url is string => !!url),
+            ],
+          }));
+      
+          console.log(
+            "Gallery images uploaded:",
+            Array.from(files).map((f) => f.name)
+          );
+        } catch (error) {
+          console.error("Error uploading gallery images:", error);
+        }
       }
+      
     }
   };
 
@@ -187,11 +223,19 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
     }
     console.log("Editor command executed:", command);
   };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const createProduct = useProductStore(state => state.createProduct);
+   
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Product Data:", formData);
     onSubmit(formData);
+    try {
+      await createProduct({...formData});
+      // Handle success
+      console.log("Product created successfully");
+    } catch (error) {
+     console.log("Error creating product:", error);
+    }
   };
 
   const handleAddCategory = () => {
@@ -496,15 +540,15 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
                 accept="image/*"
                 onChange={(e) => handleImageUpload(e, "display")}
               />
-              {formData.displayImage && (
+           {/*   {formData.displayImage && (
                 <div className="mt-2">
-                  <img
+                //  <img
                     src={URL.createObjectURL(formData.displayImage)}
                     alt="Display"
                     className="w-32 h-32 object-cover rounded"
                   />
-                </div>
-              )}
+                  </div> 
+              )} */}
             </div>
             <div>
               <Label htmlFor="galleryImages">Gallery Images</Label>
@@ -516,7 +560,7 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
                 onChange={(e) => handleImageUpload(e, "gallery")}
               />
               <div className="flex flex-wrap gap-2 mt-2">
-                {formData.galleryImages.map((image, index) => (
+                {/* {formData.galleryImages.map((image, index) => (
                   <div key={index} className="relative">
                     <img
                       src={URL.createObjectURL(image)}
@@ -538,7 +582,7 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
                       <X size={14} />
                     </button>
                   </div>
-                ))}
+                ))} */}
               </div>
             </div>
           </div>

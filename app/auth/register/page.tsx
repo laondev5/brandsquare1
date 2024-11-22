@@ -23,22 +23,32 @@ import { Icons } from "@/components/icons";
 import { CartItem } from "@/app/utility/products";
 import MainNav from "@/components/MainNav";
 import Footer from "@/components/Footer";
+import { UserRole } from "@/types/next-auth"; // Adjust the import path as necessary
+
+// import { axiosInstance } from "@/config/axios";
+import useAuthStore from "@/store/authStore";
+import { useSession } from "next-auth/react";
 
 const roles = [
-  { value: "VENDOR", label: "Vendor" }, // Updated to match the enum values
-  { value: "CUSTOMER", label: "Customer" },
+  { value: "vendor", label: "Vendor" }, // Updated to match the enum values
+  { value: "customer", label: "Customer" },
 ];
 
 export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("vendor");
+   
+  const [role, setRole] = useState<UserRole>('vendor');
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const [cart, setCart] = useState<CartItem[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const { register} = useAuthStore();
+  const  session  = useSession();
+  console.log(session);
 
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
@@ -47,32 +57,57 @@ export default function Register() {
     }
   }, []);
 
+  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    console.log(name, email, password, role); // Log the data being sent
 
-    const response = await fetch("/api/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password, role }),
-    });
+    try {
+    const response =  await register({
+        email,
+        password,
+        name,
+        phoneNumber,
+        role,
+      });
+   console.log(response,'response');
+ 
+   
+     toast.success("Registration successful! Please login."); 
+     router.push("/auth/signin");
 
-    if (response.ok) {
-      toast.success("Registration successful! Please login."); // Show success toast
-      router.push("/auth/signin");
-    } else {
-      const errorText = await response.text(); // Get the raw response text
-      console.error("Registration failed:", errorText); // Log the raw error text
-      try {
-        const errorData = JSON.parse(errorText); // Attempt to parse as JSON
-        toast.error(errorData.message || "Registration failed"); // Show error toast
-      } catch {
-        // If parsing fails, show a generic error message
-        toast.error("Registration failed. Please try again.");
-      }
-    }
-    setLoading(false);
+   
+ } catch (error) {
+   console.log(error);
+  toast.error("Registration failed. Please try again.");
+
+   setLoading(false);
+ } finally {
+   setLoading(false);
+ }
+
+    // const response = await fetch("/api/auth/register", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ name, email, password, role }),
+    // });
+ 
+    // if (response.ok) {
+    //   toast.success("Registration successful! Please login."); // Show success toast
+    //   router.push("/auth/signin");
+    // } else {
+    //   const errorText = await response.text(); // Get the raw response text
+    //   console.error("Registration failed:", errorText); // Log the raw error text
+    //   try {
+    //     const errorData = JSON.parse(errorText); // Attempt to parse as JSON
+    //     toast.error(errorData.message || "Registration failed"); // Show error toast
+    //   } catch {
+    //     // If parsing fails, show a generic error message
+    //     toast.error("Registration failed. Please try again.");
+    //   }
+    // }
+     
   };
 
   return (
@@ -140,6 +175,16 @@ export default function Register() {
                     />
                   </div>
                   <div>
+                    <Label htmlFor="phoneNumber">Phone number</Label>
+                    <Input
+                      id="phoneNumber"
+                      type="phoneNumber"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div>
                     <Label htmlFor="password">Password</Label>
                     <Input
                       id="password"
@@ -151,7 +196,7 @@ export default function Register() {
                   </div>
                   <div>
                     <Label htmlFor="role">Role</Label>
-                    <Select value={role} onValueChange={setRole}>
+                    <Select required value={role} onValueChange={(value) => setRole(value as UserRole)}>
                       <SelectTrigger>
                         <SelectValue placeholder="Select a role" />
                       </SelectTrigger>
@@ -165,7 +210,7 @@ export default function Register() {
                     </Select>
                   </div>
                 </div>
-                <Button type="submit" className="w-full" disabled={loading}>
+                <Button type="submit" className="w-full mt-8" disabled={loading}>
                   {loading && (
                     <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                   )}

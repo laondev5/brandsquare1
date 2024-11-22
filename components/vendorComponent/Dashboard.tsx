@@ -3,7 +3,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { motion } from "framer-motion";
-import { User } from "@prisma/client";
+// import { User } from "@/types/userTypes";
+import { useSession } from "next-auth/react";
 
 const data = [
   { name: "Jan", total: 1200 },
@@ -14,12 +15,15 @@ const data = [
   { name: "Jun", total: 2600 },
 ];
 
-interface DashboardProps {
-  userData: User;
-}
+// interface DashboardProps {
+//   userData: User;
+// }
 
-const Dashboard: React.FC<DashboardProps> = ({ userData }) => {
-  if (!userData) {
+
+const Dashboard = () => {
+  const session =  useSession();
+  const user = session.data?.user;
+  if (!user) {
     return <div>Loading user data...</div>;
   }
   //console.log(userData);
