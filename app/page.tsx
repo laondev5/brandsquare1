@@ -2,8 +2,8 @@
 
 
 const page = () => {
-   
-  return (
+
+   return (
     <div>
       <LandingPage />
     </div>

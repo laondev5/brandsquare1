@@ -116,17 +116,19 @@ function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
         localStorage.setItem('token', session.data.accessToken);
 
       }
+      if (result?.ok) {
+        toast.success("Logged in successfully!");
+        
 
+      }
 
       console.log(result, 'result');
-    // try {
-    //    const response = await login({
-    //     email: formState.email.toLowerCase().trim(),
-    //     password: formState.password,
-    //   });
-    //   console.log(response, 'response');
-      toast.success("Logged in successfully!");
-      // console.log(session);
+      if (result?.error) {
+        toast.error("Authentication failed. Please try again.");
+        setError(result.error);
+        return;
+      }
+        
 
       // You can add router.push('/dashboard') or any redirect logic here
       

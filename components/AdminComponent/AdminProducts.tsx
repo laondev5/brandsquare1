@@ -487,7 +487,7 @@ export default function AdminProductsPage() {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm font-medium">Price</p>
-                      <p>${product.price.toFixed(2)}</p>
+                      <p>₦{product.price.toFixed(2)}</p>
                     </div>
                     <div>
                       <p className="text-sm font-medium">Vendor</p>

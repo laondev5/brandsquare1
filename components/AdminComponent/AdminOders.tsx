@@ -148,7 +148,7 @@ export default function AdminOrdersPage() {
                     <TableCell className="font-medium">#{order.id}</TableCell>
                     <TableCell>{order.customerName}</TableCell>
                     <TableCell>{order.orderDate}</TableCell>
-                    <TableCell>${order.total.toFixed(2)}</TableCell>
+                    <TableCell>₦{order.total.toFixed(2)}</TableCell>
                     <TableCell>
                       <Badge className={getStatusColor(order.status)}>
                         {order.status}
@@ -203,7 +203,7 @@ export default function AdminOrdersPage() {
                     </div>
                     <div>
                       <p className="text-sm font-medium">Total</p>
-                      <p>${order.total.toFixed(2)}</p>
+                      <p>₦{order.total.toFixed(2)}</p>
                     </div>
                     <div>
                       <p className="text-sm font-medium">Status</p>

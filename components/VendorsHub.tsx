@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import CardPricing from "./cardPricing";
 import Cards from "./cards";
 import {
   Card,
@@ -237,8 +238,7 @@ export default function VendorHub() {
           />
         
         </div>
-
-        {/* Text Section */}
+         {/* Text Section */}
         <div className=" text-center md:text-left my-2 md:my-0 lg:max-w-[500px] mx-auto leading-7">
           <h2 className="font-bold text-xl">Your Partner for Smarter Selling</h2>
           <p>
@@ -280,7 +280,8 @@ export default function VendorHub() {
 </div>
 
        
- 
+<CardPricing />
+
 
 <div className="container mx-auto px-4 "> 
         <motion.section

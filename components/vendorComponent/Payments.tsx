@@ -140,7 +140,7 @@ export default function Payments() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              ${pendingAmount.toFixed(2)}
+            ₦{pendingAmount.toFixed(2)}
             </div>
           </CardContent>
         </Card>
@@ -218,7 +218,7 @@ export default function Payments() {
                       <TableRow key={payment.id}>
                         <TableCell>{payment.id}</TableCell>
                         <TableCell>{payment.date}</TableCell>
-                        <TableCell>${payment.amount.toFixed(2)}</TableCell>
+                        <TableCell>₦{payment.amount.toFixed(2)}</TableCell>
                         <TableCell>
                           <span
                             className={`px-2 py-1 rounded-full text-xs font-semibold ${

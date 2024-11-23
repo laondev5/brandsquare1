@@ -138,17 +138,18 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
     type: "display" | "gallery"
   ) => {
     const files = e.target.files;
+    console.log("Files:", files); 
     if (files) {
       if (type === "display") {
         try {
           // Upload the display image to Cloudinary
           const displayUrl = await UploadToCloudinary(files[0]);
           const displayUrl1 = displayUrl?.secure_url;
-      
+        console.log("Display image uploaded:", displayUrl1);
           // Update the form data with the Cloudinary URL
           setFormData((prev) => ({ ...prev, displayImage: displayUrl1 || "" }));
       
-          console.log("Display image uploaded:", files[0].name);
+          // console.log("Display image uploaded:", files[0].name);
         } catch (error) {
           console.error("Error uploading display image:", error);
         }
@@ -161,7 +162,7 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
               return result?.secure_url;
             })
           );
-      
+       console.log("Gallery images uploaded:", uploadedGalleryImages);
           // Update the form data with the Cloudinary URLs
           setFormData((prev) => ({
             ...prev,

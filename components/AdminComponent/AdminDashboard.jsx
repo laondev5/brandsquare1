@@ -52,7 +52,7 @@ const stats = [
   },
   {
     title: "Revenue",
-    value: "$123,456",
+    value: "₦123,456",
     icon: DollarSign,
     color: "bg-purple-500",
     trend: "up",

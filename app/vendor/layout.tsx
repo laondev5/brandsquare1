@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Inter } from "next/font/google";
 import { Sidebar } from "@/components/vendorComponent/Sidebar";
 import TopBar from "@/components/vendorComponent/Topbar";
@@ -13,6 +13,8 @@ import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import AuthProvider from "@/providers/AuthProvider";
+// import useAuthStore from "@/store/authStore";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,11 +31,22 @@ export default function Layout({
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   // const [userData, setUserData] = useState<GetUserDataResponse | null>(null);
   // const [isLoading, setIsLoading] = useState(true);
+  const [hideAlert, setHideAlert] = useState(false);
+
+  const handleClose = () => {
+    setHideAlert(true);
+  };
+  useEffect(() => {
+     const businessName = localStorage.getItem("businessName");
+    if (businessName) {
+      setHideAlert(true);}
+      console.log(businessName, 'businessName')
+  }, []);
+
   const  session = useSession();
  console.log(session)
   const userData = session.data?.user;
 
-  
   // Show loading state
   if ( session.status === "loading") {
     return (
@@ -60,12 +73,13 @@ export default function Layout({
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
   };
+   
 
   return (
     <AuthProvider>
        <div className={`${inter.className} bg-gray-100 text-gray-900`}>
         {/* <Providers> */}
-          <div className="flex h-screen overflow-hidden">
+          <div className="flex h-screen   sticky overflow-hidden">
             <Sidebar />
             <MobileSidebar
               menuOpen={menuOpen}
@@ -76,9 +90,9 @@ export default function Layout({
               <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
                 {/* {userData?.onboarding ? (
                   <div className="hidden"></div>
-                ) : ( */}
+                ) : ( */}  {!hideAlert && (
                   <Alert className="bg-red-100 m-3 p-4">
-                    <X className="h-4 w-4" />
+                    <X  onClick={handleClose} className="h-4 w-4" />
                     <AlertTitle>Complete Your Sign up</AlertTitle>
                     <AlertDescription>
                       <div className="flex items-center justify-between">
@@ -96,7 +110,7 @@ export default function Layout({
                         </Link>
                       </div>
                     </AlertDescription>
-                  </Alert>
+                  </Alert>)}
                 {/* )} */}
                 {children}
               </main>

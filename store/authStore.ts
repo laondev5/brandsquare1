@@ -2,6 +2,27 @@ import { create } from 'zustand';
 import axios from 'axios';
 import { User, AuthCredentials } from '@/types/next-auth';
 const API_URL = 'http://localhost:5000/api/v1';
+
+interface VendorData {
+  businessName: string;
+  businessDescription: string;
+  logo?: string;
+  banner?: string;
+  address: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  phone: string;
+  email: string;
+  instagram: string;
+  facebook: string;
+  twitter: string;
+  linkedin: string;
+  website: string;
+  operatingHours: string;
+  businessCategory: string;
+  taxId: string;
+}
   
 
 const useAuthStore = create((set: any, get: any) => ({
@@ -10,6 +31,7 @@ const useAuthStore = create((set: any, get: any) => ({
   isLoading: false,
   error: null,
   isAuthenticated: false,
+  updatedProfile: false,
   
 
 
@@ -48,11 +70,17 @@ const useAuthStore = create((set: any, get: any) => ({
       throw error;
     }
   },
-  updateUserDetails: async (userData: User) => {
-    set({ isLoading: true, error: null });
+  updateUserDetails: async (userData: VendorData ) => {
+    set({ isLoading: true, error: null, updatedProfile: false });
     try {
       // Send PATCH request to update the user data
-      const response = await axios.patch(`${API_URL}/auth/update`, userData);
+      const response = await axios.patch(`${API_URL}/auth/update-business-profile`, userData, {
+        headers: {
+          Authorization:`Bearer ${localStorage.getItem('token')}`
+        }
+      });
+
+       
       
       // Update the state with the new user data returned from the API
       set({

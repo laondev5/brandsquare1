@@ -16,10 +16,11 @@ import {
 import { Label } from "@/components/ui/label";
 import { Toaster, toast } from "sonner";
 import { UploadToCloudinary } from "@/app/action/UploadImage";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import { Icons } from "../icons";
-import { updateUserProfile } from "@/app/action/updateUserProfile";
+// import { updateUserProfile } from "@/app/action/updateUserProfile";
 import { useRouter } from "next/navigation";
+import useAuthStore from "@/store/authStore";
 
 interface VendorData {
   businessName: string;
@@ -70,8 +71,13 @@ export default function VendorOnboarding() {
     },
   });
 
-  const  session  = useSession();
+  // const  session  = useSession();
   const router = useRouter();
+
+
+  const { updateUserDetails } = useAuthStore();
+
+ 
 
   const onSubmit = async (data: VendorData) => {
     setLoading(true);
@@ -84,52 +90,45 @@ export default function VendorOnboarding() {
         data.logo && data.logo[0]
           ? await UploadToCloudinary(data.logo[0])
           : undefined;
+          console.log('logoUrl', logoUrl);
 
       const bannerUrl =
         data.banner && data.banner[0]
           ? await UploadToCloudinary(data.banner[0])
           : undefined;
-
-      const onboardingData = {
+  console.log('bannerUrl', bannerUrl);
+      const onboardingData =   {
         ...data,
         logo: logoUrl?.secure_url, // Extract just the URL
         banner: bannerUrl?.secure_url, // Extract just the URL
-        userId: session.data?.user.id ?? "", // Provide a default empty string if undefined
-        // Spread the rest of the data
+         // Spread the rest of the data
       };
-      console.log(onboardingData, "onboardingData");
-    } catch (error) {
-      console.error("Submission error:", error);
+
+      console.log('onboardingData', onboardingData);  
+   
+      const resa =  await updateUserDetails(onboardingData);
+      toast.success('Welcome to Brandsquare! Your vendor profile has been created successfully.');
+      localStorage.setItem('businessName', data.businessName);
+      router.push("/vendor");
+   console.log(resa, 'res');
+    } catch (error: any) {
+      console.error("Submission error:", error.message);
+      if (error.message.includes("400")) {
+        toast.error("Provide a valid website link");
+      }    }finally{
+      setLoading(false);
     }
-    //   const res = await updateUserProfile(onboardingData);
-    //   console.log(res);
-    //   if (!res.success) {
-    //     setLoading(false);
-    //     toast.error(
-    //       "There was a problem submitting your information. Please try again."
-    //     );
-    //   }
-    //   setLoading(false);
-    //   toast.success(
-    //     "Welcome to Brandsquare! Your vendor profile has been created successfully."
-    //   );
-    //   router.push("/vendor");
-    // } catch (error) {
-    //   setLoading(false);
-    //   console.error("Submission error:", error);
-    //   toast.error(
-    //     "There was a problem submitting your information. Please try again."
-    //   );
-    // }
+
+    
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto  px-4 py-8">
       <Toaster position="bottom-right" expand={false} richColors />
       <h1 className="text-3xl font-bold text-center mb-8">Vendor Onboarding</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         <div className="space-y-4">
-          <h2 className="text-2xl font-semibold">Basic Business Information</h2>
+          <h2  className="text-2xl font-semibold">Basic Business Information</h2>
           <div>
             <Label htmlFor="businessName">Business Name</Label>
             <Input
