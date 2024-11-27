@@ -16,14 +16,15 @@ import {
 import { Label } from "@/components/ui/label";
 import { Toaster, toast } from "sonner";
 import { UploadToCloudinary } from "@/app/action/UploadImage";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 import { Icons } from "../icons";
-import { updateUserProfile } from "@/app/action/updateUserProfile";
+// import { updateUserProfile } from "@/app/action/updateUserProfile";
 import { useRouter } from "next/navigation";
+import useAuthStore from "@/store/authStore";
 
 interface VendorData {
-  brandName: string;
-  brandDescription: string;
+  businessName: string;
+  businessDescription: string;
   logo?: FileList;
   banner?: FileList;
   address: string;
@@ -51,8 +52,8 @@ export default function VendorOnboarding() {
     formState: { errors },
   } = useForm<VendorData>({
     defaultValues: {
-      brandName: "",
-      brandDescription: "",
+      businessName: "",
+      businessDescription: "",
       address: "",
       city: "",
       state: "",
@@ -70,83 +71,87 @@ export default function VendorOnboarding() {
     },
   });
 
-  const { data: session } = useSession();
+  // const  session  = useSession();
   const router = useRouter();
+
+
+  const { updateUserDetails } = useAuthStore();
+
+ 
 
   const onSubmit = async (data: VendorData) => {
     setLoading(true);
+    console.log('data', data);
     try {
-      if (!session?.user?.id) {
-        throw new Error("User not authenticated");
-      }
+      // if (!session.data?.user.id) {
+      //   throw new Error("User not authenticated");
+      // }
       const logoUrl =
         data.logo && data.logo[0]
           ? await UploadToCloudinary(data.logo[0])
           : undefined;
+          console.log('logoUrl', logoUrl);
 
       const bannerUrl =
         data.banner && data.banner[0]
           ? await UploadToCloudinary(data.banner[0])
           : undefined;
-
-      const onboardingData = {
+  console.log('bannerUrl', bannerUrl);
+      const onboardingData =   {
         ...data,
         logo: logoUrl?.secure_url, // Extract just the URL
         banner: bannerUrl?.secure_url, // Extract just the URL
-        userId: session?.user?.id ?? "", // Provide a default empty string if undefined
-        // Spread the rest of the data
+         // Spread the rest of the data
       };
-      //console.log(onboardingData);
 
-      const res = await updateUserProfile(onboardingData);
-      console.log(res);
-      if (!res.success) {
-        setLoading(false);
-        toast.error(
-          "There was a problem submitting your information. Please try again."
-        );
-      }
+      console.log('onboardingData', onboardingData);  
+   
+      const resa =  await updateUserDetails(onboardingData);
+      toast.success('Welcome to Brandsquare! Your vendor profile has been created successfully.');
+      localStorage.setItem('businessName', data.businessName);
+      setTimeout(() => {
+        router.push("/vendor");
+
+      }, 1000);
+    console.log(resa, 'res');
+    } catch (error: any) {
+      console.error("Submission error:", error.message, error);
+      if (error.message.includes("400")) {
+        toast.error(error.response.data.message);
+      }    }finally{
       setLoading(false);
-      toast.success(
-        "Welcome to Brandsquare! Your vendor profile has been created successfully."
-      );
-      router.push("/vendor");
-    } catch (error) {
-      setLoading(false);
-      console.error("Submission error:", error);
-      toast.error(
-        "There was a problem submitting your information. Please try again."
-      );
     }
+
+    
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto  px-4 py-8">
       <Toaster position="bottom-right" expand={false} richColors />
       <h1 className="text-3xl font-bold text-center mb-8">Vendor Onboarding</h1>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         <div className="space-y-4">
-          <h2 className="text-2xl font-semibold">Basic Business Information</h2>
+          <h2  className="text-2xl font-semibold">Basic Business Information</h2>
           <div>
-            <Label htmlFor="brandName">Business Name</Label>
+            <Label htmlFor="businessName">Business Name</Label>
             <Input
-              id="brandName"
-              {...register("brandName", { required: "Business name is required" })}
+              id="businessName"
+              {...register("businessName", { required: "Business name is required" })}
             />
-            {errors.brandName && (
-              <p className="text-red-500">{errors.brandName.message}</p>
+            {errors.businessName && (
+              <p className="text-red-500">{errors.businessName.message}</p>
             )}
           </div>
           <div>
-            <Label htmlFor="brandDescription">Business Description</Label>
+            <Label htmlFor="businessDescription">Business Description</Label>
             <Textarea
-              id="brandDescription"
-              {...register("brandDescription", {
+              id="businessDescription"
+              {...register("businessDescription", {
                 required: "Business description is required",
               })}
             />
-            {errors.brandDescription && (
-              <p className="text-red-500">{errors.brandDescription.message}</p>
+            {errors.businessDescription && (
+              <p className="text-red-500">{errors.businessDescription.message}</p>
             )}
           </div>
           <div>
@@ -170,7 +175,7 @@ export default function VendorOnboarding() {
         </div>
 
         <div className="space-y-4">
-          <h2 className="text-2xl font-semibold">Contact Information</h2>
+          <h2  className="text-2xl font-semibold">Contact Information</h2>
           <div>
             <Label htmlFor="address">Business Address</Label>
             <Input

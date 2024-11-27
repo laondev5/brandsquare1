@@ -1,8 +1,9 @@
-import LandingPage from "@/components/LandingPage";
-import React from "react";
+ import LandingPage from "@/components/LandingPage";
+
 
 const page = () => {
-  return (
+
+   return (
     <div>
       <LandingPage />
     </div>

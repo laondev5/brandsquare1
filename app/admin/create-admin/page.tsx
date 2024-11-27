@@ -10,12 +10,12 @@ export default function CreateAdminPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { data: session } = useSession();
+  const session  = useSession();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (session?.user.role !== "ADMIN") {
+    if (session?.data?.user.role !== "admin") {
       alert("You do not have permission to create an admin account.");
       return;
     }
@@ -40,7 +40,7 @@ export default function CreateAdminPage() {
     }
   };
 
-  if (!session || session.user.role !== "ADMIN") {
+  if (!session || session?.data?.user.role !== "admin") {
     return <div>Access denied. You must be an admin to view this page.</div>;
   }
 

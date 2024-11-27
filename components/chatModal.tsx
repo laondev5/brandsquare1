@@ -67,7 +67,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement >) => {
 }
   return (
     <div>
-      <div className="fixed top-28 z-50  left-1/2   transform -translate-x-1/2 md:-translate-x-0 md:left-[60%]  min-h-[80vh] md:max-h-[20vh]  md:w-[40vw] w-[90vw] lg:w-[30vw]  rounded-2xl   bg-white shadow-lg">
+      <div className="fixed top-28 z-50  left-1/2   transform -translate-x-1/2 md:-translate-x-0 md:left-[60%]  h-[600px]    md:w-[40vw] w-[90vw] lg:w-[30vw]  rounded-2xl   bg-white shadow-lg">
       {!chatUiModal ? <><div className="bg-[#000035] max-w-[800px] w-full p-6 rounded-lg">
           <div className="header flex justify-between items-center">
             <Image src="/images/logo.png" alt="logo" width={100} height={100} />
@@ -83,7 +83,7 @@ const handleInputChange = (e: React.ChangeEvent<HTMLInputElement >) => {
           </div>
         </div>
         <div className=" flex flex-col items-center justify-center mx-3"> 
-        <div className=" absolute  z-50  left-4 right-4 p-1 top-[140px] mt-1 rounded-md shadow-lg min-h-[50vh] md:h-[58vh] mb-5 bg-white">
+        <div className=" absolute  z-50  left-4 right-4 p-1 top-[140px] mt-1 rounded-md shadow-lg   h-[400px] mb-5 bg-white">
            <div className=" flex flex-col  justify-between  gap-40 items-center">
             <div> 
             <h4 className=" font-medium  text-[17px] md:text-[21px] px-2 leading-7 pt-3 text-center">Start a conversation with our team of experts now!</h4>

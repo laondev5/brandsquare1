@@ -1,25 +1,33 @@
+'use client';
 import Dashboard from "@/components/vendorComponent/Dashboard";
 import React from "react";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/auth";
-import { getUserData } from "../action/getUserData";
-import { redirect } from "next/navigation";
-const page = async () => {
-  const session = await getServerSession(authOptions);
+// import { getServerSession } from "next-auth";
+//  import { getUserData } from "../action/getUserData";
+// import { redirect } from "next/navigation";
+// import { authOptions } from "@/config/authOptions";
+const page =  () => {
+  // const user = session.data?.user;
 
-  if (!session || !session.user?.id) {
-    redirect("/auth/signin");
-  }
-  const userData = await getUserData(session.user.id);
-  if (!userData.user) {
-    redirect("/auth/signin");
-  }
+  // useEffect(() => {
+  //   if (session.status === "unauthenticated") {
+  //     redirect("/auth/signin");
+  //   }
+  // }, []);
+   
+  // const userData =  getUserData(session.data?.user.id);
+  // if (!userData.user) {
+  //   redirect("/auth/signin");
+  // }
   //console.log(userData.user);
   return (
     <div>
-      <Dashboard userData={userData.user} />
+      <Dashboard  />
     </div>
   );
 };
 
 export default page;
+
+  
+ 
+ 

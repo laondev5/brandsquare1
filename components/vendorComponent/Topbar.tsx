@@ -15,17 +15,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Notifications } from "./Notification";
-import { User } from "@prisma/client";
-import { signOut } from "next-auth/react";
+ import { signOut, useSession } from "next-auth/react";
 
 interface TopBarProps {
   onMenuToggle: () => void;
-  user: User;
+   
 }
 
-const TopBar: React.FC<TopBarProps> = ({ onMenuToggle, user }) => {
+const TopBar: React.FC<TopBarProps> = ({ onMenuToggle  }) => {
   const [searchTerm, setSearchTerm] = useState("");
   //console.log(user);
+  const  session  = useSession();
+
+  const user = session.data?.user ;
 
   const handleLogout = async () => {
     try {

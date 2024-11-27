@@ -607,7 +607,7 @@ export default function AdminInventoryPage() {
                     </div>
                     <div>
                       <p className="text-sm font-medium">Price</p>
-                      <p>${item.price.toFixed(2)}</p>
+                      <p>₦{item.price.toFixed(2)}</p>
                     </div>
                     <div>
                       <p className="text-sm font-medium">Category</p>

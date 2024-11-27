@@ -416,7 +416,7 @@ export default function PreOrdersPage() {
                   />
                 </TableCell>
                 <TableCell className="font-medium">{preOrder.name}</TableCell>
-                <TableCell>${preOrder.price.toFixed(2)}</TableCell>
+                <TableCell>₦{preOrder.price.toFixed(2)}</TableCell>
                 <TableCell>
                   <span
                     className={`px-2 py-1 rounded-full text-xs font-semibold ${

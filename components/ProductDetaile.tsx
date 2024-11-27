@@ -105,7 +105,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
               className="w-full rounded-lg shadow-lg"
             />
             <div className="flex mt-4 space-x-2">
-              {product.images.map((image, index) => (
+              {Array.isArray(product.images) && product.images.map((image, index) => (
                 <Image
                   key={index}
                   src={image}

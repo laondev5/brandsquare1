@@ -236,13 +236,13 @@ export default function Marketing() {
                     <TableRow>
                       <TableCell>TechReviewer</TableCell>
                       <TableCell>10%</TableCell>
-                      <TableCell>$5,230</TableCell>
-                      <TableCell>$523</TableCell>
+                      <TableCell>₦5,230</TableCell>
+                      <TableCell>₦523</TableCell>
                     </TableRow>
                     <TableCell>GadgetGuru</TableCell>
                     <TableCell>12%</TableCell>
-                    <TableCell>$3,750</TableCell>
-                    <TableCell>$450</TableCell>
+                    <TableCell>₦3,750</TableCell>
+                    <TableCell>₦450</TableCell>
                     <TableRow></TableRow>
                   </TableBody>
                 </Table>

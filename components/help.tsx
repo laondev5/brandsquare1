@@ -106,12 +106,12 @@ import { MdMailOutline, MdOutlineAddIcCall } from "react-icons/md";
               {
                 question: "What is the Brandsquare Vendors Hub?",
                 answer:
-                  "The Brandsquare Vendors Hub is a platform designed to help small business owners and startups sell their products through trusted partnerships with Chinese vendors. We provide solutions for seamless payments, capital assistance, shipping, and warehousing, making it easier for you to grow your business with less hassle.",
+                  "The Vendors Hub is an all-in-one platform specifically crafted to empower small business owners and aspiring entrepreneurs like you to effortlessly grow your business. We help you source the product, advertise, and handle local deliveries to your customers, with as little as 50% capital. The Vendors Hub is your go-to destination for building a thriving business without any stress.",
               },
               {
                 question: "How do I start selling on Brandsquare?",
                 answer:
-                  "To start selling on Brandsquare, you'll need to sign up as a vendor on our platform. Once registered, we'll guide you through the process of setting up your online store, choosing products from trusted Chinese vendors, and getting access to our flexible payment and warehousing options.",
+                  "To start selling on Brandsquare, you need to sign up as a vendor through the vendors hub. Once registered, we'll guide you through the process of setting up your online store, choosing products from trusted local or international suppliers, and getting access to our flexible payment and warehousing options.",
               },
               {
                 question: "How do I pay for goods from Chinese vendors?",
@@ -134,24 +134,24 @@ import { MdMailOutline, MdOutlineAddIcCall } from "react-icons/md";
                   "Yes! If you don’t have the full capital to pick up your goods, you can sell them directly from our warehouse. Once you’ve generated enough sales, you can complete the payment and retrieve your goods.",
               },
               {
-                question: "How do I know which Chinese vendors I can trust?",
+                question: "How do I know the best supplier I can trust?",
                 answer:
-                  "We have a verified list of trusted Chinese vendors that we partner with. These vendors are carefully selected to ensure quality and reliability, giving you peace of mind when sourcing products for your business.",
+                  "We have a verified list of trusted suppliers we partner with. These suppliers are carefully selected to ensure quality and reliability, giving you peace of mind when sourcing products for your business.",
               },
               {
                 question: "What shipping options are available?",
                 answer:
-                  "Brandsquare offers flexible shipping options based on your needs. We handle the entire shipping process from China to Nigeria, ensuring your goods are safely transported. You can choose to store your goods in our warehouse until you’re ready to collect them or sell them directly from our warehouse.",
+                  "We offers flexible shipping options based on your needs. We handle the entire shipping process from other countries to Nigeria, ensuring your goods are safely transported. We also offer local shipping to your customers. You can choose to store your goods in our warehouse until you’re ready to collect them or sell them directly from our warehouse.",
               },
               {
                 question: "Do I need to pay for warehousing?",
                 answer:
-                  "Brandsquare provides affordable warehousing solutions for all vendors. If you choose to store your goods in our warehouse, we offer flexible terms that allow you to keep your products with us until you have the capital to pick them up or until you’re ready to sell them.",
+                  "No, we are not charging you for wearhousing for the first month of your goods arrival, after one month, you will be required to pay minimum of one thousand naira weekly depending on the quantity of your goods.",
               },
               {
                 question: "How do I register as a vendor?",
                 answer:
-                  "Registering as a vendor is simple. Just visit our Vendors Hub page, click on 'Register Now,' and fill in the necessary details. Once you’re registered, you can start sourcing products, setting up your online store, and taking advantage of Brandsquare’s unique solutions for vendors.",
+                  "To register as a vendor is simple. Just click on the Vendors Hub button on the menu bar and follow the simple steps. Once you’re registered, you can start sourcing products, setting up your online store, and explore the Brandsquare’s unique solutions for vendors.",
               },
               {
                 question: " Can I attend the Brandsquare Vendors Seminar?",
@@ -161,29 +161,36 @@ import { MdMailOutline, MdOutlineAddIcCall } from "react-icons/md";
               {
                 question: "How does Brandsquare ensure product quality?",
                 answer:
-                  "We partner with trusted and verified Chinese vendors who are committed to delivering quality products. In addition, you have the option to inspect your goods when they arrive at our warehouse before completing the rest of your payment.",
+                  "We partner with trusted and verified suppliers who are committed to delivering quality products. In addition, you have the option to inspect your goods when they arrive at our warehouse before completing your payment.",
               },
               {
                 question: "Can I sell products from other countries besides China?",
                 answer:
-                  "Currently, Brandsquare focuses on partnerships with Chinese vendors to provide the best products at competitive prices. However, we are always looking to expand and will inform our vendors if other countries become available.",
+                  "Yes, Brandsquare focuses on partnerships with suppliers from different countries to provide the best products at competitive prices.",
               },
               {
                 question: "How do I handle returns or faulty goods?",
                 answer:
-                  "If you receive faulty goods, Brandsquare will work with the vendor to resolve the issue. We have a streamlined returns process to ensure that any defective products are handled efficiently. Just contact our support team for assistance.",
+                  "For damaged or faulty goods, We have a streamlined returns policy to ensure that any defective products are handled efficiently. Just contact our support team for assistance.",
               },
               {
                 question: "What are the benefits of becoming a Brandsquare vendor?",
                 answer:
-                  `<div><h3 class=' font-semibold'>As a Brandsquare vendor, you benefit from:</h3>
+                  `<div><h3 class=' font-semibold'>As a vendor, you benefit from:</h3>
                    <ul class='list-disc pl-5'>
-                   <li class=' py-1'>Payment in Naira for Chinese products.</li>
-                   <li class=' py-1'>Trusted and verified Chinese vendors.</li>
-                   <li class=' py-1'>50% capital start-up option.</li>
+                   <li class=' py-1'>Seamless product advertising
+</li>
+                   <li class=' py-1'>Your own customised online store
+</li>
+                   <li class=' py-1'>You only get to pay 50% capital to start your business
+</li>
                    <li class=' py-1'>Warehousing and shipping support.</li>
-                   <li class=' py-1'>Access to a large customer base through our e-commerce platform</li>
-                   <li class=' py-1'>Ongoing support and vendor seducation through our seminars and resources.</li>
+                   <li class=' py-1'>Access to a large customer base through our e-commerce platform
+</li>
+                   <li class=' py-1'>24/7 support
+</li>
+                   <li class=' py-1'>Free access to all brandsquare events
+</li>
                    </ul>
                   
                   </div>`,

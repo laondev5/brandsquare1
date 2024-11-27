@@ -1,13 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion  } from "framer-motion";
 import {
    ShoppingCart,
   User,
-  Plus,
-  Minus,
-  X,
+  
   LogOut,
   Settings,
 } from "lucide-react";
@@ -23,12 +21,12 @@ import { Button } from "@/components/ui/button";
 //   NavigationMenuList,
 // } from "@/components/ui/navigation-menu";
 import { Badge } from "@/components/ui/badge";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
+// import {
+//   Sheet,
+//   SheetContent,
+//   SheetHeader,
+//   SheetTitle,
+// } from "@/components/ui/sheet";
 import { CartItem } from "@/app/utility/products";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -70,11 +68,12 @@ const Navbar = () => <NavItem />;
 
 export default function MainNav({
   cart,
-  setCart,
+   
   searchTerm,
   setSearchTerm,
 }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { data: session } = useSession();
   const router = useRouter();
@@ -88,23 +87,23 @@ export default function MainNav({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const updateQuantity = (id: number, change: number) => {
-    setCart((prevCart) => {
-      const newCart = prevCart
-        .map((item) =>
-          item.id === id
-            ? { ...item, quantity: Math.max(0, item.quantity + change) }
-            : item
-        )
-        .filter((item) => item.quantity > 0);
-      localStorage.setItem("cart", JSON.stringify(newCart));
-      return newCart;
-    });
-  };
+  // const updateQuantity = (id: number, change: number) => {
+  //   setCart((prevCart) => {
+  //     const newCart = prevCart
+  //       .map((item) =>
+  //         item.id === id
+  //           ? { ...item, quantity: Math.max(0, item.quantity + change) }
+  //           : item
+  //       )
+  //       .filter((item) => item.quantity > 0);
+  //     localStorage.setItem("cart", JSON.stringify(newCart));
+  //     return newCart;
+  //   });
+  // };
 
-  const getTotalPrice = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
-  };
+  // const getTotalPrice = () => {
+  //   return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  // };
 
   const handleLogout = async () => {
     try {
@@ -155,7 +154,7 @@ export default function MainNav({
                 onClick={() => setIsCartOpen(true)}
                 className="relative text-white"
               >
-                <ShoppingCart className="h-5 w-5" />
+              <Link href='/cart'> <ShoppingCart className="h-5 w-5" /> </Link>
                 {cart && cart.length > 0 && (
                   <Badge
                     variant="destructive"
@@ -211,7 +210,7 @@ export default function MainNav({
         
       </div>
 
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isCartOpen && (
           <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
             <SheetContent>
@@ -284,6 +283,7 @@ export default function MainNav({
                       </p>
                     </div>
                     <div className="mt-6 space-y-2">
+                       
                       <Button className="w-full bg-yellow-400 text-black hover:bg-yellow-500">
                         View Cart
                       </Button>
@@ -297,7 +297,7 @@ export default function MainNav({
             </SheetContent>
           </Sheet>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </header>
   );
 }
