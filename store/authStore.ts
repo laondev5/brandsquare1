@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import axios from 'axios';
 import { User, AuthCredentials } from '@/types/next-auth';
-const API_URL = 'http://localhost:5000/api/v1';
+const API_URL = 'https://brandsquare-backend.onrender.com/api/v1';
 
 interface VendorData {
   businessName: string;

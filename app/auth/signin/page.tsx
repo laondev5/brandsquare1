@@ -18,11 +18,12 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Icons } from "@/components/icons";
 import Link from "next/link";
 import { Suspense } from "react";
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import MainNav from "@/components/MainNav";
 import { CartItem } from "@/app/utility/products";
 import Footer from "@/components/Footer";
 import { Toaster, toast } from "sonner";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 interface FormState {
   email: string;
   password: string;
@@ -50,6 +51,7 @@ function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
     password: "",
   });
   const user = session?.data?.user;
+  const [showPassword, setShowPassword] = useState(false);
   // console.log(session, 'session');
    //const callbackUrl: string = searchParams?.get("callbackUrl") ?? "/";
 
@@ -91,6 +93,9 @@ function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
     }}
   }, [session.status]);
 
+ 
+  
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     setLoading(true);
@@ -111,14 +116,15 @@ function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
         // callbackUrl: decodeURIComponent(callbackUrl),
       });
  
-      if (session.data?.accessToken) {
-        console.log(session.data.accessToken, 'sessiontoken');
-        localStorage.setItem('token', session.data.accessToken);
-
-      }
+      
       if (result?.ok) {
         toast.success("Logged in successfully!");
-        
+  
+        const updatedSession = await getSession();
+    if (updatedSession?.accessToken) {
+      console.log(updatedSession.accessToken, "Updated session token");
+      localStorage.setItem("token", updatedSession.accessToken);
+    }
 
       }
 
@@ -210,12 +216,12 @@ function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
             aria-describedby={error ? "email-error" : undefined}
           />
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2 relative">
           <Label htmlFor="password">Password</Label>
           <Input
             id="password"
             name="password"
-            type="password"
+            type= {showPassword ? "text" : "password"}
             value={formState.password}
             onChange={handleInputChange}
             required
@@ -223,6 +229,14 @@ function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
             aria-describedby={error ? "password-error" : undefined}
             minLength={6}
           />
+          <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute inset-y-0 right-3   top-5 flex items-center text-gray-500"
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}  
+              </button>
         </div>
       </CardContent>
       <CardFooter>

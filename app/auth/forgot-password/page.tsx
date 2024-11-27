@@ -12,6 +12,9 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import useAuthStore from "@/store/authStore";
+import Image from "next/image";
+import logo from "../../../public/images/logo.png";
+
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -45,8 +48,35 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex flex-col">
+
+    <div className="relative flex  items-center justify-center w-full min-h-screen overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-500 via-purple-400 to-pink-300">
+        <div className="absolute inset-0">
+            <svg
+              className="absolute w-full h-full"
+              viewBox="0 0 1000 1000"
+              preserveAspectRatio="none"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0,1000 C300,800 400,600 1000,800 L1000,0 L0,0 Z"
+                fill="rgba(255,255,255,0.1)"
+              />
+              <path
+                d="M0,1000 C300,900 500,600 1000,900 L1000,0 L0,0 Z"
+                fill="rgba(255,255,255,0.05)"
+              />
+            </svg>
+          </div>
+          </div>
+
+          <div className="relative w-full max-w-md px-4">
+            <div className=" flex justify-center items-center mb-5">
+              <Image src={logo} width={100} height={100} alt="" />
+            </div>
+          <Card className="w-full max-w-md">
         <CardHeader>
           <h1 className="text-2xl font-bold text-center">Forgot Password</h1>
         </CardHeader>
@@ -78,7 +108,9 @@ export default function ForgotPassword() {
             Back to Sign In
           </Button>
         </CardFooter>
-      </Card>
+      </Card></div>
+      
     </div>
-  );
+    </div>
+   );
 }

@@ -32,7 +32,7 @@ interface ProductState {
   deleteProduct: (id: string) => Promise<void>;
 }
 
-const API_URL = 'http://localhost:5000/api/v1/products';
+const API_URL = 'https://brandsquare-backend.onrender.com/api/v1/products';
 //removed get
 export const useProductStore = create<ProductState>((set) => ({
   products: [],

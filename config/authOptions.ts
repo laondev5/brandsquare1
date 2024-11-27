@@ -33,7 +33,7 @@ export const authOptions = {
         if (!credentials) return null;
 
         try {
-          const res = await axiosInstance.post<AuthResponse>("http://localhost:5000/api/v1/auth/login", {
+          const res = await axiosInstance.post<AuthResponse>("https://brandsquare-backend.onrender.com/api/v1/auth/login", {
             email: credentials.email,
             password: credentials.password,
           });
@@ -45,8 +45,7 @@ export const authOptions = {
            if (user) {
             console.log(user, 'iddddd');
  
-
-            return {
+             return {
                 name:user.name,
                email: user.email,
               phone: user.phone,

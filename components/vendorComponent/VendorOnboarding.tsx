@@ -109,12 +109,15 @@ export default function VendorOnboarding() {
       const resa =  await updateUserDetails(onboardingData);
       toast.success('Welcome to Brandsquare! Your vendor profile has been created successfully.');
       localStorage.setItem('businessName', data.businessName);
-      router.push("/vendor");
-   console.log(resa, 'res');
+      setTimeout(() => {
+        router.push("/vendor");
+
+      }, 1000);
+    console.log(resa, 'res');
     } catch (error: any) {
-      console.error("Submission error:", error.message);
+      console.error("Submission error:", error.message, error);
       if (error.message.includes("400")) {
-        toast.error("Provide a valid website link");
+        toast.error(error.response.data.message);
       }    }finally{
       setLoading(false);
     }

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Define the base URL for the API
-const BASE_URL = "http://localhost:5000/api/v1";
+const BASE_URL = "https://brandsquare-backend.onrender.com/api/v1";
   
 // Default axios instance
 const axiosInstance = axios.create({
