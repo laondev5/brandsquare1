@@ -2,14 +2,14 @@ import { NextResponse } from 'next/server';
 //import { PrismaClient } from '@prisma/client';
 import { hash } from 'bcryptjs';
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../../auth/[...nextauth]/auth';
+// import { authOptions } from "@/config/authOptions";
 import { prisma } from '@/lib/prisma'
 //const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession();
 
-  if (!session || session.user.role !== 'ADMIN') {
+  if (!session || session.user.role !== 'admin') {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
         name,
         email,
         password: hashedPassword,
-        role: 'ADMIN',
+        role: 'admin',
       },
     });
 
