@@ -29,7 +29,7 @@ export default function AboutUs() {
     }
   }, []);
 
-  const { data: session } = useSession();
+  const   session  = useSession();
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -80,7 +80,7 @@ export default function AboutUs() {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
-            {session?.user?.role === "VENDOR" ? (
+            {session?.data?.user.role === "vendor" ? (
               <Link href="/vendor">
                 <Button className="bg-yellow-400 text-black hover:bg-yellow-500 text-lg px-8 py-6">
                   Continue to dashboard

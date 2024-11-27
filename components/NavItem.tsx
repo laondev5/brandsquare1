@@ -15,7 +15,7 @@ import {
 import { useSession } from "next-auth/react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 const NavItem = () => {
-  const { data: session } = useSession();
+  const  session  = useSession();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
 
@@ -86,7 +86,7 @@ const NavItem = () => {
           </Link>
         ))}
       </div> */}
-      {session?.user?.role === "VENDOR" ? (
+      {session?.data?.user.role === "vendor" ? (
         <Link href="/vendor">
           <Button className="bg-yellow-400 text-black hover:bg-yellow-500 text-lg px-8 py-6 sm:mr-0 mr-3 text-[12px] p-1 sm:text-[14px] font-semibold sm:p-2">
          dashboard
