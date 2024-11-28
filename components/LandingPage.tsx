@@ -13,13 +13,16 @@ import {
   products,
   categories,
   popularBrands,
-  //Product,
+  Product,
   CartItem,
 } from "@/app/utility/products";
 import MainNav from "./MainNav";
 import Footer from "./Footer";
 import BackgroundSlider from "./BackgroundSlider";
 import ServiceOfferings from "./ServiceOfferings";
+import ProductCard from "./productCard";
+import { addProductToCart } from '@/app/utility/productfn';
+ 
 
 //type CartItem = Product & { quantity: number };
 
@@ -28,6 +31,12 @@ export default function Zeomart() {
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [showCategories, setShowCategories] = useState(false);
   const [cart, setCart] = useState<CartItem[]>([]);
+
+
+  const handleAddToCart = (product: Product) => {
+    const updatedCart = addProductToCart(product, 1, setCart);
+    console.log(updatedCart);
+  };
 
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
@@ -77,7 +86,7 @@ export default function Zeomart() {
   // };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100">
+    <div className="min-h-screen flex flex-col  ">
       <MainNav
         cart={cart}
         setCart={setCart}
@@ -123,6 +132,8 @@ export default function Zeomart() {
                   <p className="text-sm">{brand.name}</p>
                 </CardContent>
               </Card>
+
+               
             ))}
           </div>
         </motion.section>
@@ -158,28 +169,35 @@ export default function Zeomart() {
           )}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {filteredProducts.slice(0, 5).map((product) => (
-              <Card className="bg-white" key={product.id}>
-                <CardContent className="p-4">
-                  <Link href={`/product/${product.id}`}>
-                    <Image
-                      src={product.images[0]}
-                      alt={product.name}
-                      width={300}
-                      height={300}
-                      className="w-full h-64 object-cover mb-4 rounded-lg"
-                    />
-                  </Link>
-                  <h3 className="font-semibold text-sm">{product.name}</h3>
-                  <p className="text-muted-foreground text-sm">₦
-                    {product.price}
-                  </p>
-                  <Link href={`/product/${product.id}`} passHref>
-                    <Button className="w-full bg-yellow-400 text-black hover:bg-yellow-500">
-                      View Product
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
+              // <Card className="bg-white" key={product.id}>
+              //   <CardContent className="p-4">
+              //     <Link href={`/product/${product.id}`}>
+              //       <Image
+              //         src={product.images[0]}
+              //         alt={product.name}
+              //         width={300}
+              //         height={300}
+              //         className="w-full h-64 object-cover mb-4 rounded-lg"
+              //       />
+              //     </Link>
+              //     <h3 className="font-semibold text-sm">{product.name}</h3>
+              //     <p className="text-muted-foreground text-sm">₦
+              //       {product.price}
+              //     </p>
+              //     <Link href={`/product/${product.id}`} passHref>
+              //       <Button className="w-full bg-yellow-400 text-black hover:bg-yellow-500">
+              //         View Product
+              //       </Button>
+              //     </Link>
+              //   </CardContent>
+              // </Card>
+              <Link href={`/product/${product.id}`}>
+
+<ProductCard 
+key={product.id} 
+product={product} 
+onAddToCart={() => handleAddToCart(product)} 
+/> </Link>
             ))}
           </div>
         </motion.section>
@@ -207,30 +225,37 @@ export default function Zeomart() {
                   .filter((product) => product.category === category)
                   .slice(0, 5)
                   .map((product) => (
-                    <Card className="bg-white" key={product.id}>
-                      <CardContent className="p-4">
-                        <Link href={`/product/${product.id}`}>
-                          <Image
-                            src={product.images[0]}
-                            alt={product.name}
-                            width={200}
-                            height={200}
-                            className="w-full h-32 object-cover mb-2 rounded"
-                          />
-                        </Link>
-                        <h3 className="font-semibold text-sm">
-                          {product.name}
-                        </h3>
-                        <p className="text-muted-foreground text-sm">
-                        ₦{product.price}
-                        </p>
-                        <Link href={`/product/${product.id}`} passHref>
-                          <Button className="w-full bg-yellow-400 text-black hover:bg-yellow-500">
-                            View Product
-                          </Button>
-                        </Link>
-                      </CardContent>
-                    </Card>
+                    // <Card className="bg-white" key={product.id}>
+                    //   <CardContent className="p-4">
+                    //     <Link href={`/product/${product.id}`}>
+                    //       <Image
+                    //         src={product.images[0]}
+                    //         alt={product.name}
+                    //         width={200}
+                    //         height={200}
+                    //         className="w-full h-32 object-cover mb-2 rounded"
+                    //       />
+                    //     </Link>
+                    //     <h3 className="font-semibold text-sm">
+                    //       {product.name}
+                    //     </h3>
+                    //     <p className="text-muted-foreground text-sm">
+                    //     ₦{product.price}
+                    //     </p>
+                    //     <Link href={`/product/${product.id}`} passHref>
+                    //       <Button className="w-full bg-yellow-400 text-black hover:bg-yellow-500">
+                    //         View Product
+                    //       </Button>
+                    //     </Link>
+                    //   </CardContent>
+                    // </Card>
+                    <Link href={`/product/${product.id}`}>
+                    <ProductCard 
+                    key={product.id} 
+                    product={product} 
+                    onAddToCart={() => handleAddToCart(product)} 
+                    />
+                    </Link>
                   ))}
               </div>
             </motion.section>

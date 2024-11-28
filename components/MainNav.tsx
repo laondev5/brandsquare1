@@ -123,8 +123,100 @@ export default function MainNav({
       } transition-all duration-300`}
     >
       <div className="container mx-auto px-4">
+
+      <div className="flex justify-between items-center w-full px-4 py-2">
+  {/* Logo - Left side */}
+  <motion.h1
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    className="flex-shrink-0"
+  >
+    <Link href="/">
+      <Image
+        src="/images/logocopy.png"
+        alt="logo"
+        width={300}
+        height={300}
+        className="max-w-[7rem]"
+      />
+    </Link>
+  </motion.h1>
+
+  {/* Search Bar - Center */}
+  <div className="flex-grow mx-4 max-w-md">
+    <SearchBar 
+      searchTerm={searchTerm} 
+      setSearchTerm={setSearchTerm} 
+     />
+  </div>
+
+  {/* Right side - Cart and User Actions */}
+  <div className="flex items-center space-x-2">
+  <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="flex  sm:space-x-2"
+            >
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsCartOpen(true)}
+                className="relative text-white"
+              >
+              <Link href='/cart'> <ShoppingCart className="h-5 w-5" /> </Link>
+                {cart && cart.length > 0 && (
+                  <Badge
+                    variant="destructive"
+                    className="absolute -top-2 -right-2 px-1 min-w-[1.25rem] h-5"
+                  >
+                    {cart
+                      ? cart.reduce((total, item) => total + item.quantity, 0)
+                      : 0}
+                  </Badge>
+                )}
+              </Button>
+              {session ? (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" className="text-white ">
+                      <User className="h-4 w-4 " />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={() => router.push("/profile")}>
+                      <User className="mr-2 h-4 w-4" />
+                      Profile
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => router.push("/settings")}>
+                      <Settings className="mr-2 h-4 w-4" />
+                      Settings
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleLogout}>
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              ) : (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-white"
+                  onClick={() => router.push("/auth/signin")}
+                >
+                  <User className="h-4 w-4" />
+                </Button>
+              )}
+            </motion.div>
+
+    {/* Optional: Navbar component */}
+    <div>
+      <Navbar />
+    </div>
+  </div>
+</div>
      
-        <div className=" flex justify-between items-center w-full">
+        {/* <div className=" flex  items-center w-full">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -140,10 +232,10 @@ export default function MainNav({
               />
             </Link>
           </motion.h1>
-           
-          <div className="flex items-center  w-[70%]    ">
-            <SearchBar  searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-            <motion.div
+           <div className=" w-[50%] ">            <SearchBar  searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+           </div>
+          <div className="flex items-center     ">
+             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               className="flex  sm:space-x-2"
@@ -205,7 +297,7 @@ export default function MainNav({
         </div>
           </div>
             
-        </div>
+        </div> */}
          
         
       </div>
