@@ -12,15 +12,11 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 //import { Input } from "@/components/ui/input";
-// import {
-//   Dialog,
-//   DialogContent,
-//   DialogDescription,
-//   DialogFooter,
-//   DialogHeader,
-//   DialogTitle,
-//   DialogTrigger,
-// } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 //import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
@@ -36,6 +32,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ProductForm } from "./ProductForm";
+import { Plus } from "lucide-react";
 // import {
 //   Select,
 //   SelectContent,
@@ -54,6 +52,13 @@ interface Product {
   status: "Active" | "Inactive" | "Pending Review";
   stock: number;
   createdAt: string;
+}
+interface ProductAdd {
+  id: number;
+  name: string;
+  price: number;
+  category: string;
+  inventory: number;
 }
 
 const initialProducts: Product[] = [
@@ -92,74 +97,28 @@ const initialProducts: Product[] = [
   },
 ];
 
+const initialProductsAdd: ProductAdd[] = [
+  {
+    id: 1,
+    name: "Wireless Earbuds",
+    price: 99.99,
+    category: "Electronics",
+    inventory: 50,
+  },
+  {
+    id: 2,
+    name: "Leather Jacket",
+    price: 199.99,
+    category: "Clothing",
+    inventory: 30,
+  }]
+
 export default function AdminProductsPage() {
   const [products, setProducts] = useState<Product[]>(initialProducts);
-  //   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  //   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-  //   const [newProduct, setNewProduct] = useState<
-  //     Omit<Product, "id" | "createdAt">
-  //   >({
-  //     name: "",
-  //     description: "",
-  //     price: 0,
-  //     category: "",
-  //     vendor: "",
-  //     status: "Pending Review",
-  //     stock: 0,
-  //   });
+  const [productAdd, setProductAdd] = useState<ProductAdd[]>(initialProductsAdd);
+  const [isAddProductOpen, setIsAddProductOpen] = useState(false);
 
-  //   const handleAddProduct = () => {
-  //     const product: Product = {
-  //       ...newProduct,
-  //       id: products.length + 1,
-  //       createdAt: new Date().toISOString().split("T")[0],
-  //     };
-  //     setProducts([...products, product]);
-  //     setIsDialogOpen(false);
-  //     setNewProduct({
-  //       name: "",
-  //       description: "",
-  //       price: 0,
-  //       category: "",
-  //       vendor: "",
-  //       status: "Pending Review",
-  //       stock: 0,
-  //     });
-  //     toast({
-  //       title: "Product Added",
-  //       description: `${product.name} has been successfully added.`,
-  //     });
-  //   };
-
-  //   const handleEditProduct = (product: Product) => {
-  //     setEditingProduct(product);
-  //     setIsDialogOpen(true);
-  //   };
-
-  //   const handleUpdateProduct = () => {
-  //     if (editingProduct) {
-  //       setProducts(
-  //         products.map((p) => (p.id === editingProduct.id ? editingProduct : p))
-  //       );
-  //       setIsDialogOpen(false);
-  //       setEditingProduct(null);
-  //       toast({
-  //         title: "Product Updated",
-  //         description: `${editingProduct.name} has been successfully updated.`,
-  //       });
-  //     }
-  //   };
-
-  //   const handleDeleteProduct = (id: number) => {
-  //     setProducts(products.filter((p) => p.id !== id));
-  //     toast({
-  //       title: "Product Deleted",
-  //       description: "The product has been successfully deleted.",
-  //       variant: "destructive",
-  //     });
-  //   };
-
-  const handleToggleProductStatus = (id: number) => {
+       const handleToggleProductStatus = (id: number) => {
     setProducts(
       products.map((p) => {
         if (p.id === id) {
@@ -190,202 +149,40 @@ export default function AdminProductsPage() {
     );
   };
 
+
+  const handleAddProduct = async (formData: any) => {
+    const newProduct = {
+      id: products.length + 1,
+      name: formData.name,
+      price: parseFloat(formData.price),
+      category: formData.category,
+      inventory: Object.values(
+        formData.inventory as Record<string, number>
+      ).reduce((a, b) => a + b, 0),
+    };
+    setProductAdd([...productAdd, newProduct]);
+    console.log("new product", newProduct);
+   
+    //  setIsAddProductOpen(false);
+
+  };
+
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Product Management</h1>
-        {/* <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger asChild>
-            <Button onClick={() => setEditingProduct(null)}>
-              Add New Product
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-3xl">
-            <DialogHeader>
-              <DialogTitle>
-                {editingProduct ? "Edit Product" : "Add New Product"}
-              </DialogTitle>
-              <DialogDescription>
-                {editingProduct
-                  ? "Update the product details below."
-                  : "Enter the details of the new product below."}
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="name">Name</Label>
-                  <Input
-                    id="name"
-                    value={
-                      editingProduct ? editingProduct.name : newProduct.name
-                    }
-                    onChange={(e) =>
-                      editingProduct
-                        ? setEditingProduct({
-                            ...editingProduct,
-                            name: e.target.value,
-                          })
-                        : setNewProduct({ ...newProduct, name: e.target.value })
-                    }
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="price">Price</Label>
-                  <Input
-                    id="price"
-                    type="number"
-                    value={
-                      editingProduct ? editingProduct.price : newProduct.price
-                    }
-                    onChange={(e) => {
-                      const value = parseFloat(e.target.value);
-                      if (!isNaN(value)) {
-                        editingProduct
-                          ? setEditingProduct({
-                              ...editingProduct,
-                              price: value,
-                            })
-                          : setNewProduct({ ...newProduct, price: value });
-                      }
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="description">Description</Label>
-                <Textarea
-                  id="description"
-                  value={
-                    editingProduct
-                      ? editingProduct.description
-                      : newProduct.description
-                  }
-                  onChange={(e) =>
-                    editingProduct
-                      ? setEditingProduct({
-                          ...editingProduct,
-                          description: e.target.value,
-                        })
-                      : setNewProduct({
-                          ...newProduct,
-                          description: e.target.value,
-                        })
-                  }
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="category">Category</Label>
-                  <Input
-                    id="category"
-                    value={
-                      editingProduct
-                        ? editingProduct.category
-                        : newProduct.category
-                    }
-                    onChange={(e) =>
-                      editingProduct
-                        ? setEditingProduct({
-                            ...editingProduct,
-                            category: e.target.value,
-                          })
-                        : setNewProduct({
-                            ...newProduct,
-                            category: e.target.value,
-                          })
-                    }
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="vendor">Vendor</Label>
-                  <Input
-                    id="vendor"
-                    value={
-                      editingProduct ? editingProduct.vendor : newProduct.vendor
-                    }
-                    onChange={(e) =>
-                      editingProduct
-                        ? setEditingProduct({
-                            ...editingProduct,
-                            vendor: e.target.value,
-                          })
-                        : setNewProduct({
-                            ...newProduct,
-                            vendor: e.target.value,
-                          })
-                    }
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="grid gap-2">
-                  <Label htmlFor="stock">Stock</Label>
-                  <Input
-                    id="stock"
-                    type="number"
-                    value={
-                      editingProduct ? editingProduct.stock : newProduct.stock
-                    }
-                    onChange={(e) => {
-                      const value = parseInt(e.target.value, 10);
-                      if (!isNaN(value)) {
-                        editingProduct
-                          ? setEditingProduct({
-                              ...editingProduct,
-                              stock: value,
-                            })
-                          : setNewProduct({ ...newProduct, stock: value });
-                      }
-                    }}
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="status">Status</Label>
-                  <Select
-                    value={
-                      editingProduct ? editingProduct.status : newProduct.status
-                    }
-                    onValueChange={(value: string) => {
-                      const newStatus = value as
-                        | "Active"
-                        | "Inactive"
-                        | "Pending Review";
-                      editingProduct
-                        ? setEditingProduct({
-                            ...editingProduct,
-                            status: newStatus,
-                          })
-                        : setNewProduct({ ...newProduct, status: newStatus });
-                    }}
-                  >
-                    <SelectTrigger id="status">
-                      <SelectValue placeholder="Select status" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Active">Active</SelectItem>
-                      <SelectItem value="Inactive">Inactive</SelectItem>
-                      <SelectItem value="Pending Review">
-                        Pending Review
-                      </SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-            </div>
-            <DialogFooter>
-              <Button
-                type="submit"
-                onClick={
-                  editingProduct ? handleUpdateProduct : handleAddProduct
-                }
-              >
-                {editingProduct ? "Update Product" : "Add Product"}
-              </Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog> */}
-      </div>
+
+<Dialog open={isAddProductOpen} onOpenChange={setIsAddProductOpen}>
+<DialogTrigger asChild>
+  <Button>
+    <Plus className="w-4 h-4 mr-2" />
+    Add Product
+  </Button>
+</DialogTrigger>
+<DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+  <ProductForm onSubmit={handleAddProduct} />
+</DialogContent>
+</Dialog>       </div>
       <Tabs defaultValue="list" className="space-y-4">
         <TabsList>
           <TabsTrigger value="list">List View</TabsTrigger>

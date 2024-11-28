@@ -122,7 +122,7 @@ export default function MainNav({
         isScrolled ? "bg-[#000035] shadow-md" : "bg-[#000035]"
       } transition-all duration-300`}
     >
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto px-4">
      
         <div className=" flex justify-between items-center w-full">
           <motion.h1
@@ -132,10 +132,10 @@ export default function MainNav({
           >
             <Link href="/">
               <Image
-                src="/images/logo.png"
+                src="/images/logocopy.png"
                 alt="logo"
-                width={100}
-                height={100}
+                width={300}
+                height={300}
                 className="max-w-[7rem]"
               />
             </Link>

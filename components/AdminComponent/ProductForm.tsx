@@ -42,6 +42,7 @@ interface ProductFormData {
   category: string;
   sizes: string[];
   colors: string[];
+  description: string;
   inventory: { [key: string]: number };
   // displayImage: File | null;
   displayImage:  string;
@@ -58,6 +59,7 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
     fullDescription: "",
     category: "",
     sizes: [],
+    description: "this is an error",
     colors: [],
     inventory: {},
     displayImage: '',
