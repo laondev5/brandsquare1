@@ -59,7 +59,7 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
     fullDescription: "",
     category: "",
     sizes: [],
-    description: "this is an error",
+    description:"thisnnnnnn is an error",
     colors: [],
     inventory: {},
     displayImage: '',
@@ -76,6 +76,7 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
   ]);
   const [newCategory, setNewCategory] = useState("");
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
+ 
 
   const editorRef = useRef<HTMLDivElement>(null);
 
@@ -84,13 +85,12 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
       editorRef.current.innerHTML = formData.fullDescription;
     }
   }, [formData.fullDescription]);
-
-  const handleChange = (
+   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    console.log(`${name} changed:`, value);
+    console.log(`${name} changooooooooooooooed:`, value);
   };
 
   const handleSizeChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
