@@ -7,6 +7,7 @@ import { UserRole } from "@/types/next-auth";
 // import { UserRole } from "./types/next-auth"; // Import from your type declaration file
 
 interface AuthResponse {
+  token: string;
   data: {
     user: {
       _id: string;
@@ -16,8 +17,7 @@ interface AuthResponse {
       isVerified: boolean;
       role: UserRole;
     };
-    token: string;
-    status: string;
+     status: string;
   };
 }
 
@@ -43,7 +43,9 @@ export const authOptions: NextAuthOptions = {
           );
 
           const user = res?.data.data.user;
-          const token =  res?.data.data.token;
+          const token = res?.data?.token;
+          console.log(token, 'token')
+          console.log(user, 'user')
 
           if (user) {
             return {

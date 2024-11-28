@@ -93,7 +93,7 @@ function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
     }}
   }, [session.status]);
 
- 
+  console.log(session.data?.accessToken, 'session');
   
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -115,13 +115,13 @@ function SignInForm({ className = "" }: SignInFormProps): JSX.Element {
         password: formState.password,
         // callbackUrl: decodeURIComponent(callbackUrl),
       });
- 
       
       if (result?.ok) {
         toast.success("Logged in successfully!");
   
         const updatedSession = await getSession();
-    if (updatedSession?.accessToken) {
+
+     if (updatedSession?.accessToken) {
       console.log(updatedSession.accessToken, "Updated session token");
       localStorage.setItem("token", updatedSession.accessToken);
     }
