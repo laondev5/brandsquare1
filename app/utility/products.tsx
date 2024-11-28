@@ -4,7 +4,7 @@ export type Product = {
   price: number;
   category: string;
   description: string;
-  images: string[] | string; // This property is required
+  images: string[] ; // This property is required
   colors: string[];
   rating: number;
   discount?: number;
