@@ -98,7 +98,9 @@ export default function VendorSignupForm() {
    } catch (error: any) {
      console.log(error );
      if(error.response.data.message.includes('duplicate key error')){
-    toast.error("Email aldready exists. Please another email.");}
+    toast.error("Email aldready exists. Please another email.");}else{
+      toast.error("Registration failed. Please try again.");
+     }
   
      setIsLoading(false);
    } finally {

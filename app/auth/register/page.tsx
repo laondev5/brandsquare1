@@ -82,6 +82,9 @@ export default function Register() {
   console.log(error );
   if(error.response.data.message.includes('duplicate key error')){
  toast.error("Email aldready exists. Please another email.");}
+ else{
+  toast.error("Registration failed. Please try again.");
+ }
 
    setLoading(false);
  } finally {
