@@ -78,9 +78,10 @@ export default function Register() {
      router.push("/auth/signin");
 
    
- } catch (error) {
-   console.log(error);
-  toast.error("Registration failed. Please try again.");
+ }  catch (error: any) {
+  console.log(error );
+  if(error.response.data.message.includes('duplicate key error')){
+ toast.error("Email aldready exists. Please another email.");}
 
    setLoading(false);
  } finally {
