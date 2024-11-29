@@ -25,15 +25,17 @@ import Link from "next/link";
 import { CartItem } from "@/app/utility/products";
 import MainNav from "../MainNav";
 import Footer from "../Footer";
+import useAuthStore from "@/store/authStore";
 
 const signupSchema = z
   .object({
     name: z
       .string()
       .min(3, "Username must be at least 3 characters")
-      .max(20, "Username must be at most 20 characters"),
+      .max(20, "   name must be at most 20 characters"),
     email: z.string().email("Invalid email address"),
-    role: z.string(),
+    role: z.enum(["admin", "vendor", "customer"]),
+    phoneNumber: z.string(),
     password: z.string().min(8, "Password must be at least 8 characters"),
     confirmPassword: z.string(),
   })
@@ -66,37 +68,42 @@ export default function VendorSignupForm() {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
+     
   } = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
   });
+
+  const { register: authRegister} = useAuthStore();
 
   const onSubmit = async (data: SignupFormValues) => {
     setIsLoading(true);
 
     //console.log("Form data:", data);
-    const { name, email, password, role } = data;
-    const response = await fetch("/api/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password, role }),
-    });
-
-    if (response.ok) {
-      router.push("/auth/signin");
-    } else {
-      const errorText = await response.text(); // Get the raw response text
-      console.error("Registration failed:", errorText); // Log the raw error text
-      try {
-        const errorData = JSON.parse(errorText); // Attempt to parse as JSON
-        toast.error(errorData.message || "Registration failed");
-        reset(); // Show error toast
-      } catch {
-        // If parsing fails, show a generic error message
-        toast.error("Registration failed. Please try again.");
-      }
-    }
-    setIsLoading(false);
+    const { name, email, phoneNumber, password, role } = data;
+    try {
+      const response =  await authRegister({
+          email,
+          password,
+          name,
+          phoneNumber,
+          role,
+        });
+     console.log(response,'response');
+   
+     
+       toast.success("Registration successful! Please login."); 
+       router.push("/auth/signin");
+  
+     
+   } catch (error: any) {
+     console.log(error );
+     if(error.response.data.message.includes('duplicate key error')){
+    toast.error("Email aldready exists. Please another email.");}
+  
+     setIsLoading(false);
+   } finally {
+     setIsLoading(false);
+   }
   };
 
   return (
@@ -173,13 +180,27 @@ export default function VendorSignupForm() {
                     </p>
                   )}
                 </div>
+                <div className="space-y-2">
+                  <Label htmlFor="phoneNumber">Phone Number</Label>
+                  <Input
+                    id="phoneNumber"
+                    type="phoneNumber"
+                    {...register("phoneNumber")}
+                    // aria-invalid={errors.email ? "true" : "false"}
+                  />
+                  {errors.email && (
+                    <p className="text-sm text-red-500" role="alert">
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
                 <div className="space-y-2 hidden">
                   <Label htmlFor="email">role</Label>
                   <Input
                     id="role"
                     type="text"
                     {...register("role")}
-                    value="VENDOR"
+                    defaultValue="vendor"
                   />
                 </div>
                 <div className="space-y-2">
