@@ -12,8 +12,7 @@ const ProductCard: React.FC<{
     onAddToCart: (product: Product) => void 
   }> = ({ product, onAddToCart }) => {
     const [isHovered, setIsHovered] = useState(false);
-  
-    return (
+     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -35,7 +34,7 @@ const ProductCard: React.FC<{
                 bg-[#000035] text-gray-800  rounded-full transition
                 ${isHovered ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}
               `}>
-                                    <Link href={`/product/${product.id}`}>
+                                    <Link href={`/product/${product._id}`}>
 
           <span className=' flex items-center gap-1 font-extrabold text-[11px]'><FaEye /> View item</span></Link>
           {/* <Heart size={20} className="text-gray-600" /> */}
@@ -57,7 +56,8 @@ const ProductCard: React.FC<{
         <div className="relative w-full h-52 overflow-hidden">
           <Image 
             // src={Array.isArray(product.images) ? product.images[0] : product.images} 
-            src={shirtImage} 
+            // src={product.displayImage} 
+            src={product.displayImage?.includes("cloudinary") ? product.displayImage :  shirtImage}
             alt={product.name}
             layout="fill"
             objectFit="cover"
@@ -72,15 +72,15 @@ const ProductCard: React.FC<{
           <div>
               {product.discount ? (
                 <>
-                   <span className="text-[25px] font-bold text-gray-800"><span className=' text-[12px]'>₦</span>{product.price}.00{(product.price * (1 - product.discount / 100)).toFixed(2)}
+                   <span className="text-[25px] font-bold text-gray-800"><span className=' text-[12px]'>₦</span>{product.price}.00{( Number(product.price) * (1 - product.discount / 100)).toFixed(2)}
                   </span>
                   <span className="ml-2 text-sm text-gray-400 line-through">
-                    ₦{product.price.toFixed(2)}
+                    ₦{Number(product.price).toFixed(2)}
                   </span>
                 </>
               ) : (
                 <span className="text-xl font-bold text-gray-800">
-                  <span className=' text-[12px]'>₦</span>{product.price.toFixed(2)}
+                  <span className=' text-[12px]'>₦</span>{Number(product.price).toFixed(2)}
                 </span>
               )}
             </div>

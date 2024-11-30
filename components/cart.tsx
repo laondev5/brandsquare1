@@ -20,122 +20,104 @@ import  {CartItem, Product
 } from "@/app/utility/products";
 
 const topSellingItems: Product[] = [
-    {
-      id: 66,
-      name: 'Classic Leather Jacket',
-      price: 129.99,
-      images: ['/images/happyman.png', '/images/happyman.png'],
-      rating: 4.5,
-      discount: 20,
-      category: 'Jackets',
-        colors: ['black', 'brown', 'blue'],
-      description: 'This is a detailed description for Product 1. It\'s a high-quality item in the Clothing category.'
-    },
-    {
-        id: 67,
-        name: 'Elegant Evening Dress',
-        price: 149.99,
-        images: ['/images/evening-dress.png', '/images/evening-dress2.png'],
-        rating: 4.8,
-        discount: 25,
-        category: 'Dresses',
-        colors: ['red', 'green', 'gold'],
-        description: 'A stunning evening dress designed for formal occasions, made from premium materials.',
-      },
-      {
-        id: 68,
-        name: 'Stylish Running Shoes',
-        price: 89.99,
-        images: ['/images/running-shoes.png', '/images/running-shoes2.png'],
-        rating: 4.7,
-        discount: 15,
-        category: 'Footwear',
-        colors: ['white', 'black', 'gray'],
-        description: 'High-performance running shoes built for comfort and durability.',
-      },
-
-      {
-        id: 69,
-        name: 'Classic Denim Jacket',
-        price: 99.99,
-        images: ['/images/denim-jacket.png', '/images/denim-jacket2.png'],
-        rating: 4.6,
-        discount: 10,
-        category: 'Jackets',
-        colors: ['blue', 'light blue'],
-        description: 'A classic denim jacket that pairs well with any casual outfit.',
-      },
-      {
-        id: 70,
-        name: 'Casual Polo Shirt',
-        price: 39.99,
-        images: ['/images/polo-shirt.png', '/images/polo-shirt2.png'],
-        rating: 4.4,
-        discount: 5,
-        category: 'Shirts',
-        colors: ['white', 'navy', 'black'],
-        description: 'A breathable and comfortable polo shirt perfect for everyday wear.',
-      },
-      {
-        id: 71,
-        name: 'Modern Leather Handbag',
-        price: 199.99,
-        images: ['/images/leather-handbag.png', '/images/leather-handbag2.png'],
-        rating: 4.9,
-        discount: 30,
-        category: 'Accessories',
-        colors: ['brown', 'tan', 'black'],
-        description: 'A sleek leather handbag for modern, stylish'
-      }
-     
+  {
+    _id: '62',
+    name: 'Classic Denim Jacket',
+    price: '99.99',
+    galleryImages: ['/images/denim-jacket.png', '/images/denim-jacket2.png'],
+    rating: 4.6,
+    displayImage:'',
+    discount: 10,
+    category: 'Jackets',
+    colors: ['blue', 'light blue'],
+    description: 'A classic denim jacket that pairs well with any casual outfit.',
+  },{
+    _id: '63',
+    name: 'Classic Denim Jacket',
+    price: '99.99',
+    galleryImages: ['/images/denim-jacket.png', '/images/denim-jacket2.png'],
+    rating: 4.6,
+    displayImage:'',
+    discount: 10,
+    category: 'Jackets',
+    colors: ['blue', 'light blue'],
+    description: 'A classic denim jacket that pairs well with any casual outfit.',
+  },{
+    _id: '64',
+    name: 'Classic Denim Jacket',
+    price: '99.99',
+    galleryImages: ['/images/denim-jacket.png', '/images/denim-jacket2.png'],
+    rating: 4.6,
+    displayImage:'',
+    discount: 10,
+    category: 'Jackets',
+    colors: ['blue', 'light blue'],
+    description: 'A classic denim jacket that pairs well with any casual outfit.',
+  },{
+    _id: '65',
+    name: 'Classic Denim Jacket',
+    price: '99.99',
+    galleryImages: ['/images/denim-jacket.png', '/images/denim-jacket2.png'],
+    rating: 4.6,
+    displayImage:'',
+    discount: 10,
+    category: 'Jackets',
+    colors: ['blue', 'light blue'],
+    description: 'A classic denim jacket that pairs well with any casual outfit.',
+  },
   ];
   
   const youMayAlsoLike: Product[] = [
      
       {
-        id: 69,
+        _id: '69',
         name: 'Classic Denim Jacket',
-        price: 99.99,
-        images: ['/images/denim-jacket.png', '/images/denim-jacket2.png'],
+        price: '99.99',
+        galleryImages: ['/images/denim-jacket.png', '/images/denim-jacket2.png'],
         rating: 4.6,
+        displayImage:'',
         discount: 10,
         category: 'Jackets',
         colors: ['blue', 'light blue'],
         description: 'A classic denim jacket that pairs well with any casual outfit.',
       },
       {
-        id: 70,
+        _id: '70',
         name: 'Casual Polo Shirt',
-        price: 39.99,
-        images: ['/images/polo-shirt.png', '/images/polo-shirt2.png'],
-        rating: 4.4,
-        discount: 5,
+        price: '39.99',
+        galleryImages: ['/images/denim-jacket.png', '/images/denim-jacket2.png'],
+        rating: 4.6,
+        displayImage:'',
+        discount: 10,
         category: 'Shirts',
         colors: ['white', 'navy', 'black'],
         description: 'A breathable and comfortable polo shirt perfect for everyday wear.',
       },
       {
-        id: 71,
-        name: 'Modern Leather Handbag',
-        price: 199.99,
-        images: ['/images/leather-handbag.png', '/images/leather-handbag2.png'],
-        rating: 4.9,
-        discount: 30,
-        category: 'Accessories',
-        colors: ['brown', 'tan', 'black'],
-        description: 'A sleek leather handbag for modern, stylish women.',
+        _id: '72',
+        name: 'Casual Polo Shirt',
+        price: '39.99',
+        galleryImages: ['/images/denim-jacket.png', '/images/denim-jacket2.png'],
+        rating: 4.6,
+        displayImage:'',
+        discount: 10,
+        category: 'Shirts',
+        colors: ['white', 'navy', 'black'],
+        description: 'A breathable and comfortable polo shirt perfect for everyday wear.',
       },
       {
-        id: 72,
-        name: 'Oversized Wool Sweater',
-        price: 79.99,
-        images: ['/images/wool-sweater.png', '/images/wool-sweater2.png'],
-        rating: 4.5,
+        _id: '73',
+        name: 'Casual Polo Shirt',
+        price: '39.99',
+        galleryImages: ['/images/denim-jacket.png', '/images/denim-jacket2.png'],
+        rating: 4.6,
+        displayImage:'',
         discount: 10,
-        category: 'Sweaters',
-        colors: ['cream', 'gray', 'navy'],
-        description: 'A cozy oversized sweater perfect for chilly weather.',
+        category: 'Shirts',
+        colors: ['white', 'navy', 'black'],
+        description: 'A breathable and comfortable polo shirt perfect for everyday wear.',
       },
+       
   ];
 
 const CartPage = () => {
@@ -153,14 +135,14 @@ const CartPage = () => {
 
   // Calculate total price
   const totalPrice = cart.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) => total + Number(item.price) * item.quantity,
     0
   );
  
   // Increase item quantity
-  const increaseQuantity = (id: number) => {
+  const increaseQuantity = (id: string) => {
     const updatedCart = cart.map(item => 
-      item.id === id 
+      item._id === id 
         ? { ...item, quantity: item.quantity + 1 } 
         : item
     );
@@ -169,10 +151,10 @@ const CartPage = () => {
   };
 
   // Decrease item quantity
-  const decreaseQuantity = (id: number) => {
+  const decreaseQuantity = (id: string) => {
     const updatedCart = cart
       .map(item => 
-        item.id === id && item.quantity > 1
+        item._id === id && item.quantity > 1
           ? { ...item, quantity: item.quantity - 1 }
           : item
       )
@@ -183,8 +165,8 @@ const CartPage = () => {
   };
 
   // Remove item from cart
-  const removeItem = (id: number) => {
-    const updatedCart = cart.filter(item => item.id !== id);
+  const removeItem = (id: string) => {
+    const updatedCart = cart.filter(item => item._id !== id);
     setCart(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
@@ -239,7 +221,7 @@ const CartPage = () => {
                 ) : (
                   cart.map((item) => (
                     <motion.div
-                      key={item.id}
+                      key={item._id}
                       initial={{ opacity: 0, x: -50 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: 50 }}
@@ -261,21 +243,21 @@ const CartPage = () => {
                           <h2 className="text-md md:text-lg font-bold text-[#000035]">
                             {item.name}
                           </h2>
-                          <p className="text-gray-500">₦{item.price.toFixed(2)}</p>
+                          <p className="text-gray-500">₦{Number(item.price).toFixed(2)}</p>
                         </div>
                       </div>
 
                       {/* Quantity Control */}
                       <div className="flex items-center space-x-4 my-4 mr-2 md:my-0">
                         <button
-                          onClick={() => decreaseQuantity(item.id)}
+                          onClick={() => decreaseQuantity(item._id)}
                           className="bg-gray-100 text-[#000035] p-2 rounded-full hover:bg-gray-200 transition"
                         >
                           <Minus size={16} />
                         </button>
                         <span className="text-md md:text-lg font-semibold">{item.quantity}</span>
                         <button
-                          onClick={() => increaseQuantity(item.id)}
+                          onClick={() => increaseQuantity(item._id)}
                           className="bg-gray-100 text-[#000035] p-2 rounded-full hover:bg-gray-200 transition"
                         >
                           <Plus size={16} />
@@ -285,10 +267,10 @@ const CartPage = () => {
                       {/* Item Total & Remove */}
                       <div className="flex items-center space-x-4">
                         <span className="text-md md:text-lg font-bold text-[#000035]">
-                          ₦{(item.price * item.quantity).toFixed(2)}
+                          ₦{(Number(item.price) * item.quantity).toFixed(2)}
                         </span>
                         <button
-                          onClick={() => removeItem(item.id)}
+                          onClick={() => removeItem(item._id)}
                           className="text-gray-500 hover:text-red-500 transition"
                         >
                           <Trash2 size={16} />
@@ -360,7 +342,7 @@ const CartPage = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {topSellingItems.map(product => (
                   <ProductCard 
-                    key={product.id} 
+                    key={product._id} 
                     product={product} 
                     onAddToCart={() => handleAddToCart(product)} 
                   />
@@ -382,7 +364,7 @@ const CartPage = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {youMayAlsoLike.map(product => (
                   <ProductCard 
-                    key={product.id} 
+                    key={product._id} 
                     product={product} 
                     onAddToCart={() => handleAddToCart(product)} 
                   />

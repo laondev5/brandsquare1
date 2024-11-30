@@ -32,15 +32,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ProductForm } from "./ProductForm";
+import { ProductForm } from "../ProductForm";
 import { Plus } from "lucide-react";
-// import {
-//   Select,
-//   SelectContent,
-//   SelectItem,
-//   SelectTrigger,
-//   SelectValue,
-// } from "@/components/ui/select";
+
 
 interface Product {
   id: number;
@@ -162,6 +156,7 @@ export default function AdminProductsPage() {
     };
     setProductAdd([...productAdd, newProduct]);
     console.log("new product", newProduct);
+
    
     //  setIsAddProductOpen(false);
 
@@ -180,7 +175,7 @@ export default function AdminProductsPage() {
   </Button>
 </DialogTrigger>
 <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-  <ProductForm onSubmit={handleAddProduct} />
+  <ProductForm setIsAddProductOpen={setIsAddProductOpen} onSubmit={handleAddProduct} />
 </DialogContent>
 </Dialog>       </div>
       <Tabs defaultValue="list" className="space-y-4">

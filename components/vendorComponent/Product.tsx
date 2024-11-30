@@ -34,7 +34,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ProductForm } from "./ProductForm";
+// import { ProductForm } from "./ProductForm";
+import {ProductForm} from '@/components/ProductForm'
 //  import useAxiosAuth from "@/hooks/useAxiosAuth";
 // import { useSession } from "next-auth/react";
 
@@ -107,10 +108,8 @@ export default function ProductsPage() {
       ).reduce((a, b) => a + b, 0),
     };
     setProducts([...products, newProduct]);
-    console.log("new product", newProduct);
-   
-    //  setIsAddProductOpen(false);
-
+    
+ 
   };
  
   const handleDeleteProduct = (id: number) => {
@@ -163,7 +162,7 @@ export default function ProductsPage() {
                 Fill in the details to add a new product to your inventory.
               </DialogDescription>
             </DialogHeader>
-            <ProductForm onSubmit={handleAddProduct} />
+            <ProductForm setIsAddProductOpen={setIsAddProductOpen} onSubmit={handleAddProduct} />
           </DialogContent>
         </Dialog>
       </motion.div>

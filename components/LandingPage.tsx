@@ -10,8 +10,7 @@ import ChatButton from "./chatButton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
-  products,
-  categories,
+   categories,
   popularBrands,
   Product,
   CartItem,
@@ -22,17 +21,24 @@ import BackgroundSlider from "./BackgroundSlider";
 import ServiceOfferings from "./ServiceOfferings";
 import ProductCard from "./productCard";
 import { addProductToCart } from '@/app/utility/productfn';
+// import { useProductQuery } from "@/hooks/reactQueryHooks";
+import { useProductStore } from "@/store/productStore";
  
 
 //type CartItem = Product & { quantity: number };
 
 export default function Zeomart() {
+  
+  const { fetchProducts,   allProducts,   } = useProductStore();
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [filteredProducts, setFilteredProducts] = useState(allProducts);
   const [showCategories, setShowCategories] = useState(false);
   const [cart, setCart] = useState<CartItem[]>([]);
-
-
+  // const [allProducts, setAllProducts] = useState<Product[]>([])
+   
   const handleAddToCart = (product: Product) => {
     const updatedCart = addProductToCart(product, 1, setCart);
     console.log(updatedCart);
@@ -45,15 +51,17 @@ export default function Zeomart() {
     }
   }, []);
 
-  fetch('/api/v1/products')
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data); // List of all products
-   })
-  .catch((error) => console.error('Error:', error));
+  useEffect(() => {
+    const filtered = allProducts.filter(
+      (product) =>{
+        product.category.toLowerCase().includes(searchTerm.toLowerCase());
+       }
+    );
+    setFilteredProducts(filtered);
+  },[ fetchProducts])
 
   useEffect(() => {
-    const filtered = products.filter(
+    const filtered = allProducts.filter(
       (product) =>
         product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         product.category.toLowerCase().includes(searchTerm.toLowerCase())
@@ -137,6 +145,21 @@ export default function Zeomart() {
             ))}
           </div>
         </motion.section>
+        <div>
+        <h2 className="text-2xl font-bold mb-4">New Products</h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {allProducts && allProducts.map((product) => (
+               
+               <Link href={`/product/${product._id}`}>
+ 
+<ProductCard 
+key={product._id} 
+product={product} 
+onAddToCart={() => handleAddToCart(product)} 
+/> </Link>
+            ))}
+          </div>
+        </div>
 
         <motion.section
           initial={{ opacity: 0, y: 20 }}
@@ -169,32 +192,11 @@ export default function Zeomart() {
           )}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {filteredProducts.slice(0, 5).map((product) => (
-              // <Card className="bg-white" key={product.id}>
-              //   <CardContent className="p-4">
-              //     <Link href={`/product/${product.id}`}>
-              //       <Image
-              //         src={product.images[0]}
-              //         alt={product.name}
-              //         width={300}
-              //         height={300}
-              //         className="w-full h-64 object-cover mb-4 rounded-lg"
-              //       />
-              //     </Link>
-              //     <h3 className="font-semibold text-sm">{product.name}</h3>
-              //     <p className="text-muted-foreground text-sm">₦
-              //       {product.price}
-              //     </p>
-              //     <Link href={`/product/${product.id}`} passHref>
-              //       <Button className="w-full bg-yellow-400 text-black hover:bg-yellow-500">
-              //         View Product
-              //       </Button>
-              //     </Link>
-              //   </CardContent>
-              // </Card>
-              <Link href={`/product/${product.id}`}>
-
+               
+              <Link href={`/product/${product._id}`}>
+  
 <ProductCard 
-key={product.id} 
+key={product._id} 
 product={product} 
 onAddToCart={() => handleAddToCart(product)} 
 /> </Link>
@@ -214,7 +216,7 @@ onAddToCart={() => handleAddToCart(product)}
               <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-bold mb-4">{category}</h2>
 
-                <Link href={`/category/${category}`} passHref>
+                <Link href={`/category/${category}`} >
                   <Button className="w-full bg-[#000035] hover:bg-[#000035cc] text-white  ">
                     View All
                   </Button>
@@ -249,9 +251,9 @@ onAddToCart={() => handleAddToCart(product)}
                     //     </Link>
                     //   </CardContent>
                     // </Card>
-                    <Link href={`/product/${product.id}`}>
+                    <Link href={`/product/${product._id}`}>
                     <ProductCard 
-                    key={product.id} 
+                    key={product._id} 
                     product={product} 
                     onAddToCart={() => handleAddToCart(product)} 
                     />

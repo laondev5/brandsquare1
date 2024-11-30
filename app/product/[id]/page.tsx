@@ -2,7 +2,7 @@ import ProductDetail from "@/components/ProductDetaile";
 import React from "react";
 
 interface ParamsProps {
-  id: string | number; // or number, depending on your use case
+  id: string ; // or number, depending on your use case
 }
 
 interface PageProps {

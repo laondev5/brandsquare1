@@ -138,6 +138,7 @@ export default function MainNav({
         width={300}
         height={300}
         className="max-w-[7rem]"
+        priority
       />
     </Link>
   </motion.h1>

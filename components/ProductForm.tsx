@@ -27,11 +27,16 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Card, CardContent } from "@/components/ui/card";
 import { useProductStore } from "@/store/productStore";
+import { useSession } from "next-auth/react";
+import { toast, Toaster } from "sonner";
+import { Icons } from "./icons";
 
 interface ProductFormProps {
   onSubmit: (formData: ProductFormData) => void;
   initialData?: Partial<ProductFormData>;
+  setIsAddProductOpen: (value:boolean) => void;
 }
+
 
 interface ProductFormData {
   name: string;
@@ -47,10 +52,14 @@ interface ProductFormData {
   // displayImage: File | null;
   displayImage:  string;
   galleryImages: string[];
+  uploadedBy: string;
+  vendorPlanStatus:string;
   coupons: { code: string; discount: number }[];
+  _id:string;
 }
 
-export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
+export function ProductForm({setIsAddProductOpen, onSubmit, initialData = {} }: ProductFormProps) {
+  const  session  = useSession();
   const [formData, setFormData] = useState<ProductFormData>({
     name: "",
     price: "",
@@ -59,13 +68,16 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
     fullDescription: "",
     category: "",
     sizes: [],
-    description:"thisnnnnnn is an error",
+    description:"A very useful Product",
     colors: [],
     inventory: {},
     displayImage: '',
     galleryImages: [],
     coupons: [],
+    uploadedBy: session ? session.data?.user.role ?? '' : '',
+    vendorPlanStatus:'free',
     ...initialData,
+    _id:''
   });
 
   const [categories, setCategories] = useState<string[]>([
@@ -73,10 +85,12 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
     "Clothing",
     "Home & Garden",
     "Sports & Outdoors",
+    "Books"
   ]);
   const [newCategory, setNewCategory] = useState("");
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
- 
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const editorRef = useRef<HTMLDivElement>(null);
 
@@ -90,8 +104,7 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    console.log(`${name} changooooooooooooooed:`, value);
-  };
+   };
 
   const handleSizeChange = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -230,15 +243,22 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
    
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Product Data:", formData);
-    onSubmit(formData);
+    setIsLoading(true);
+     onSubmit(formData);
     try {
-      await createProduct({...formData});
-      // Handle success
-      console.log("Product created successfully");
-    } catch (error) {
+      await createProduct({...formData}).then(() => {
+        toast.success('product created succesfully');
+      })
+       console.log('product created succesfully');
+      setTimeout(() => {
+        setIsAddProductOpen(false)
+      },3000)
+      } catch (error) {
      console.log("Error creating product:", error);
-    }
+     toast.error('Error creating product');
+    }finally{
+      setIsLoading(false);
+     }
   };
 
   const handleAddCategory = () => {
@@ -291,8 +311,14 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
       onSubmit={handleSubmit}
-      className="space-y-8"
+      className="space-y-8 relative"
     >
+<Toaster
+    position="bottom-right"
+    expand={false}
+    richColors
+    className="absolute bottom-0 right-0" // Position toaster within the form
+  />
       <Card>
         <CardContent className="p-6">
           <div className="space-y-4">
@@ -637,8 +663,11 @@ export function ProductForm({ onSubmit, initialData = {} }: ProductFormProps) {
         </CardContent>
       </Card>
 
-      <Button type="submit" className="w-full">
+      <Button type="submit" className="w-full" disabled={isLoading}>
         Create Product
+        {isLoading && (
+                      <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                    )}
       </Button>
     </motion.form>
   );

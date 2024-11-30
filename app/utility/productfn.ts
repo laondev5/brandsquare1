@@ -10,7 +10,7 @@ export const addProductToCart = (
 
   // Check if the product already exists in the cart
   const existingItemIndex = currentCart.findIndex(
-    (item) => item.id === product.id
+    (item) => item._id === product._id
   );
 
   let updatedCart: CartItem[];
@@ -25,11 +25,10 @@ export const addProductToCart = (
     // If product doesn't exist, add it as a new item
     const newItem: CartItem = {
       ...product,
-      id: product.id,
+      _id: product._id,
       quantity: quantity,
-      images: product.images || [],
-      image: Array.isArray(product.images) ? product.images[0] : product.images,
-    };
+      image: product.displayImage,
+     };
     updatedCart = [...currentCart, newItem];
   }
 

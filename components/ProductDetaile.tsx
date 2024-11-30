@@ -262,16 +262,17 @@ import { Button } from "@/components/ui/button";
  import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Star, Plus, Minus, Heart, Share2, ShoppingCart } from "lucide-react";
-import { products, Product, CartItem } from "@/app/utility/products";
+import {   Product, CartItem } from "@/app/utility/products";
 import Footer from "./Footer";
 import MainNav from "./MainNav";
 import ChatButton from "./chatButton";
 import ProductCard from "./productCard";
 import { addProductToCart } from "@/app/utility/productfn";
+import { useProductStore } from "@/store/productStore";
 
 
 interface ProductDetailProps {
-  id: string | number;
+  id: string ;
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
@@ -283,20 +284,28 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
     const [selectedColor, setSelectedColor] = useState("");
     const [quantity, setQuantity] = useState(1);
     const [isInCart, setIsInCart] = useState(false);
-    const imagesArr =  ['/images/coke4.jpg' ,'/images/coke1.jpeg', '/images/coke2.jpeg'];
+    // const imagesArr =  ['/images/coke4.jpg' ,'/images/coke1.jpeg', '/images/coke2.jpeg'];
     const handleAddToCart = (product: Product) => {
       const updatedCart = addProductToCart(product, 1, setCart);
       console.log(updatedCart);
     };
+    const { fetchProducts,   allProducts  } = useProductStore();
     useEffect(() => {
-      if (id) {
-        const foundProduct = products.find((p) => p.id === Number(id));
+      fetchProducts();
+
+    }, [fetchProducts]);
+
+    useEffect(() => {
+      if (id && allProducts.length > 0) {
+      
+        const foundProduct = allProducts.find((p) => p._id === id);
         if (foundProduct) {
           setProduct(foundProduct);
+           console.log(foundProduct, 'foundProducts')
           setSelectedColor(foundProduct.colors[0]);
         }
       }
-    }, [id]);
+    }, [id, allProducts]);
 
 
   
@@ -305,7 +314,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
       if (storedCart) {
         const parsedCart = JSON.parse(storedCart);
         setCart(parsedCart);
-        setIsInCart(parsedCart.some((item: CartItem) => item.id === Number(id)));
+        setIsInCart(parsedCart.some((item: CartItem) => item._id ===  id));
       }
     }, [id]);
   
@@ -314,7 +323,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
         const newItem: CartItem = {
           ...product,
           quantity: quantity,
-          image: product.images[0],
+          image: product.displayImage,
         };
         setCart((prevCart) => {
           const updatedCart = [...prevCart, newItem];
@@ -328,7 +337,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
     const updateCartQuantity = (newQuantity: number) => {
       setCart((prevCart) => {
         const updatedCart = prevCart.map((item) =>
-          item.id === Number(id) ? { ...item, quantity: newQuantity } : item
+          item._id ===  id ? { ...item, quantity: newQuantity } : item
         );
         localStorage.setItem("cart", JSON.stringify(updatedCart));
         return updatedCart;
@@ -338,10 +347,10 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
   
     if (!product) {
       return <div>Loading...</div>;
-    }
+     }
   
-    const relatedProducts = products
-      .filter((p) => p.category === product.category && p.id !== product.id)
+    const relatedProducts = allProducts
+      .filter((p) => p.category === product.category && p._id !== product._id)
       .slice(0, 6);
 
       const handleShare = async () => {
@@ -380,8 +389,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
           <div>
             <div className="relative">
               <Image
-                src={imagesArr[selectedImage]}
-                // src={product.images[selectedImage]}
+                // src={imagesArr[selectedImage]}
+                src={product.galleryImages[selectedImage]}
                 alt={product.name}
                 width={500}
                 height={500}
@@ -406,8 +415,8 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
             </div>
 
             <div className="flex mt-4 space-x-2 overflow-x-auto">
-              {/* {product.images.map((image, index) => ( */}
-              {imagesArr.map((image, index) => (
+              {/* {imagesArr.map((image, index) => ( */}
+              {product.galleryImages.map((image, index) => ( 
                 <Image
                   key={index}
                   src={image}
@@ -433,7 +442,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
                   <Star
                     key={i}
                     className={`w-4 h-4 ${
-                      i < Math.floor(product.rating)
+                      i < Math.floor(Number(product.rating))
                         ? "text-yellow-400 fill-current"
                         : "text-gray-300"
                     }`}
@@ -454,7 +463,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
                   ₦{product.price}
                 </span>
                 <span className="line-through text-gray-500">
-                  ₦{(product.price * 1.3).toFixed(2)}
+                  ₦{(Number(product.price) * 1.3).toFixed(2)}
                 </span>
               </div>
               <div className="text-green-600 font-semibold">
@@ -554,7 +563,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({ id }) => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {relatedProducts.map((product) => (
                 <ProductCard 
-               key={product.id} 
+               key={product._id} 
                product={product} 
                onAddToCart={() => handleAddToCart(product)} 
                />
