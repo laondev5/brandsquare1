@@ -34,7 +34,7 @@ const ProductCard: React.FC<{
                 bg-[#000035] text-gray-800  rounded-full transition
                 ${isHovered ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}
               `}>
-                                    <Link href={`/product/${product.id}`}>
+                                    <Link href={`/product/${product._id}`}>
 
           <span className=' flex items-center gap-1 font-extrabold text-[11px]'><FaEye /> View item</span></Link>
           {/* <Heart size={20} className="text-gray-600" /> */}

@@ -55,6 +55,7 @@ interface ProductFormData {
   uploadedBy: string;
   vendorPlanStatus:string;
   coupons: { code: string; discount: number }[];
+  _id:string;
 }
 
 export function ProductForm({setIsAddProductOpen, onSubmit, initialData = {} }: ProductFormProps) {
@@ -76,6 +77,7 @@ export function ProductForm({setIsAddProductOpen, onSubmit, initialData = {} }: 
     uploadedBy: session ? session.data?.user.role ?? '' : '',
     vendorPlanStatus:'free',
     ...initialData,
+    _id:''
   });
 
   const [categories, setCategories] = useState<string[]>([

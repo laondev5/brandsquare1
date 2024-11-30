@@ -27,10 +27,14 @@ import {
 //import { products, categories, Product } from "../data/products";
 import {
   //Product,
-  products,
-  categories,
+   categories,
   CartItem,
 } from "@/app/utility/products";
+import {
+  //Product,
+  products,
+  
+} from "@/app/utility/dummyProduct";
 import Footer from "./Footer";
 import MainNav from "./MainNav";
 

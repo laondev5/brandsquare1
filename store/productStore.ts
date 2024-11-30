@@ -155,7 +155,7 @@ export const useProductStore = create<ProductState>((set) => ({
       const updatedProduct = response.data;
       set(state => ({
         products: state.allProducts.map(product => 
-          product.id.toString() === id ? updatedProduct : product
+          product._id === id ? updatedProduct : product
         ),
         currentProduct: updatedProduct,
         isLoading: false
@@ -180,8 +180,8 @@ export const useProductStore = create<ProductState>((set) => ({
       });
       
       set(state => ({
-        products: state.allProducts.filter(product => product.id.toString() !== id),
-        currentProduct: state.currentProduct?.id.toString() === id ? null : state.currentProduct,
+        products: state.allProducts.filter(product => product._id.toString() !== id),
+        currentProduct: state.currentProduct?._id === id ? null : state.currentProduct,
         isLoading: false
       }));
     } catch (error: any) {
