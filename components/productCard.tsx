@@ -12,8 +12,7 @@ const ProductCard: React.FC<{
     onAddToCart: (product: Product) => void 
   }> = ({ product, onAddToCart }) => {
     const [isHovered, setIsHovered] = useState(false);
-  
-    return (
+     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -57,7 +56,8 @@ const ProductCard: React.FC<{
         <div className="relative w-full h-52 overflow-hidden">
           <Image 
             // src={Array.isArray(product.images) ? product.images[0] : product.images} 
-            src={shirtImage} 
+            // src={product.displayImage} 
+            src={product.displayImage?.includes("cloudinary") ? product.displayImage :  shirtImage}
             alt={product.name}
             layout="fill"
             objectFit="cover"
@@ -72,15 +72,15 @@ const ProductCard: React.FC<{
           <div>
               {product.discount ? (
                 <>
-                   <span className="text-[25px] font-bold text-gray-800"><span className=' text-[12px]'>₦</span>{product.price}.00{(product.price * (1 - product.discount / 100)).toFixed(2)}
+                   <span className="text-[25px] font-bold text-gray-800"><span className=' text-[12px]'>₦</span>{product.price}.00{( Number(product.price) * (1 - product.discount / 100)).toFixed(2)}
                   </span>
                   <span className="ml-2 text-sm text-gray-400 line-through">
-                    ₦{product.price.toFixed(2)}
+                    ₦{Number(product.price).toFixed(2)}
                   </span>
                 </>
               ) : (
                 <span className="text-xl font-bold text-gray-800">
-                  <span className=' text-[12px]'>₦</span>{product.price.toFixed(2)}
+                  <span className=' text-[12px]'>₦</span>{Number(product.price).toFixed(2)}
                 </span>
               )}
             </div>
